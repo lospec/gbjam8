@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Player
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     public class PlayerController : MonoBehaviour
     {
         private Direction _playerDirection = Direction.E;
@@ -13,18 +13,19 @@ namespace Player
                 switch (value)
                 {
                     case Direction.W:
-                        spriteRenderer.flipX = true;
+                        _spriteRenderer.flipX = true;
                         break;
                     case Direction.E:
-                        spriteRenderer.flipX = false;
+                        _spriteRenderer.flipX = false;
                         break;
                 }
+
                 _playerDirection = value;
             }
             get => _playerDirection;
         }
 
-        public SpriteRenderer spriteRenderer;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
 
         private void Update()
         {
