@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 	{
 		set
 		{
-			SpriteRenderer.flipX = Direction.LEFT == value;
+			spriteRenderer.flipX = Direction.LEFT == value;
 			_playerDirection = value;
 		}
 		get
@@ -22,11 +22,11 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	public SpriteRenderer SpriteRenderer;
+	public SpriteRenderer spriteRenderer;
 
 	private void Start()
 	{
-		SpriteRenderer = (SpriteRenderer)GetComponent("SpriteRenderer");
+		spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 
 	private void Update()
@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
 		if (horizontalInput != 0)
 		{
 			PlayerDirection = (Direction)horizontalInput;
-			
 		}
     }
 }
