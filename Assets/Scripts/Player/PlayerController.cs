@@ -24,11 +24,6 @@ public class PlayerController : MonoBehaviour
 
 	public SpriteRenderer spriteRenderer;
 
-	private void Start()
-	{
-		spriteRenderer = GetComponent<SpriteRenderer>();
-	}
-
 	private void Update()
     {
 		float horizontalInput = Input.GetAxisRaw("Horizontal");
