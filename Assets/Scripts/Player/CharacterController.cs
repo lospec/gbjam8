@@ -1,112 +1,145 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
-public class CharacterController : MonoBehaviour
+namespace Player
 {
-    //General Properties
-    public Direction direction = Direction.E;
-    Rigidbody2D rb;
-    public LayerMask floorLayer; //Use this to set which layers will be checked for colliders to see whether the character is grounded.
-
-    //Movement & Jumping
-    Vector2 moveVector, currentForceOfGravity;
-    bool isGrounded, jumpIsQueued;
-    float coyoteTime;
-    public Transform leftFoot, rightFoot; //Create two empties and position them at the bottom corners of the character for the groundcheck.
-    public float moveSpeed = 3000f, jumpPower = 5000f, maxCoyoteTime = .15f, customGravity = 1000f;
-
-    //Graphics related
-    public SpriteRenderer sr;
-    public Animator animator;
-
-    void Awake()
+    public class CharacterController : MonoBehaviour
     {
-        sr = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
+        public Direction direction = Direction.E;
+        public LayerMask
+            floorLayer; //Use this to set which layers will be checked for colliders to see whether the character is grounded.
 
-        rb.gravityScale = 0; //We use custom gravity to ensure the smoothest terrain traverlsal possible.
-    }
-    void Update()
-    {
-        coyoteTime += Time.deltaTime;
-        ReadControls();
-        UpdateSpriteAndAnimations();
-    }
+        //Create two empties and position them at the bottom corners of the character for the groundcheck.
+        public Transform leftFoot, rightFoot;
+        public float moveSpeed = 3000f,
+            jumpPower = 5000f,
+            maxCoyoteTime = .15f,
+            customGravity = 1000f;
 
-    void FixedUpdate()
-    {
-        isGrounded = GroundCheck();
-        CalcGravity();
+        //Graphics related
+        [SerializeField] private SpriteRenderer sr;
+        [SerializeField] private Animator animator;
+        private float _coyoteTime;
+        private bool _isGrounded, _jumpIsQueued;
 
-        if (jumpIsQueued)
+        //Movement & Jumping
+        private Vector2 _moveVector, _currentForceOfGravity;
+        //General Properties
+        private Rigidbody2D _rigidbody;
+
+        private void Awake()
         {
-            rb.AddForce(Vector2.up * jumpPower * Time.fixedDeltaTime, ForceMode2D.Impulse);
-            jumpIsQueued = false;
+            sr = GetComponent<SpriteRenderer>();
+            _rigidbody = GetComponent<Rigidbody2D>();
+
+            _rigidbody.gravityScale =
+                0; //We use custom gravity to ensure the smoothest terrain traverlsal possible.
         }
-        rb.AddForce((moveVector + currentForceOfGravity) * Time.fixedDeltaTime);
-    }
 
-    void ReadControls()
-    {
-        moveVector = Vector2.zero;
-
-        // Movement
-        if (Keyboard.current.leftArrowKey.isPressed) 
+        private void Update()
         {
-            moveVector.x = -moveSpeed;
-            if (Keyboard.current.upArrowKey.isPressed) direction = Direction.NW;
-            else if (Keyboard.current.downArrowKey.isPressed) direction = Direction.SW;
-            else direction = Direction.W;
+            _coyoteTime += Time.deltaTime;
+            ReadControls();
+            UpdateSpriteAndAnimations();
         }
-        else if (Keyboard.current.rightArrowKey.isPressed)
+
+        private void FixedUpdate()
         {
-            moveVector.x = moveSpeed;
-            if (Keyboard.current.upArrowKey.isPressed) direction = Direction.NE;
-            else if (Keyboard.current.downArrowKey.isPressed) direction = Direction.SE;
-            else direction = Direction.E;
+            _isGrounded = GroundCheck();
+            CalcGravity();
+
+            if (_jumpIsQueued)
+            {
+                _rigidbody.AddForce(Vector2.up * (jumpPower * Time.fixedDeltaTime),
+                    ForceMode2D.Impulse);
+                _jumpIsQueued = false;
+            }
+
+            _rigidbody.AddForce(
+                (_moveVector + _currentForceOfGravity) * Time.fixedDeltaTime);
         }
-        if (moveVector.x != 0 && Keyboard.current.upArrowKey.isPressed) direction = Direction.N;
-        else if (moveVector.x != 0 && Keyboard.current.downArrowKey.isPressed) direction = Direction.S;
 
-        // A-Button
-        // This is a bool so the input can not be read multiple times before the next physics frame (even if this is very unlikely to happen).
-        if (Keyboard.current.xKey.wasPressedThisFrame && isGrounded && !jumpIsQueued) jumpIsQueued = true; 
-
-        // B-Button
-        if (Keyboard.current.cKey.wasPressedThisFrame) Hook(); //This should live in its own script.
-    }
-
-    private void Hook()
-    {
-        throw new NotImplementedException();
-    }
-
-    void UpdateSpriteAndAnimations()
-    {
-        if(direction == Direction.E || direction == Direction.NE || direction == Direction.SE) sr.flipX = false;
-        else if(direction == Direction.W || direction == Direction.NW || direction == Direction.SW) sr.flipX = true;
-        //Plug in animation setfloats and setbools here!
-    }
-
-    private bool GroundCheck()
-    {
-        if (Physics2D.Linecast(transform.position, leftFoot.position, floorLayer)
-            || Physics2D.Linecast(transform.position, rightFoot.position, floorLayer))
+        private void ReadControls()
         {
-            coyoteTime = 0f;
-            return true;
-        }
-        else if (coyoteTime <= maxCoyoteTime) return true;
-        else return false;
-    }
+            _moveVector = Vector2.zero;
 
-    private void CalcGravity()
-    {
-        if (!isGrounded) currentForceOfGravity.y -= customGravity * Time.fixedDeltaTime;
-        else currentForceOfGravity = Vector2.zero;
+            // Movement
+            if (Keyboard.current.leftArrowKey.isPressed)
+            {
+                _moveVector.x = -moveSpeed;
+                if (Keyboard.current.upArrowKey.isPressed) direction = Direction.NW;
+                else if (Keyboard.current.downArrowKey.isPressed)
+                    direction = Direction.SW;
+                else direction = Direction.W;
+            }
+            else if (Keyboard.current.rightArrowKey.isPressed)
+            {
+                _moveVector.x = moveSpeed;
+                if (Keyboard.current.upArrowKey.isPressed) direction = Direction.NE;
+                else if (Keyboard.current.downArrowKey.isPressed)
+                    direction = Direction.SE;
+                else direction = Direction.E;
+            }
+
+            if (_moveVector.x != 0 && Keyboard.current.upArrowKey.isPressed)
+                direction = Direction.N;
+            else if (_moveVector.x != 0 && Keyboard.current.downArrowKey.isPressed)
+                direction = Direction.S;
+
+            // A-Button
+            // This is a bool so the input can not be read multiple times before the next physics frame (even if this is very unlikely to happen).
+            if (Keyboard.current.xKey.wasPressedThisFrame && _isGrounded &&
+                !_jumpIsQueued)
+                _jumpIsQueued = true;
+
+            // B-Button
+            if (Keyboard.current.cKey.wasPressedThisFrame)
+                Hook(); //This should live in its own script.
+        }
+
+        private void Hook()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateSpriteAndAnimations()
+        {
+            switch (direction)
+            {
+                case Direction.E:
+                case Direction.NE:
+                case Direction.SE:
+                    sr.flipX = false;
+                    break;
+                case Direction.W:
+                case Direction.NW:
+                case Direction.SW:
+                    sr.flipX = true;
+                    break;
+            }
+
+            //Plug in animation setfloats and setbools here!
+        }
+
+        private bool GroundCheck()
+        {
+            if (Physics2D.Linecast(transform.position, leftFoot.position, floorLayer)
+                || Physics2D.Linecast(transform.position, rightFoot.position,
+                    floorLayer))
+            {
+                _coyoteTime = 0f;
+                return true;
+            }
+
+            return _coyoteTime <= maxCoyoteTime;
+        }
+
+        private void CalcGravity()
+        {
+            if (!_isGrounded)
+                _currentForceOfGravity.y -= customGravity * Time.fixedDeltaTime;
+            else _currentForceOfGravity = Vector2.zero;
+        }
     }
 }
