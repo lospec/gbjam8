@@ -202,7 +202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28818871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 9.91, z: -10}
+  m_LocalPosition: {x: 4.91, y: 10.74, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -375,11 +375,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6099035587017450207, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.95
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6099035587017450207, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.89
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6099035587017450207, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -467,6 +467,7 @@ MonoBehaviour:
   roomPath: Rooms
   startRoom: {fileID: 3452407230368185149, guid: aac237db86ac1464eba506f6ae2fb75c, type: 3}
   levelDifficulty: 0
+  startOffset: -6.47
 --- !u!1 &2112564995
 GameObject:
   m_ObjectHideFlags: 0

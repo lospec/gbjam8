@@ -18,6 +18,8 @@ public class RoomLoader : MonoBehaviour
     [Header("Other")]
     // Level difficulty
     public int levelDifficulty;
+    // Start offset from ground room
+    public float startOffset;
 
     private GameObject player;
     private float currentMaxY;
@@ -36,7 +38,7 @@ public class RoomLoader : MonoBehaviour
 
         // Instantiating the first room
         topRoom = Instantiate(startRoom, Vector3.zero, Quaternion.Euler(Vector3.zero));
-        currentMaxY = topRoom.GetComponent<RoomData>().GetMidPoint();
+        currentMaxY = topRoom.GetComponent<RoomData>().GetMidPoint() + startOffset;
 
         Debug.Log("Max y: " + currentMaxY);
         Debug.Log("top: " + currentMaxY + topRoom.GetComponent<RoomData>().GetRoomHeight() / 2f);
