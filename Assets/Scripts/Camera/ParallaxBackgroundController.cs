@@ -16,7 +16,13 @@ public class ParallaxBackgroundController : MonoBehaviour
 	{
 		if (transform.position.y > _background2.position.y)
 		{
-			_background1.position = new Vector3(_background1.position.x, _background2.position.y + _size, _background1.position.y);
+			_background1.position = new Vector3(_background1.position.x, _background2.position.y + _size, _background1.position.z);
+			SwitchBackgrounds();
+		}
+
+		if (transform.position.y < _background1.position.y)
+		{
+			_background2.position = new Vector3(_background2.position.x, _background1.position.y - _size, _background2.position.z);
 			SwitchBackgrounds();
 		}
 	}
