@@ -20,6 +20,7 @@ public class RoomLoader : MonoBehaviour
     public int levelDifficulty;
 
     private GameObject player;
+    private float currentMaxY;
 
     private Object[] rooms;
     private GameObject topRoom;
@@ -34,7 +35,11 @@ public class RoomLoader : MonoBehaviour
         player = FrequentlyAccessed.Instance.playerObject;
 
         // Instantiating the first room
-        topRoom = Instantiate(startRoom, transform.position, Quaternion.Euler(Vector3.zero));
+        topRoom = Instantiate(startRoom, Vector3.zero, Quaternion.Euler(Vector3.zero));
+        currentMaxY = topRoom.GetComponent<RoomData>().GetMidPoint();
+
+        Debug.Log("Max y: " + currentMaxY);
+        Debug.Log("top: " + currentMaxY + topRoom.GetComponent<RoomData>().GetRoomHeight() / 2f);
     }
 
     // Update is called once per frame
@@ -57,6 +62,8 @@ public class RoomLoader : MonoBehaviour
         string chosenRoomName = "TemplateStart";
         // Room to instantiate
         GameObject chosenRoom = null;
+        // Room data of the room
+        RoomData roomData;
         // Y coord of the new room
         float yPos;
 
@@ -67,14 +74,17 @@ public class RoomLoader : MonoBehaviour
             chosenRoomName = chosenRoom.name;
         }
 
+        roomData = chosenRoom.GetComponent<RoomData>();
+
         if (chosenRoom != null)
         {
-            yPos = topRoom.transform.position.y + chosenRoom.GetComponent<RoomData>().GetRoomHeight() / 2 + 
-                topRoom.GetComponent<RoomData>().GetRoomHeight() / 2;
+            yPos = currentMaxY + roomData.GetRoomHeight() / 2f + topRoom.GetComponent<RoomData>().GetRoomHeight() / 2f +
+                ((roomData.GetRoomHeight() % 2 == 0) ? -1 : 0);
             // Instantiating the room
             topRoom = Instantiate(chosenRoom, new Vector3(topRoom.transform.position.x, yPos), Quaternion.Euler(Vector3.zero));
 
             loadedRooms.Add(topRoom);
+            currentMaxY = yPos;
         }
         else
         {

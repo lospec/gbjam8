@@ -11,16 +11,16 @@ public class RoomData : MonoBehaviour
     // Tilemap
     public Tilemap tilemap;
     [Header("Public variables just for debug purpose")]
-    // Min y (pivot used to connect rooms)
     public int minY;
-    public int height;
+    public int maxY;
+    public int height = -1;
 
     public int GetRoomHeight()
     {
         Vector3Int currentTilePos = new Vector3Int();
 
-        int minY = tilemap.size.y;
-        int maxY = -tilemap.size.y;
+        minY = tilemap.size.y;
+        maxY = -tilemap.size.y;
 
         for (int i = tilemap.cellBounds.xMin; i < tilemap.cellBounds.xMax; i++)
         {
@@ -46,6 +46,15 @@ public class RoomData : MonoBehaviour
 
         height = maxY - minY + 1;
 
-        return maxY - minY;
+        Debug.Log("room " + name + ", max: " + maxY + ", min: " + minY);
+
+        return height;
+    }
+
+    public float GetMidPoint()
+    {
+        GetRoomHeight();
+
+        return tilemap.CellToWorld(new Vector3Int(0, (maxY + minY + 1) / 2, tilemap.cellBounds.z)).y;
     }
 }

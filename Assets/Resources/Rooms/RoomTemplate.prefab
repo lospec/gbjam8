@@ -61,6 +61,7 @@ MonoBehaviour:
   difficulty: 0
   tilemap: {fileID: 825730311957529918}
   minY: 0
+  maxY: 0
   height: 0
 --- !u!1 &3452407231916408478
 GameObject:
