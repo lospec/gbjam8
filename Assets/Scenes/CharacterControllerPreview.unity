@@ -274,8 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1050582407}
-  _smoothMovementMaxSpeed: 0.3
-  _minDistForMovement: 4
+  _smoothMovementMaxSpeed: 4000
   _minPosY: 0
   _maxPosY: Infinity
   _targetOffsetY: 5
