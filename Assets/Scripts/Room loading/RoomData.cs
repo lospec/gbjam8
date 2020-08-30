@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
+using Utility;
 
 public class RoomData : MonoBehaviour
 {
@@ -10,10 +9,12 @@ public class RoomData : MonoBehaviour
     public int difficulty;
     // Tilemap
     public Tilemap tilemap;
+    public Tilemap borderBlender;
+    
     [Header("Public variables just for debug purpose")]
-    public int minY;
-    public int maxY;
-    public int height = -1;
+    [InspectorReadOnly] public int minY;
+    [InspectorReadOnly] public int maxY;
+    [InspectorReadOnly] public int height = -1;
 
     public int GetRoomHeight()
     {
