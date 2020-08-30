@@ -1,0 +1,679 @@
+fileFormatVersion: 2
+guid: 3a1d109fbd34879428973dfa2bb9d133
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4379752222842907268
+    second: TartarusTiles_0
+  - first:
+      213: 2865502943354505647
+    second: TartarusTiles_1
+  - first:
+      213: -7451236265347861674
+    second: TartarusTiles_2
+  - first:
+      213: 232475119061393112
+    second: TartarusTiles_3
+  - first:
+      213: -7492664802602491521
+    second: TartarusTiles_4
+  - first:
+      213: 6316435279779243822
+    second: TartarusTiles_5
+  - first:
+      213: -8067389846479237001
+    second: TartarusTiles_6
+  - first:
+      213: -5716187872193591464
+    second: TartarusTiles_7
+  - first:
+      213: 2204979826999255549
+    second: TartarusTiles_8
+  - first:
+      213: -1487377235712585597
+    second: TartarusTiles_9
+  - first:
+      213: -5403638343068709654
+    second: TartarusTiles_10
+  - first:
+      213: -1219795263628820595
+    second: TartarusTiles_11
+  - first:
+      213: -4420288626529403184
+    second: TartarusTiles_12
+  - first:
+      213: 2289586479735489506
+    second: TartarusTiles_13
+  - first:
+      213: 1687625153506730243
+    second: TartarusTiles_14
+  - first:
+      213: 3405254381821500122
+    second: TartarusTiles_15
+  - first:
+      213: 1189539240213854997
+    second: TartarusTiles_16
+  - first:
+      213: -1218635012243202873
+    second: TartarusTiles_17
+  - first:
+      213: -8931388098735726416
+    second: TartarusTiles_18
+  - first:
+      213: 3767491843272693015
+    second: TartarusTiles_19
+  - first:
+      213: -2238074599251785021
+    second: TartarusTiles_20
+  - first:
+      213: -3813827187310064683
+    second: TartarusTiles_21
+  - first:
+      213: -9142608340182987247
+    second: TartarusTiles_22
+  - first:
+      213: 5377238975024640158
+    second: TartarusTiles_23
+  - first:
+      213: -8581849186551146083
+    second: TartarusTiles_24
+  - first:
+      213: -3542774509701643943
+    second: TartarusTiles_25
+  - first:
+      213: 3402228814804439975
+    second: TartarusTiles_26
+  - first:
+      213: -3576137294453564824
+    second: TartarusTiles_27
+  - first:
+      213: -3479188739874923482
+    second: TartarusTiles_28
+  - first:
+      213: -2576799501895481906
+    second: TartarusTiles_29
+  - first:
+      213: -3803312053748392483
+    second: TartarusTiles_30
+  - first:
+      213: -3145362542004296092
+    second: TartarusTiles_31
+  - first:
+      213: -7863103286457247266
+    second: TartarusTiles_32
+  - first:
+      213: -3104524715940652643
+    second: TartarusTiles_33
+  - first:
+      213: 5754021613052706990
+    second: TartarusTiles_34
+  - first:
+      213: 4248135679352350666
+    second: TartarusTiles_35
+  - first:
+      213: -7062618486315657124
+    second: TartarusTiles_36
+  - first:
+      213: 4025329504745562259
+    second: TartarusTiles_37
+  - first:
+      213: 5656289674194433477
+    second: TartarusTiles_38
+  - first:
+      213: 4855294904531320137
+    second: TartarusTiles_39
+  - first:
+      213: -7937963607928867012
+    second: TartarusTiles_40
+  - first:
+      213: 7401125178079648943
+    second: TartarusTiles_41
+  - first:
+      213: -655347373504223747
+    second: TartarusTiles_42
+  - first:
+      213: -3853939123572204392
+    second: TartarusTiles_43
+  - first:
+      213: 74353433435928570
+    second: TartarusTiles_44
+  - first:
+      213: 6754896758934651960
+    second: TartarusTiles_45
+  - first:
+      213: 7819846484639752605
+    second: TartarusTiles_46
+  - first:
+      213: 7552766137398566792
+    second: TartarusTiles_47
+  - first:
+      213: -8386945123080078556
+    second: TartarusTiles_48
+  - first:
+      213: 8720251018797848925
+    second: TartarusTiles_49
+  - first:
+      213: 2941549291684799178
+    second: TartarusTiles_50
+  - first:
+      213: -8886246332556064107
+    second: TartarusTiles_51
+  - first:
+      213: -2596599532079330262
+    second: TartarusTiles_52
+  - first:
+      213: 5499828285189694270
+    second: TartarusTiles_53
+  - first:
+      213: -4960394769323911918
+    second: TartarusTiles_54
+  - first:
+      213: 7821167051434684779
+    second: TartarusTiles_55
+  - first:
+      213: 7797615628793791142
+    second: TartarusTiles_56
+  - first:
+      213: -3860583152371585269
+    second: TartarusTiles_57
+  - first:
+      213: -1825856829806915543
+    second: TartarusTiles_58
+  - first:
+      213: 7894148139701857468
+    second: TartarusTiles_59
+  - first:
+      213: 7157175352478302291
+    second: TartarusTiles_60
+  - first:
+      213: -4039361783568457016
+    second: TartarusTiles_61
+  - first:
+      213: 5843120120363627565
+    second: TartarusTilesSheet_0
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 8
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TartarusTiles_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48a67c6117108cc30800000000000000
+      internalID: 4379752222842907268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa94b71bebf44c720800000000000000
+      internalID: 2865502943354505647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_2
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 653be625814e79890800000000000000
+      internalID: -7451236265347861674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_3
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 24
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8de55ca93eae93300800000000000000
+      internalID: 232475119061393112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f716ec35f05b40890800000000000000
+      internalID: -7492664802602491521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_5
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e27acf9cb6c78a750800000000000000
+      internalID: 6316435279779243822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_6
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77013007dafda0090800000000000000
+      internalID: -8067389846479237001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_7
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 16
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85741887a650ca0b0800000000000000
+      internalID: -5716187872193591464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df1613d5879a99e10800000000000000
+      internalID: 2204979826999255549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_9
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 380595ad846cb5be0800000000000000
+      internalID: -1487377235712585597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_10
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aec85b28e8b6205b0800000000000000
+      internalID: -5403638343068709654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_11
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8f33b4abaa621fe0800000000000000
+      internalID: -1219795263628820595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0def303f9eaf7a2c0800000000000000
+      internalID: -4420288626529403184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_13
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e3cb27c5ce36cf10800000000000000
+      internalID: 2289586479735489506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_14
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30168ccb226ab6710800000000000000
+      internalID: 1687625153506730243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTiles_15
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ada105681d4e14f20800000000000000
+      internalID: 3405254381821500122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
