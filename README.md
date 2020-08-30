@@ -6,7 +6,6 @@
 - Mariothedog - [Itch](https://mariothedog.itch.io/) - Project Manager
 - Pillsgood - [Itch](https://itch.io/profile/pillsgood) - Lead Programmer
 - RushJet1 - Lead Composer
-- CalmRadish - [Itch](https://calmradish.itch.io/) - Lead Artist
 - Ophiuchus - [Itch](https://ophi-chus.itch.io/) - Lead Artist
 
 ### Unsorted Contributors
