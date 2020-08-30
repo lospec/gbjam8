@@ -125,7 +125,6 @@ namespace Player
 
                 if (!prevGrounded && _isGrounded)
                 {
-                    Debug.Log("break jump");
                     break;
                 }
             }
