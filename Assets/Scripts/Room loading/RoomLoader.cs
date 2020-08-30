@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomLoader : MonoBehaviour
@@ -11,7 +10,7 @@ public class RoomLoader : MonoBehaviour
 
     [Header("Rooms")]
     // Path from which rooms are loaded
-    public string roomPath;
+    public GameObject[] rooms;
     // Start room
     public GameObject startRoom;
 
@@ -24,31 +23,36 @@ public class RoomLoader : MonoBehaviour
     private GameObject player;
     private float currentMaxY;
 
-    private Object[] rooms;
+
     private GameObject topRoom;
     private List<GameObject> loadedRooms;
+
+    private int roomCount;
 
     // Start is called before the first frame update
     void Start()
     {
         loadedRooms = new List<GameObject>();
-
-        rooms = Resources.LoadAll(roomPath);
         player = FrequentlyAccessed.Instance.playerObject;
 
         // Instantiating the first room
         topRoom = Instantiate(startRoom, Vector3.zero, Quaternion.Euler(Vector3.zero));
+        topRoom.transform.SetParent(transform);
+        topRoom.name = $"Room Chunk {roomCount++}";
+
         currentMaxY = topRoom.GetComponent<RoomData>().GetMidPoint() + startOffset;
 
         Debug.Log("Max y: " + currentMaxY);
-        Debug.Log("top: " + currentMaxY + topRoom.GetComponent<RoomData>().GetRoomHeight() / 2f);
+        Debug.Log("top: " + currentMaxY +
+                  topRoom.GetComponent<RoomData>().GetRoomHeight() / 2f);
     }
 
     // Update is called once per frame
     void Update()
     {
         // Getting the distance from the player to the top room
-        float distance = Vector2.Distance(topRoom.transform.position, player.transform.position);
+        float distance =
+            Vector2.Distance(topRoom.transform.position, player.transform.position);
 
         if (distance < loadDistance)
         {
@@ -60,8 +64,6 @@ public class RoomLoader : MonoBehaviour
 
     private void LoadRoom()
     {
-        // Name of the chosenroom
-        string chosenRoomName = "TemplateStart";
         // Room to instantiate
         GameObject chosenRoom = null;
         // Room data of the room
@@ -69,21 +71,21 @@ public class RoomLoader : MonoBehaviour
         // Y coord of the new room
         float yPos;
 
-        // Avoid choosing the template room or a start room
-        while (chosenRoomName.Contains("Template") || chosenRoomName.Contains("Start"))
-        {
-            chosenRoom = (GameObject)rooms[Random.Range(0, rooms.Length)];
-            chosenRoomName = chosenRoom.name;
-        }
+        chosenRoom = rooms[Random.Range(0, rooms.Length)];
 
         roomData = chosenRoom.GetComponent<RoomData>();
 
         if (chosenRoom != null)
         {
-            yPos = currentMaxY + roomData.GetRoomHeight() / 2f + topRoom.GetComponent<RoomData>().GetRoomHeight() / 2f +
-                ((roomData.GetRoomHeight() % 2 == 0) ? -1 : 0);
+            yPos = currentMaxY + roomData.GetRoomHeight() / 2f +
+                   topRoom.GetComponent<RoomData>().GetRoomHeight() / 2f +
+                   ((roomData.GetRoomHeight() % 2 == 0) ? -1 : 0);
             // Instantiating the room
-            topRoom = Instantiate(chosenRoom, new Vector3(topRoom.transform.position.x, yPos), Quaternion.Euler(Vector3.zero));
+            topRoom = Instantiate(chosenRoom,
+                new Vector3(topRoom.transform.position.x, yPos),
+                Quaternion.Euler(Vector3.zero));
+            topRoom.transform.SetParent(transform);
+            topRoom.name = $"Room Chunk {roomCount++}";
 
             loadedRooms.Add(topRoom);
             currentMaxY = yPos;
@@ -101,10 +103,11 @@ public class RoomLoader : MonoBehaviour
         // Using a copy to cycle through the rooms
         List<GameObject> roomCopy = new List<GameObject>(loadedRooms);
 
-        for (int i=0; i< roomCopy.Count; i++)
+        for (int i = 0; i < roomCopy.Count; i++)
         {
             // If I'm far enough from the room and the player is above it (I can't destroy rooms above the player)
-            if (Vector2.Distance(roomCopy[i].transform.position, player.transform.position) > unloadDistance &&
+            if (Vector2.Distance(roomCopy[i].transform.position,
+                    player.transform.position) > unloadDistance &&
                 player.transform.position.y > roomCopy[i].transform.position.y)
             {
                 // I remove it from the list of the loaded rooms
