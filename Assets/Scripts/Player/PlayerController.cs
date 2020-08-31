@@ -1,0 +1,88 @@
+﻿using System;
+using System.Collections;
+using System.Linq;
+using Inputs;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace Player
+{
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(PlayerMotor))]
+    public class PlayerController : MonoBehaviour, PlayerControls.IPlayerActions
+    {
+        private static class AnimParams
+        {
+            public static readonly int IsRunning = Animator.StringToHash("IsRunning");
+            public static readonly int IsJumping = Animator.StringToHash("IsJumping");
+        }
+
+        [SerializeField] private Animator animator = default;
+        private PlayerControls _input = default;
+        private SpriteRenderer _spriteRenderer;
+        private PlayerMotor _motor;
+
+        private Vector2 _inputVector;
+
+        private void Awake()
+        {
+            _input = new PlayerControls();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _motor = GetComponent<PlayerMotor>();
+        }
+
+        private void Start()
+        {
+            _input.Player.Movement.performed += OnMovement;
+            _input.Player.Primary.performed += OnPrimary;
+            _input.Player.Secondary.performed += OnSecondary;
+        }
+
+        private void Update()
+        {
+            _motor.Move = new Vector2(_inputVector.x, _motor.Move.y);
+            UpdateSpriteAndAnimations();
+        }
+
+        private void OnEnable()
+        {
+            _input.Enable();
+        }
+
+        private void OnDisable()
+        {
+            _input.Disable();
+        }
+
+        public void OnMovement(InputAction.CallbackContext context)
+        {
+            _inputVector = context.ReadValue<Vector2>();
+        }
+
+        public void OnPrimary(InputAction.CallbackContext context)
+        {
+            if (context.control.IsPressed())
+                StartCoroutine(_motor.Jump(context.action));
+        }
+
+
+        public void OnSecondary(InputAction.CallbackContext context)
+        {
+            Hook();
+        }
+
+        private void Hook()
+        {
+        }
+
+
+        private void UpdateSpriteAndAnimations()
+        {
+            if (_inputVector.x != 0) _spriteRenderer.flipX = !(_inputVector.x >= 0);
+            animator.SetBool(AnimParams.IsJumping, _motor.IsJumping);
+            animator.SetBool(AnimParams.IsRunning,
+                Mathf.Abs(_motor.Body.velocity.x) > 0.25f);
+        }
+    }
+}
