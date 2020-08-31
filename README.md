@@ -14,7 +14,7 @@
 - ShinyTseul
 - Reverie
 - Zarki
-- Alvyn Berg
+- Alvynskio (a.k.a. TreatmentClock)
 - Pit - [Itch](https://itch.io/profile/pixeltea-studio)
 - Treelia - [Itch](https://shinytseul.itch.io/)
 - Sid
