@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 4082135001969102876}
   - component: {fileID: 6695751410770696835}
   - component: {fileID: 5734544770073800161}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 5908164629450178765}
   - component: {fileID: 8413646033278092913}
   - component: {fileID: 8286322129992128390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlendRegion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
