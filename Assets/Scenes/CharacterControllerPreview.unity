@@ -487,7 +487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4470147315589490617, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
       propertyPath: rooms.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4470147315589490617, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
       propertyPath: startRoom
@@ -517,6 +517,14 @@ PrefabInstance:
       propertyPath: rooms.Array.data[5]
       value: 
       objectReference: {fileID: 7186186224288377473, guid: 4596b2933ba098f41beb433863450923, type: 3}
+    - target: {fileID: 4470147315589490617, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
+      propertyPath: startOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470147315589490617, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
+      propertyPath: rooms.Array.data[6]
+      value: 
+      objectReference: {fileID: 5973720074147792220, guid: e8e4c4bd99728054386f149952d15dcb, type: 3}
     - target: {fileID: 4470147315589490619, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
       propertyPath: m_Name
       value: Map
