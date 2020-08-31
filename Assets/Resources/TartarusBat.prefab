@@ -163,7 +163,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.56}
+  m_Offset: {x: 0.020053387, y: 0.0020054579}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -174,7 +174,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.36003065}
+  m_Size: {x: 1.9601068, y: 1.2416418}
   m_EdgeRadius: 0
 --- !u!1 &4338764739658670799
 GameObject:
@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 4338764739658670798}
   - component: {fileID: 4338764739658670793}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: TartarusBat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,4 +254,3 @@ MonoBehaviour:
     m_Bits: 0
   flyingCollider: {fileID: 4338764739160754744}
   groundCollider: {fileID: 4338764739447683639}
-  player: {fileID: 0}
