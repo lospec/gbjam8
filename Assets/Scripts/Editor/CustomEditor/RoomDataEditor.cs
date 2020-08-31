@@ -12,7 +12,7 @@ namespace Editor.CustomEditor
         private const string ResourcePath = "Assets/Editor/Resource/RoomResource.asset";
 
         public int wallWidth = 5;
-        public int spaceBetweenWall = 20;
+        public int spaceBetweenWall = 18;
         public int roomHeight = 36;
         public RoomGeneratorResource roomResource;
 
