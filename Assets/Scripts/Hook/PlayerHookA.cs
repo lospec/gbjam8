@@ -15,7 +15,14 @@ namespace Hook.Prototype
         /// <summary> The speed of the hook when shot, use 0 for instant shot </summary>
         [Tooltip("The speed of the hook when shot, use 0 for instant shot")]
         public float shootSpeed = 0f;
+        
+        /// <summary> The speed of the hook when shot, use 0 for instant shot </summary>
+        [Tooltip("The grapples pulling speed")]
         public float pullSpeed = 50f;
+        
+        /// <summary> The maximum range the player can grapple, use 0 for infinite range </summary>
+        [Tooltip("The maximum range the player can grapple, use 0 for infinite range")]
+        public float maxHookDistance = 0f;
 
         /// <summary> The distance that the character will cast to check if they collided with walls or not </summary>
         [Tooltip("The distance that the character will cast to check if they collided with walls or not")]
@@ -23,6 +30,7 @@ namespace Hook.Prototype
 
         public bool IsGrappling { get; private set; } = false;
         public Vector2 HookPosition { get; private set; }
+        public Vector2 HookDirection { get; private set; }
         public Vector2 Aim { get; private set; }
         public Vector2 Target { get; private set; }
 
@@ -59,8 +67,6 @@ namespace Hook.Prototype
 
         private void MovementPerformed(InputAction.CallbackContext ctx)
         {
-            if (IsGrappling) return;
-
             Vector2 input = ctx.ReadValue<Vector2>();
 
             if (input.sqrMagnitude >= 1f)
@@ -126,7 +132,11 @@ namespace Hook.Prototype
         {
             if (IsGrappling) return;
 
-            RaycastHit2D hit = Physics2D.Raycast(rigid.position, Aim);
+            RaycastHit2D hit;
+            if (maxHookDistance > 0)
+                hit = Physics2D.Raycast(rigid.position, Aim, maxHookDistance);
+            else
+                hit = Physics2D.Raycast(rigid.position, Aim);
 
             if (hit)
             {
@@ -141,6 +151,7 @@ namespace Hook.Prototype
                     // if anybody have a better way to move the player, feel free to change my script
                     IsGrappling = true;
                     Target = hit.point;
+                    HookDirection = Aim;
 
                     if (shootSpeed > 0f)
                         HookPosition = rigid.position;

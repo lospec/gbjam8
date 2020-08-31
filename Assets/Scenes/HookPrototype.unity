@@ -759,6 +759,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6099035587017450192, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099035587017450193, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: customGravity
+      value: 19.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099035587017450193, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: jumpPower
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6099035587017450193, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: jumpTimer
+      value: 0.05
+      objectReference: {fileID: 0}
     - target: {fileID: 6099035587017450194, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -953,9 +969,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovementComponent: {fileID: 1417804987}
   shootSpeed: 0
-  pullSpeed: 20
-  checkDistance: 0.25
-  aim: {x: 0, y: 0}
+  pullSpeed: 50
+  checkDistance: 1
 --- !u!1 &1710102774
 GameObject:
   m_ObjectHideFlags: 0
