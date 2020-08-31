@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f9af97fc32b42f89adff6328f286d5e, type: 3}
+  m_Name: RoomResource
+  m_EditorClassIdentifier: Assembly-CSharp-Editor:Editor.CustomEditor:RoomDataEditor/RoomGeneratorResource
+  ruleTile: {fileID: 11400000, guid: ccc09ad8216b7204c94132c6d2c70a4e, type: 2}
+  leftTile: {fileID: 11400000, guid: f8d9987dac3050b46b4518655817215c, type: 2}
+  centerTile: {fileID: 11400000, guid: 515088b6bb0473e428606a33fc4d9f59, type: 2}
+  rightTile: {fileID: 11400000, guid: 49ae3fd2712616f408e0ecd0dd7727a1, type: 2}

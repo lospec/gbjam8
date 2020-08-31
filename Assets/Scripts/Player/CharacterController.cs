@@ -120,12 +120,11 @@ namespace Player
             {
                 var prevGrounded = _isGrounded;
                 yield return nextFixedUpdated;
-                _rigidbody.velocity += Vector2.up * jumpPower;
+                _rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                 _jumpTime -= Time.fixedDeltaTime;
 
                 if (!prevGrounded && _isGrounded)
                 {
-                    Debug.Log("break jump");
                     break;
                 }
             }
