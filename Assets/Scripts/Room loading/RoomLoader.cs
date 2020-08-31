@@ -38,7 +38,8 @@ public class RoomLoader : MonoBehaviour
         // Instantiating the first room
         topRoom = Instantiate(startRoom, Vector3.zero, Quaternion.Euler(Vector3.zero));
         topRoom.transform.SetParent(transform);
-        topRoom.name = $"Room Chunk {roomCount++}";
+        // sorry I need to know which prefab has been instantiated 
+        //topRoom.name = $"Room Chunk {roomCount++}";
 
         currentMaxY = topRoom.GetComponent<RoomData>().GetMidPoint() + startOffset;
 
@@ -85,7 +86,7 @@ public class RoomLoader : MonoBehaviour
                 new Vector3(topRoom.transform.position.x, yPos),
                 Quaternion.Euler(Vector3.zero));
             topRoom.transform.SetParent(transform);
-            topRoom.name = $"Room Chunk {roomCount++}";
+            //topRoom.name = $"Room Chunk {roomCount++}";
 
             loadedRooms.Add(topRoom);
             currentMaxY = yPos;

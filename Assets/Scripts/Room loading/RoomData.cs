@@ -23,14 +23,14 @@ public class RoomData : MonoBehaviour
         minY = tilemap.size.y;
         maxY = -tilemap.size.y;
 
-        for (int i = tilemap.cellBounds.xMin; i < tilemap.cellBounds.xMax; i++)
+        for (int i = borderBlender.cellBounds.xMin; i < borderBlender.cellBounds.xMax; i++)
         {
-            for (int j = tilemap.cellBounds.yMin; j < tilemap.cellBounds.yMax; j++)
+            for (int j = borderBlender.cellBounds.yMin; j < borderBlender.cellBounds.yMax; j++)
             {
                 currentTilePos.x = i;
                 currentTilePos.y = j;
 
-                if (tilemap.HasTile(currentTilePos))
+                if (borderBlender.HasTile(currentTilePos))
                 {
                     if (j < minY)
                     {
@@ -56,6 +56,6 @@ public class RoomData : MonoBehaviour
     {
         GetRoomHeight();
 
-        return tilemap.CellToWorld(new Vector3Int(0, (maxY + minY + 1) / 2, tilemap.cellBounds.z)).y;
+        return borderBlender.CellToWorld(new Vector3Int(0, (maxY + minY + 1) / 2, tilemap.cellBounds.z)).y;
     }
 }
