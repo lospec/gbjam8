@@ -83,6 +83,9 @@ namespace Player
         private void OnDisable()
         {
             _input.Disable();
+
+            // Temporary fix for accumulating _currentForceOfGravity when grappling
+            _currentForceOfGravity = Vector2.zero;
         }
 
         public void OnMovement(InputAction.CallbackContext context)
