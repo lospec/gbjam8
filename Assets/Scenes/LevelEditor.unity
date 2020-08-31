@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 49430415}
   - component: {fileID: 49430414}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Brush preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1315,7 +1315,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1371006412}
-  testObject: {fileID: 49430413}
+  brushPreview: {fileID: 49430413}
+  cameraSpeed: 5
 --- !u!1 &1317999336
 GameObject:
   m_ObjectHideFlags: 0
