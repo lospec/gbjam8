@@ -284,6 +284,26 @@ PrefabInstance:
       propertyPath: _healthImageTopStartPadding
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4256445006288919005, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256445006288919005, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256445006288919005, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256445006288919005, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -18.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256445006288919005, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -51.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6796999014260673994, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
       propertyPath: _targetEntity
       value: 
@@ -295,6 +315,10 @@ PrefabInstance:
     - target: {fileID: 7821156551021953834, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 7821156551021953877, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7821156551021953878, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -378,6 +402,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7821156551021953878, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016694193455772177, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
