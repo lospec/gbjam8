@@ -14,6 +14,6 @@ public class HUDScoreHandler : MonoBehaviour
 
 	private void SetHUDScore(int score)
 	{
-		_textMeshProText.text = string.Join("\n", score.ToString().ToArray());
+		_textMeshProText.text = string.Join("\n", score.ToString().ToCharArray());
 	}
 }
