@@ -37,7 +37,7 @@ class EntityHealth : MonoBehaviour
 		OnHealthSet(Health);
 	}
 
-	public virtual void TakeDamage(int damage)
+	public virtual void Hurt(int damage)
 	{
 		Health -= damage;
 		OnTakeDamage(damage);

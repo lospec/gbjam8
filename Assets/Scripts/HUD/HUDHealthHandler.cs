@@ -7,7 +7,7 @@ public class HUDHealthHandler : MonoBehaviour
 	[SerializeField] private int _healthImagePadding;
 	[SerializeField] private int _healthImageTopPadding;
 
-    private void Start()
+    private void Awake()
     {
 		_targetEntityHealth.HealthSetEvent += SetHUDHealth;
 	}
