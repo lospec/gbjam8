@@ -5,7 +5,7 @@ public class HUDHealthHandler : MonoBehaviour
 	[SerializeField] private EntityHealth _targetEntityHealth;
 	[SerializeField] private GameObject _healthImagePrefab;
 	[SerializeField] private int _healthImagePadding;
-	[SerializeField] private int _healthImageTopStartPadding;
+	[SerializeField] private int _healthImageTopPadding;
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class HUDHealthHandler : MonoBehaviour
 			RectTransform heartImageRectTransform = heartImage.GetComponent<RectTransform>();
 			heartImageRectTransform.anchoredPosition = new Vector3(
 				-heartImageRectTransform.rect.width / 2,
-				-heartImageRectTransform.rect.height / 2 + _healthImageTopStartPadding - (heartImageRectTransform.rect.height + _healthImagePadding) * i,
+				-heartImageRectTransform.rect.height / 2 - _healthImageTopPadding - (heartImageRectTransform.rect.height + _healthImagePadding) * i,
 				0);
 			heartImageRectTransform.localScale = Vector3.one;
 		}
