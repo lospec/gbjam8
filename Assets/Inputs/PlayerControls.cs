@@ -124,6 +124,77 @@ namespace Inputs
                     ""isPartOfComposite"": true
                 }
             ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""2857cb27-08cf-4b80-aa43-2567a7abe305"",
+            ""actions"": [
+                {
+                    ""name"": ""CameraMovement"",
+                    ""type"": ""Value"",
+                    ""id"": ""76581819-082f-4d64-9721-646a3ec55714"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""9fdf4c49-4bca-4eee-bdf5-8a32c89deb86"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e10b20bc-7e05-47e2-94ce-5f5a90b6491c"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard"",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""0926092a-2ced-491e-bb6c-7709c5a81345"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard"",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8c33eb0c-2c7d-41df-bf3c-e3a1429348c5"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard"",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""5fbf980d-e8c8-42e6-8e4c-40fc96b7dbd4"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard"",
+                    ""action"": ""CameraMovement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -145,6 +216,9 @@ namespace Inputs
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_Primary = m_Player.FindAction("Primary", throwIfNotFound: true);
             m_Player_Secondary = m_Player.FindAction("Secondary", throwIfNotFound: true);
+            // Camera
+            m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+            m_Camera_CameraMovement = m_Camera.FindAction("CameraMovement", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -239,6 +313,39 @@ namespace Inputs
             }
         }
         public PlayerActions @Player => new PlayerActions(this);
+
+        // Camera
+        private readonly InputActionMap m_Camera;
+        private ICameraActions m_CameraActionsCallbackInterface;
+        private readonly InputAction m_Camera_CameraMovement;
+        public struct CameraActions
+        {
+            private @PlayerControls m_Wrapper;
+            public CameraActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @CameraMovement => m_Wrapper.m_Camera_CameraMovement;
+            public InputActionMap Get() { return m_Wrapper.m_Camera; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+            public void SetCallbacks(ICameraActions instance)
+            {
+                if (m_Wrapper.m_CameraActionsCallbackInterface != null)
+                {
+                    @CameraMovement.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraMovement;
+                    @CameraMovement.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraMovement;
+                    @CameraMovement.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraMovement;
+                }
+                m_Wrapper.m_CameraActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @CameraMovement.started += instance.OnCameraMovement;
+                    @CameraMovement.performed += instance.OnCameraMovement;
+                    @CameraMovement.canceled += instance.OnCameraMovement;
+                }
+            }
+        }
+        public CameraActions @Camera => new CameraActions(this);
         private int m_keyboardSchemeIndex = -1;
         public InputControlScheme keyboardScheme
         {
@@ -253,6 +360,10 @@ namespace Inputs
             void OnMovement(InputAction.CallbackContext context);
             void OnPrimary(InputAction.CallbackContext context);
             void OnSecondary(InputAction.CallbackContext context);
+        }
+        public interface ICameraActions
+        {
+            void OnCameraMovement(InputAction.CallbackContext context);
         }
     }
 }
