@@ -14,7 +14,7 @@ namespace Hook.Prototype
 
         private void FixedUpdate()
         {
-            if (playerHook.IsGrappling)
+            if (playerHook.ShowHook)
             {
                 grappleLine.enabled = true;
                 aimLine.enabled = false;

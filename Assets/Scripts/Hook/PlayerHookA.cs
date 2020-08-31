@@ -5,6 +5,7 @@ using Inputs;
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine.Rendering;
+using System.Data.Common;
 
 namespace Hook.Prototype
 {
@@ -19,12 +20,17 @@ namespace Hook.Prototype
         /// <summary> The speed of the hook when shot, use 0 for instant shot </summary>
         [Tooltip("The grapples pulling speed")]
         public float pullSpeed = 50f;
-        
+
         /// <summary> The maximum range the player can grapple, use 0 for infinite range </summary>
         [Tooltip("The maximum range the player can grapple, use 0 for infinite range")]
         public float maxHookDistance = 0f;
 
+        /// <summary> The time it takes in seconds for the hook to return if it can't hit a target, this will only be used when Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance) </summary>
+        [Tooltip("The time it takes in seconds for the hook to return if it can't hit a target, this will only be used when Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance)")]
+        public float hookReturnDuration = 1f;
+
         public bool IsGrappling { get; private set; } = false;
+        public bool ShowHook { get => IsGrappling || shootFalseHook != null; }
         public Vector2 HookOrigin { get => rigid.position; }
         public Vector2 HookPosition { get; private set; }
         public Vector2 HookDirection { get; private set; }
@@ -111,7 +117,7 @@ namespace Hook.Prototype
 
             // Player hits an obstacle
             RaycastHit2D[] hits = new RaycastHit2D[4];
-            if (rigid.Cast(dir, hits, pullSpeed * Time.deltaTime) > 0)
+            if (rigid.Cast(dir, hits, pullSpeed * Time.deltaTime) > 0f)
             {
                 // Could additionally check it the obstacle stops grappling or not, but this'll do for now
                 StopGrappling();
@@ -136,13 +142,20 @@ namespace Hook.Prototype
 
         public void PerformGrapple()
         {
+            if (shootFalseHook != null)
+            {
+                StopCoroutine(shootFalseHook);
+                shootFalseHook = null;
+            }
+
             RaycastHit2D hit;
-            if (maxHookDistance > 0)
+
+            if (maxHookDistance > 0f)
                 hit = Physics2D.Raycast(HookOrigin, Aim, maxHookDistance);
             else
                 hit = Physics2D.Raycast(HookOrigin, Aim);
 
-            if (hit)
+            if (hit.collider)
             {
                 GameObject hitObject = hit.collider.gameObject;
 
@@ -162,6 +175,45 @@ namespace Hook.Prototype
                         HookPosition = Target;
                 }
             }
+
+            else if (shootSpeed > 0f && maxHookDistance > 0f && maxHookDistance != Mathf.Infinity)
+            {
+                Target = HookOrigin + Aim.normalized * maxHookDistance;
+                HookPosition = HookOrigin;
+                HookDirection = Aim;
+
+                shootFalseHook = StartCoroutine(ShootFalseHook());
+            }
+        }
+
+        private Coroutine shootFalseHook = null;
+        private IEnumerator ShootFalseHook()
+        {
+            while ((Target - HookPosition).sqrMagnitude > 0.01f)
+            {
+                Debug.Log("ASKDLASD");
+                HookPosition = Vector2.MoveTowards(HookPosition, Target, shootSpeed * Time.deltaTime);
+                yield return null;
+            }
+
+            if (hookReturnDuration <= 0f)
+            {
+                shootFalseHook = null;
+                yield break;
+            }
+
+            float t = 0f;
+            while (t < 1f)
+            {
+                // We could still use this, but i'm afraid that this will behave strangely
+                // because the HookOrigin could move Away from the hook position
+                //HookPosition = Vector2.MoveTowards(HookPosition, HookOrigin, shootSpeed * Time.deltaTime);
+                t += Time.deltaTime / hookReturnDuration;
+                HookPosition = Vector2.Lerp(Target, HookOrigin, t);
+                yield return null;
+            }
+
+            shootFalseHook = null;
         }
 
         private void DisableMovement()
