@@ -29,11 +29,13 @@ namespace Hook.Prototype
         public float checkDistance = .25f;
 
         public bool IsGrappling { get; private set; } = false;
+        public Vector2 HookOrigin { get => rigid.position; }
         public Vector2 HookPosition { get; private set; }
         public Vector2 HookDirection { get; private set; }
-        public Vector2 Aim { get; private set; }
+        public Vector2 Aim { get; private set; } = Vector2.right;
         public Vector2 Target { get; private set; }
 
+        private float lastDirection = 1f;
         private Rigidbody2D rigid;
         private PlayerControls input;
         
@@ -48,6 +50,7 @@ namespace Hook.Prototype
         private void Start()
         {
             input.Player.Movement.performed += MovementPerformed;
+            input.Player.Movement.canceled += MovementCanceled;
             input.Player.Secondary.performed += SecondaryPerformed;
         }
 
@@ -69,8 +72,16 @@ namespace Hook.Prototype
         {
             Vector2 input = ctx.ReadValue<Vector2>();
 
-            if (input.sqrMagnitude >= 1f)
-                Aim = input;
+            if (input.sqrMagnitude >= 1f) Aim = input;
+            else Aim = Vector2.right * lastDirection;
+
+            if (Mathf.Abs(input.x) > 0f)
+                lastDirection = Mathf.Sign(input.x);
+        }
+
+        private void MovementCanceled(InputAction.CallbackContext ctx)
+        {
+            Aim = Vector2.right * lastDirection;
         }
 
         private void SecondaryPerformed(InputAction.CallbackContext ctx)
@@ -99,11 +110,10 @@ namespace Hook.Prototype
         public void MoveTowardsTarget()
         {
             // if anybody have a better way to move the player, feel free to change my script
-            Vector2 dir = (Target - rigid.position).normalized;
+            Vector2 dir = (Target - HookOrigin).normalized;
             Vector2 vel = dir * pullSpeed;
 
             // Player hits an obstacle
-            // Don't know why this doesn't work here
             RaycastHit2D[] hits = new RaycastHit2D[4];
             if (rigid.Cast(dir, hits, pullSpeed * Time.deltaTime) > 0)
             {
@@ -134,9 +144,9 @@ namespace Hook.Prototype
 
             RaycastHit2D hit;
             if (maxHookDistance > 0)
-                hit = Physics2D.Raycast(rigid.position, Aim, maxHookDistance);
+                hit = Physics2D.Raycast(HookOrigin, Aim, maxHookDistance);
             else
-                hit = Physics2D.Raycast(rigid.position, Aim);
+                hit = Physics2D.Raycast(HookOrigin, Aim);
 
             if (hit)
             {
@@ -148,13 +158,12 @@ namespace Hook.Prototype
 
                 //if (hitObject.CompareTag("Tile"))
                 {
-                    // if anybody have a better way to move the player, feel free to change my script
                     IsGrappling = true;
                     Target = hit.point;
                     HookDirection = Aim;
 
                     if (shootSpeed > 0f)
-                        HookPosition = rigid.position;
+                        HookPosition = HookOrigin;
                     else
                         HookPosition = Target;
                 }
