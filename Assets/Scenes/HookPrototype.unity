@@ -1097,10 +1097,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovementComponent: {fileID: 1417804987}
-  shootSpeed: 0
+  shootSpeed: 80
   pullSpeed: 50
-  maxHookDistance: 0
-  checkDistance: 1
+  maxHookDistance: 50
 --- !u!1 &1680805948
 GameObject:
   m_ObjectHideFlags: 0

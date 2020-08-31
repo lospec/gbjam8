@@ -24,10 +24,6 @@ namespace Hook.Prototype
         [Tooltip("The maximum range the player can grapple, use 0 for infinite range")]
         public float maxHookDistance = 0f;
 
-        /// <summary> The distance that the character will cast to check if they collided with walls or not </summary>
-        [Tooltip("The distance that the character will cast to check if they collided with walls or not")]
-        public float checkDistance = .25f;
-
         public bool IsGrappling { get; private set; } = false;
         public Vector2 HookOrigin { get => rigid.position; }
         public Vector2 HookPosition { get; private set; }
@@ -140,8 +136,6 @@ namespace Hook.Prototype
 
         public void PerformGrapple()
         {
-            if (IsGrappling) return;
-
             RaycastHit2D hit;
             if (maxHookDistance > 0)
                 hit = Physics2D.Raycast(HookOrigin, Aim, maxHookDistance);
