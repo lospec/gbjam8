@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using Weapon;
 
-namespace Hook
+namespace Weapon.Hook
 {
     public class PlayerHookGraphics : MonoBehaviour
     {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Configuration;
-using System.Globalization;
-using Hook;
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Weapon
+namespace Weapon.Hook
 {
     [RequireComponent(typeof(LineRenderer))]
     public class Rope : MonoBehaviour

@@ -1,7 +1,7 @@
-﻿using Hook;
-using Inputs;
+﻿using Inputs;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Weapon.Hook;
 
 namespace Player
 {

@@ -2,9 +2,8 @@
 using System.Collections;
 using Player;
 using UnityEngine;
-using Weapon;
 
-namespace Hook
+namespace Weapon.Hook
 {
     public class GrapplingGun : MonoBehaviour
     {
