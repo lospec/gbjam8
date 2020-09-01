@@ -7,5 +7,5 @@ public class AudioManagerAudioClip
 	public string Name;
 	public AudioClip AudioClip;
 	public float Volume = 1;
-	public float Pitch;
+	public float Pitch = 1;
 }
