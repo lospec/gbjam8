@@ -18,7 +18,6 @@ namespace Player
 
         [SerializeField] private GrapplingGun grapplingGun;
 
-
         private Animator _animator;
         private PlayerControls _input = default;
         private SpriteRenderer _spriteRenderer;

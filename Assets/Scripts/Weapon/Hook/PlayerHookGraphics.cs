@@ -1,44 +1,66 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Weapon.Hook
 {
     public class PlayerHookGraphics : MonoBehaviour
     {
-        [SerializeField] GrapplingGun playerHook;
-        [SerializeField] LineRenderer aimLine;
-
         public float aimLineDistance = 0f;
 
-        private void FixedUpdate()
+        [SerializeField] private GrapplingGun grapplingGun;
+        [SerializeField] private LineRenderer aimLine;
+
+
+        private void Start()
         {
-            if (playerHook.ShowHook)
-            {
-                aimLine.enabled = false;
-                return;
-            }
+            GrapplingGun.HookRetractEnd += EnableAimLine;
+            GrapplingGun.EndPull += EnableAimLine;
+            GrapplingGun.HookShot += DisableAimLine;
+        }
 
-            aimLine.enabled = true;
 
-            Vector2 aim = playerHook.Aim.normalized;
-            float d = aimLineDistance;
+        private void Update()
+        {
+            var aim = grapplingGun.Aim.normalized;
+            var d = aimLineDistance;
 
             if (d <= 0f) d = Mathf.Infinity;
-            RaycastHit2D hit = Physics2D.Raycast(playerHook.HookOrigin,
-                playerHook.Aim, d);
+            var hit = Physics2D.Raycast(grapplingGun.HookOrigin,
+                grapplingGun.Aim, d);
 
             if (hit) d = hit.distance;
             else
                 d = aimLineDistance <= 0f
-                    ? playerHook.maxHookDistance
+                    ? grapplingGun.maxHookDistance
                     : aimLineDistance;
 
-            aimLine.SetPosition(0, playerHook.HookOrigin);
-            aimLine.SetPosition(1, playerHook.HookOrigin + aim * d);
+            aimLine.SetPosition(0, grapplingGun.HookOrigin);
+            aimLine.SetPosition(1, grapplingGun.HookOrigin + aim * d);
         }
 
         private void OnDisable()
         {
             aimLine.enabled = false;
+        }
+
+        private void OnDestroy()
+        {
+            GrapplingGun.HookRetractEnd -= EnableAimLine;
+            GrapplingGun.EndPull -= EnableAimLine;
+            GrapplingGun.HookShot -= DisableAimLine;
+        }
+
+        private void DisableAimLine(float arg1, Vector2 arg2, Transform arg3,
+            Action arg4)
+        {
+            aimLine.enabled = false;
+            enabled = false;
+        }
+
+        private void EnableAimLine()
+        {
+            aimLine.enabled = true;
+            enabled = true;
         }
     }
 }
