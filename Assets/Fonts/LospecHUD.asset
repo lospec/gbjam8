@@ -1,0 +1,479 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!28 &-6201094826075444640
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LospecHUD Atlas
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 2
+  m_Width: 32
+  m_Height: 32
+  m_CompleteImageSize: 1024
+  m_MipsStripped: 0
+  m_TextureFormat: 1
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMasterTextureLimit: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 0
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 0
+  m_ColorSpace: 0
+  image data: 1024
+  _typelessdata: 000000000000000000000000000000000000000000000000000000000000000000ffffff0000ffffff0000ffffff00000000ff0000000000000000000000000000ff00ff0000000000000000000000000000ff0000000000000000000000000000ff00ff0000ffffff0000ffffff0000ffffff00000000000000000000000000000000ff00000000ff0000ff00000000ff00000000000000000000000000000000ffffff0000ffffff0000ffffff0000ffffff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffff00000000ff0000ffffff0000000000000000000000000000000000000000000000000000ff0000ff00ff0000000000000000000000000000000000000000ff000000ffffff000000ff0000000000000000000000000000000000000000ffff000000ff00000000ff00ff0000000000000000000000000000000000000000ff000000ff00ff0000ffffff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffff00000000ff0000000000000000000000000000000000000000000000000000ff00000000ff000000000000000000000000000000000000000000000000ff00ff00000000ff0000000000000000000000000000000000000000000000000000ff0000ff0000000000000000000000000000000000000000000000000000ffffff0000ffffff00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ffffff0000000000000000000000000000000000000000000000000000000000ff00ff0000000000000000000000000000000000000000000000000000000000ffffff0000000000000000000000000000000000000000000000000000000000ff00000000000000000000000000000000000000000000000000000000000000ff00ff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000ff00ff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+  m_Name: LospecHUD
+  m_EditorClassIdentifier: 
+  hashCode: -2029345889
+  material: {fileID: 6523984585828616516}
+  materialHashCode: 1288435935
+  m_Version: 1.1.0
+  m_SourceFontFileGUID: 89b6fdc701b3bda43a648d7838e69976
+  m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 89b6fdc701b3bda43a648d7838e69976, type: 3}
+  m_SourceFontFile: {fileID: 0}
+  m_AtlasPopulationMode: 0
+  m_FaceInfo:
+    m_FamilyName: LospecHUD
+    m_StyleName: Medium
+    m_PointSize: 15
+    m_Scale: 1
+    m_LineHeight: 6
+    m_AscentLine: 4
+    m_CapLine: 0
+    m_MeanLine: 0
+    m_Baseline: 0
+    m_DescentLine: 0
+    m_SuperscriptOffset: 9.990233
+    m_SuperscriptSize: 0.5
+    m_SubscriptOffset: 0
+    m_SubscriptSize: 0.5
+    m_UnderlineOffset: -2.241211
+    m_UnderlineThickness: 0.74707025
+    m_StrikethroughOffset: 0
+    m_StrikethroughThickness: 0.74707025
+    m_TabWidth: 4
+  m_GlyphTable:
+  - m_Index: 4
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 0.9375
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 2.8125
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 1
+      m_Y: 29
+      m_Width: 3
+      m_Height: 1
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 5
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 1
+      m_Y: 1
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 6
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 1
+      m_Y: 8
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 7
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 6
+      m_Y: 1
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 8
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 1
+      m_Y: 15
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 9
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 6
+      m_Y: 8
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 10
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 11
+      m_Y: 1
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 11
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 1
+      m_Y: 22
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 12
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 6
+      m_Y: 15
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 13
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 11
+      m_Y: 8
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  - m_Index: 14
+    m_Metrics:
+      m_Width: 2.8125
+      m_Height: 4.6875
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 4.6875
+      m_HorizontalAdvance: 3.75
+    m_GlyphRect:
+      m_X: 16
+      m_Y: 1
+      m_Width: 3
+      m_Height: 5
+    m_Scale: 1
+    m_AtlasIndex: 0
+  m_CharacterTable:
+  - m_ElementType: 1
+    m_Unicode: 45
+    m_GlyphIndex: 4
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 48
+    m_GlyphIndex: 5
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 49
+    m_GlyphIndex: 6
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 50
+    m_GlyphIndex: 7
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 51
+    m_GlyphIndex: 8
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 52
+    m_GlyphIndex: 9
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 53
+    m_GlyphIndex: 10
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 54
+    m_GlyphIndex: 11
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 55
+    m_GlyphIndex: 12
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 56
+    m_GlyphIndex: 13
+    m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 57
+    m_GlyphIndex: 14
+    m_Scale: 1
+  m_AtlasTextures:
+  - {fileID: -6201094826075444640}
+  m_AtlasTextureIndex: 0
+  m_IsMultiAtlasTexturesEnabled: 0
+  m_UsedGlyphRects:
+  - m_X: 0
+    m_Y: 0
+    m_Width: 5
+    m_Height: 7
+  - m_X: 0
+    m_Y: 7
+    m_Width: 5
+    m_Height: 7
+  - m_X: 5
+    m_Y: 0
+    m_Width: 5
+    m_Height: 7
+  - m_X: 0
+    m_Y: 14
+    m_Width: 5
+    m_Height: 7
+  - m_X: 5
+    m_Y: 7
+    m_Width: 5
+    m_Height: 7
+  - m_X: 10
+    m_Y: 0
+    m_Width: 5
+    m_Height: 7
+  - m_X: 0
+    m_Y: 21
+    m_Width: 5
+    m_Height: 7
+  - m_X: 5
+    m_Y: 14
+    m_Width: 5
+    m_Height: 7
+  - m_X: 10
+    m_Y: 7
+    m_Width: 5
+    m_Height: 7
+  - m_X: 15
+    m_Y: 0
+    m_Width: 5
+    m_Height: 7
+  - m_X: 0
+    m_Y: 28
+    m_Width: 5
+    m_Height: 3
+  m_FreeGlyphRects:
+  - m_X: 5
+    m_Y: 21
+    m_Width: 27
+    m_Height: 11
+  - m_X: 10
+    m_Y: 14
+    m_Width: 22
+    m_Height: 18
+  - m_X: 15
+    m_Y: 7
+    m_Width: 17
+    m_Height: 25
+  - m_X: 20
+    m_Y: 0
+    m_Width: 12
+    m_Height: 32
+  - m_X: 0
+    m_Y: 31
+    m_Width: 32
+    m_Height: 1
+  m_fontInfo:
+    Name: 
+    PointSize: 0
+    Scale: 0
+    CharacterCount: 0
+    LineHeight: 0
+    Baseline: 0
+    Ascender: 0
+    CapHeight: 0
+    Descender: 0
+    CenterLine: 0
+    SuperscriptOffset: 0
+    SubscriptOffset: 0
+    SubSize: 0
+    Underline: 0
+    UnderlineThickness: 0
+    strikethrough: 0
+    strikethroughThickness: 0
+    TabWidth: 0
+    Padding: 0
+    AtlasWidth: 0
+    AtlasHeight: 0
+  atlas: {fileID: 0}
+  m_AtlasWidth: 32
+  m_AtlasHeight: 32
+  m_AtlasPadding: 1
+  m_AtlasRenderMode: 4118
+  m_glyphInfoList: []
+  m_KerningTable:
+    kerningPairs: []
+  m_FontFeatureTable:
+    m_GlyphPairAdjustmentRecords: []
+  fallbackFontAssets: []
+  m_FallbackFontAssetTable: []
+  m_CreationSettings:
+    sourceFontFileName: 
+    sourceFontFileGUID: 89b6fdc701b3bda43a648d7838e69976
+    pointSizeSamplingMode: 1
+    pointSize: 15
+    padding: 1
+    packingMode: 4
+    atlasWidth: 32
+    atlasHeight: 32
+    characterSetSelectionMode: 7
+    characterSequence: -0123456789
+    referencedFontAssetGUID: 95a03076114796c4cb925248ac061a02
+    referencedTextAssetGUID: 
+    fontStyle: 0
+    fontStyleModifier: 0
+    renderMode: 4118
+    includeFontFeatures: 0
+  m_FontWeightTable:
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 0}
+    italicTypeface: {fileID: 0}
+  fontWeights: []
+  normalStyle: 0
+  normalSpacingOffset: 0
+  boldStyle: 0.75
+  boldSpacing: 7
+  italicStyle: 35
+  tabSize: 10
+--- !u!21 &6523984585828616516
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LospecHUD Material
+  m_Shader: {fileID: 4800000, guid: 128e987d567d4e2c824d754223b3f3b0, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FaceTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: -6201094826075444640}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _ColorMask: 15
+    - _CullMode: 0
+    - _MaskSoftnessX: 0
+    - _MaskSoftnessY: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _VertexOffsetX: 0
+    - _VertexOffsetY: 0
+    m_Colors:
+    - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
+    - _FaceColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
