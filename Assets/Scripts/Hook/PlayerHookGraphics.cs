@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Weapon;
 
-namespace Hook.Prototype
+namespace Hook
 {
     public class PlayerHookGraphics : MonoBehaviour
     {
         [SerializeField] GrapplingGun playerHook;
-        [SerializeField] LineRenderer grappleLine;
         [SerializeField] LineRenderer aimLine;
 
         public float aimLineDistance = 0f;
@@ -16,35 +14,31 @@ namespace Hook.Prototype
         {
             if (playerHook.ShowHook)
             {
-                grappleLine.enabled = true;
                 aimLine.enabled = false;
-
-                grappleLine.SetPosition(0, playerHook.HookOrigin);
-                grappleLine.SetPosition(1, playerHook.HookPosition);
+                return;
             }
-            else
-            {
-                grappleLine.enabled = false;
-                aimLine.enabled = true;
 
-                Vector2 aim = playerHook.Aim.normalized;
-                float d = aimLineDistance;
+            aimLine.enabled = true;
 
-                if (d <= 0f) d = Mathf.Infinity;
-                RaycastHit2D hit = Physics2D.Raycast(playerHook.HookOrigin, 
+            Vector2 aim = playerHook.Aim.normalized;
+            float d = aimLineDistance;
+
+            if (d <= 0f) d = Mathf.Infinity;
+            RaycastHit2D hit = Physics2D.Raycast(playerHook.HookOrigin,
                 playerHook.Aim, d);
 
-                if (hit) d = hit.distance;
-                else d = aimLineDistance <= 0f ? playerHook.maxHookDistance : aimLineDistance;
+            if (hit) d = hit.distance;
+            else
+                d = aimLineDistance <= 0f
+                    ? playerHook.maxHookDistance
+                    : aimLineDistance;
 
-                aimLine.SetPosition(0, playerHook.HookOrigin);
-                aimLine.SetPosition(1, playerHook.HookOrigin + aim * d);
-            }
+            aimLine.SetPosition(0, playerHook.HookOrigin);
+            aimLine.SetPosition(1, playerHook.HookOrigin + aim * d);
         }
 
         private void OnDisable()
         {
-            grappleLine.enabled = false;
             aimLine.enabled = false;
         }
     }

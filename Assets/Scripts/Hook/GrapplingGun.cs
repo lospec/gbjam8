@@ -2,6 +2,7 @@
 using System.Collections;
 using Player;
 using UnityEngine;
+using Weapon;
 
 namespace Hook
 {
@@ -26,6 +27,10 @@ namespace Hook
         [Tooltip(
             "The time it takes in seconds for the hook to return if it can't hit a target, this will only be used when Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance)")]
         public float hookReturnDuration = 1f;
+        [SerializeField] private Transform hook;
+        [SerializeField] private Rope rope;
+
+
         private Vector2 _aim = Vector2.right;
 
         private float lastDirection = 1f;
@@ -34,7 +39,11 @@ namespace Hook
         public bool ShowHook => enabled || shootFalseHook != null;
         public Vector2 HookOrigin => Motor.Body.position;
 
-        public Vector2 HookPosition { get; private set; }
+        public Vector2 HookPosition
+        {
+            get => hook.transform.position;
+            set => hook.transform.position = value;
+        }
         public Vector2 HookDirection { get; private set; }
         public Vector2 Target { get; private set; }
 
@@ -62,8 +71,8 @@ namespace Hook
         {
             if ((Target - HookPosition).sqrMagnitude > 0.01f)
             {
-                HookPosition = Vector2.MoveTowards(HookPosition, Target,
-                    shootSpeed * Time.fixedDeltaTime);
+                // HookPosition = Vector2.MoveTowards(HookPosition, Target,
+                //     shootSpeed * Time.fixedDeltaTime);
                 return;
             }
 
@@ -127,6 +136,8 @@ namespace Hook
                 Target = hit.point;
                 HookDirection = _aim;
                 HookPosition = shootSpeed > 0f ? HookOrigin : Target;
+                rope.StartConnect();
+                hook.SetParent(null, true);
             }
 
             else if (shootSpeed > 0f && maxHookDistance > 0f &&
@@ -135,7 +146,8 @@ namespace Hook
                 Target = HookOrigin + _aim.normalized * maxHookDistance;
                 HookPosition = HookOrigin;
                 HookDirection = _aim;
-
+                rope.StartConnect();
+                hook.SetParent(null, true);
                 shootFalseHook = StartCoroutine(ShootFalseHook());
             }
         }
@@ -144,8 +156,8 @@ namespace Hook
         {
             while ((Target - HookPosition).sqrMagnitude > 0.01f)
             {
-                HookPosition = Vector2.MoveTowards(HookPosition, Target,
-                    shootSpeed * Time.deltaTime);
+                // HookPosition = Vector2.MoveTowards(HookPosition, Target,
+                //     shootSpeed * Time.deltaTime);
                 yield return null;
             }
 
@@ -166,7 +178,9 @@ namespace Hook
                 yield return null;
             }
 
+            rope.Line.enabled = false;
             shootFalseHook = null;
+            hook.SetParent(transform, true);
         }
 
         private void DisableMovement()
@@ -177,6 +191,8 @@ namespace Hook
 
         private void EnableMovement()
         {
+            rope.Line.enabled = false;
+            hook.SetParent(transform, true);
             Motor.Body.velocity = Vector2.zero;
             Motor.enabled = true;
         }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
-using Hook;
-using Hook.Prototype;
+﻿using Hook;
 using Inputs;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 namespace Player
