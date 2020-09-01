@@ -70,7 +70,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
 
         _input.Camera.CameraMovement.performed += OnCameraMovement;
         _input.Camera.CameraMovement.canceled += _ => cameraVelocity = Vector2.zero;
-        _input.Camera.CameraMovement.started += OnDelete;
+        _input.Camera.Delete.started += OnDelete;
 
         _input.Camera.Enable();
 
