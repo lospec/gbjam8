@@ -26,10 +26,9 @@ namespace Enemy
 
         protected virtual void Start()
         {
-            body.gravityScale = 0;
         }
 
-        public void Initialize(Transform player)
+        protected void Initialize(Transform player)
         {
             Player = player;
         }
