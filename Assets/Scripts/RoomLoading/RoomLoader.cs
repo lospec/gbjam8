@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Spawn;
 using UnityEngine;
 
 namespace RoomLoading
@@ -67,9 +68,16 @@ namespace RoomLoading
             // Room to instantiate
             var chosenRoom = rooms[Random.Range(0, rooms.Length)];
             if (chosenRoom != null)
-                _loadedRooms.Add(SpawnRoom(chosenRoom));
+            {
+                var room = SpawnRoom(chosenRoom);
+                _loadedRooms.Add(room);
+                var spawner = room.GetComponent<EnemySpawner>();
+                spawner.SpawnEnemies();
+            }
             else
+            {
                 Debug.LogError("Couldn't instantiate room");
+            }
         }
 
         // Unloads all the rooms that are far enough from the player
