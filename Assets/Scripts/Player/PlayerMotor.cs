@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace Player
@@ -19,6 +20,9 @@ namespace Player
 
         [SerializeField] private Transform topLeftBound = default;
         [SerializeField] private Transform bottomRightBound = default;
+
+		public UnityEvent<float> OnPlayerStartJump;
+		public UnityEvent<float> OnPlayerJumpHeld;
 
         private float _jumpTime;
         private bool _isGrounded;
@@ -67,17 +71,26 @@ namespace Player
             _jumpTime = jumpTimer;
             Body.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
 
-            var nextFixedUpdated = new WaitForFixedUpdate();
+            var netJumpMagnitude = jumpPower;
+
+			OnPlayerStartJump?.Invoke(netJumpMagnitude);
+
+			var nextFixedUpdated = new WaitForFixedUpdate();
 
             while (IsJumping)
             {
                 if (contextAction.ReadValue<float>() > 0 && _jumpTime > 0)
                 {
+                    float jumpMagnitude = jumpPower * (_jumpTime / jumpTimer);
                     Body.AddForce(
-                        Vector2.up * (jumpPower * (_jumpTime / jumpTimer)),
+                        Vector2.up * jumpMagnitude,
                         ForceMode2D.Impulse);
                     _jumpTime -= Time.fixedDeltaTime;
-                }
+
+                    netJumpMagnitude += jumpMagnitude;
+
+					OnPlayerJumpHeld?.Invoke(netJumpMagnitude);
+				}
 
                 var prevGrounded = _isGrounded;
                 yield return nextFixedUpdated;
@@ -87,7 +100,7 @@ namespace Player
                 }
             }
 
-            IsJumping = false;
+			IsJumping = false;
         }
 
         private bool GroundCheck()
