@@ -100,10 +100,9 @@ namespace Weapon.Hook
         {
             var t = 0f;
             var startPosition = hook.position;
-            var d = Vector2.Distance(startPosition, transform.position);
             while (t <= 1f)
             {
-                t += Time.deltaTime * speed / d;
+                t += Time.deltaTime * speed;
                 hook.position = Vector2.Lerp(startPosition, transform.position, t);
                 Line.SetPosition(1, hook.position);
                 yield return null;

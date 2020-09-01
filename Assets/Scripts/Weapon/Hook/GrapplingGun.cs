@@ -16,7 +16,7 @@ namespace Weapon.Hook
         /// </summary>
         [Tooltip(
             "The time it takes in seconds for the hook to return if it can't hit a target, this will only be used when Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance)")]
-        public float returnSpeed = 1f;
+        public float returnDuration = 1f;
 
         /// <summary> The speed of the hook when shot, use 0 for instant shot </summary>
         [Tooltip("The grapples pulling speed")]
@@ -146,7 +146,7 @@ namespace Weapon.Hook
                 Target = HookOrigin + _aim.normalized * maxHookDistance;
                 HookPosition = HookOrigin;
                 HookShot?.Invoke(shootSpeed, Target, hook, () => HookRetract?.Invoke
-                (returnSpeed, hook,
+                (returnDuration, hook,
                     () =>
                     {
                         StopGrappling();
