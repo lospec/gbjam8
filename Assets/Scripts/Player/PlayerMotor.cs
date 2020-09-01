@@ -43,10 +43,12 @@ namespace Player
                 ? Vector2.zero
                 : _gravity + Vector2.down * customGravity;
 
-            Body.AddForce(Move * (moveSpeed * MoveSpeedModifier));
+            // Body.AddForce(Move * (moveSpeed * MoveSpeedModifier));
             Body.AddForce(_gravity);
 
             var velocity = Body.velocity;
+            velocity.x = Mathf.Abs(Move.x) > 0 ? Move.x * moveSpeed : velocity.x;
+
             velocity.y = velocity.y < -terminalVelocity
                 ? -terminalVelocity
                 : velocity.y;

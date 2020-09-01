@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using Hook;
+using Hook.Prototype;
 using Inputs;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
 namespace Player
@@ -18,10 +21,14 @@ namespace Player
             public static readonly int IsJumping = Animator.StringToHash("IsJumping");
         }
 
-        [SerializeField] private Animator animator = default;
+        [SerializeField] private GrapplingGun grapplingGun;
+
+
+        private Animator _animator;
         private PlayerControls _input = default;
         private SpriteRenderer _spriteRenderer;
         private PlayerMotor _motor;
+
 
         private Vector2 _inputVector;
 
@@ -29,7 +36,9 @@ namespace Player
         {
             _input = new PlayerControls();
             _spriteRenderer = GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
             _motor = GetComponent<PlayerMotor>();
+            grapplingGun.Motor = _motor;
         }
 
         private void Start()
@@ -42,6 +51,7 @@ namespace Player
         private void Update()
         {
             _motor.Move = new Vector2(_inputVector.x, _motor.Move.y);
+            grapplingGun.Aim = _inputVector;
             UpdateSpriteAndAnimations();
         }
 
@@ -69,19 +79,14 @@ namespace Player
 
         public void OnSecondary(InputAction.CallbackContext context)
         {
-            Hook();
+            grapplingGun.PerformGrapple();
         }
-
-        private void Hook()
-        {
-        }
-
 
         private void UpdateSpriteAndAnimations()
         {
             if (_inputVector.x != 0) _spriteRenderer.flipX = !(_inputVector.x >= 0);
-            animator.SetBool(AnimParams.IsJumping, _motor.IsJumping);
-            animator.SetBool(AnimParams.IsRunning,
+            _animator.SetBool(AnimParams.IsJumping, _motor.IsJumping);
+            _animator.SetBool(AnimParams.IsRunning,
                 Mathf.Abs(_motor.Body.velocity.x) > 0.25f);
         }
     }

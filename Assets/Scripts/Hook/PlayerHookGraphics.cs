@@ -6,7 +6,7 @@ namespace Hook.Prototype
 {
     public class PlayerHookGraphics : MonoBehaviour
     {
-        [SerializeField] PlayerHookA playerHook;
+        [SerializeField] GrapplingGun playerHook;
         [SerializeField] LineRenderer grappleLine;
         [SerializeField] LineRenderer aimLine;
 
@@ -31,7 +31,8 @@ namespace Hook.Prototype
                 float d = aimLineDistance;
 
                 if (d <= 0f) d = Mathf.Infinity;
-                RaycastHit2D hit = Physics2D.Raycast(playerHook.HookOrigin, playerHook.Aim, d);
+                RaycastHit2D hit = Physics2D.Raycast(playerHook.HookOrigin, 
+                playerHook.Aim, d);
 
                 if (hit) d = hit.distance;
                 else d = aimLineDistance <= 0f ? playerHook.maxHookDistance : aimLineDistance;
