@@ -38,18 +38,17 @@ public class ScrollableEntry : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     public void OnDrag(PointerEventData eventData)
     {
         // La preview si muove con il pennello
-        Debug.Log("Trascino");
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        // Istanzio l'oggetto
-        Debug.Log("Smetto di trascinare");
-
         editor.AddToAssetList(resource);
 
         editor.ResetBrushPreview();
         editor.isDragging = false;
+
+        resource.AddComponent<MovableAsset>();
+        resource.AddComponent<PolygonCollider2D>();
     }
 
     public void SetPath(string path, string name)

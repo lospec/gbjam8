@@ -136,6 +136,14 @@ namespace Inputs
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Delete"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a3a1c14-7ed9-45c0-a1ae-1d8938f158c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -193,6 +201,17 @@ namespace Inputs
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d58f6a6-6cbb-4eb9-bdd8-150623d3dcae"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard"",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -219,6 +238,7 @@ namespace Inputs
             // Camera
             m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
             m_Camera_CameraMovement = m_Camera.FindAction("CameraMovement", throwIfNotFound: true);
+            m_Camera_Delete = m_Camera.FindAction("Delete", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -318,11 +338,13 @@ namespace Inputs
         private readonly InputActionMap m_Camera;
         private ICameraActions m_CameraActionsCallbackInterface;
         private readonly InputAction m_Camera_CameraMovement;
+        private readonly InputAction m_Camera_Delete;
         public struct CameraActions
         {
             private @PlayerControls m_Wrapper;
             public CameraActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @CameraMovement => m_Wrapper.m_Camera_CameraMovement;
+            public InputAction @Delete => m_Wrapper.m_Camera_Delete;
             public InputActionMap Get() { return m_Wrapper.m_Camera; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -335,6 +357,9 @@ namespace Inputs
                     @CameraMovement.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraMovement;
                     @CameraMovement.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraMovement;
                     @CameraMovement.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnCameraMovement;
+                    @Delete.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnDelete;
+                    @Delete.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnDelete;
+                    @Delete.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnDelete;
                 }
                 m_Wrapper.m_CameraActionsCallbackInterface = instance;
                 if (instance != null)
@@ -342,6 +367,9 @@ namespace Inputs
                     @CameraMovement.started += instance.OnCameraMovement;
                     @CameraMovement.performed += instance.OnCameraMovement;
                     @CameraMovement.canceled += instance.OnCameraMovement;
+                    @Delete.started += instance.OnDelete;
+                    @Delete.performed += instance.OnDelete;
+                    @Delete.canceled += instance.OnDelete;
                 }
             }
         }
@@ -364,6 +392,7 @@ namespace Inputs
         public interface ICameraActions
         {
             void OnCameraMovement(InputAction.CallbackContext context);
+            void OnDelete(InputAction.CallbackContext context);
         }
     }
 }

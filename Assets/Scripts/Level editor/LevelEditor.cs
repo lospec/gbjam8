@@ -18,11 +18,14 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     public Tilemap tilemap;
     public RuleTile defaultTile;
     public GameObject brushPreview;
+    public GameObject selectedIcon;
     public EventSystem uiEvents;
     public float cameraSpeed = 5f;
     [Header("Please mark as readonly I don't know how to do that")]
     public bool isDragging;
     public bool cursorOnUI;
+    public bool isDrawing;
+    public bool canDraw;
 
     // Input manager
     private PlayerControls _input = default;
@@ -35,7 +38,9 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     private Tool currentTool;
     private Camera camera;
     private Vector2 cameraVelocity;
+
     private GameObject prevBrushPreview;
+    private GameObject selectedAsset;
 
     private List<GameObject> instantiatedAssets;
     private List<Vector2> startPositions;
@@ -44,7 +49,6 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     private void Awake()
     {
         _input = new PlayerControls();
-        _input.Camera.Enable();
 
         Instance = this;
     }
@@ -66,11 +70,16 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
 
         _input.Camera.CameraMovement.performed += OnCameraMovement;
         _input.Camera.CameraMovement.canceled += _ => cameraVelocity = Vector2.zero;
+        _input.Camera.CameraMovement.started += OnDelete;
 
+        _input.Camera.Enable();
+
+        canDraw = true;
         // Default tool is pencil
         currentTool = Tool.Pencil;
         // Freezing time so that the user can create the level
         Time.timeScale = 0;
+        selectedIcon.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 0);
     }
 
     // Update is called once per frame
@@ -89,8 +98,8 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         intTilemapPosition.y = Mathf.RoundToInt(mouseTilemapPosition.y);
 
         brushPreview.transform.position = mouseWorldPosition;
-
-        if (!uiEvents.IsPointerOverGameObject() && !isDragging)
+        
+        if (!uiEvents.IsPointerOverGameObject() && !isDragging && canDraw)
         {
             cursorOnUI = false;
 
@@ -99,6 +108,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
                 case Tool.Pencil:
                     if (leftMousePressed)
                     {
+                        isDrawing = true;
                         // Saving data
                         tilemapData[(intTilemapPosition.x, intTilemapPosition.y)] = "tile";
 
@@ -108,30 +118,48 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
                     }
                     else if (rightMousePressed)
                     {
+                        isDrawing = true;
                         // Saving data
                         tilemapData.Remove((intTilemapPosition.x, intTilemapPosition.y));
 
                         // Clear the current tile
                         tilemap.SetTile(intTilemapPosition, null);
                     }
+                    else
+                    {
+                        isDrawing = false;
+                    }
+
                     break;
                 case Tool.Eraser:
                     if (leftMousePressed)
                     {
+                        isDrawing = true;
                         // Saving data
                         tilemapData.Remove((intTilemapPosition.x, intTilemapPosition.y));
 
                         tilemap.SetTile(intTilemapPosition, null);
                     }
+                    else
+                    {
+                        isDrawing = false;
+                    }
+
                     break;
                 case Tool.Fill:
                     if (Mouse.current.leftButton.wasReleasedThisFrame)
                     {
+                        isDrawing = true;
                         // Saving data
                         tilemapData[(intTilemapPosition.x, intTilemapPosition.y)] = "flood";
 
                         tilemap.FloodFill(intTilemapPosition, defaultTile);
                     }
+                    else
+                    {
+                        isDrawing = false;
+                    }
+
                     break;
                 default:
                     break;
@@ -212,8 +240,30 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         }
     }
 
+    public void SetSelected(GameObject toSet)
+    {
+        selectedAsset = toSet;
+    }
+
+    public void ResetSelected(GameObject toReset)
+    {
+        if (toReset.Equals(selectedAsset))
+        {
+            selectedAsset = null;
+        }
+    }
+
     public void Save()
     {
 
+    }
+
+    public void OnDelete(InputAction.CallbackContext context)
+    {
+        Debug.Log("Delete");
+        if (selectedAsset != null)
+        {
+            Destroy(selectedAsset);
+        }
     }
 }
