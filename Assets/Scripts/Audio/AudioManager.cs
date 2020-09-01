@@ -25,14 +25,14 @@ namespace Audio
             }
         }
 
-		private KeyValuePair<AudioManagerAudioClip, AudioSource> GetAudioSourceByName(string audioName)
+		private KeyValuePair<AudioManagerAudioClip, AudioSource> GetAudioSourcePairByName(string audioName)
 		{
-			var audioSources =
+			var audioSourcePairs =
 				(from pair in _audioManagerClipToSource
 				 where pair.Key.name == audioName
 				 select pair).ToArray();
 
-			var count = audioSources.Length;
+			var count = audioSourcePairs.Length;
 			if (count > 1)
 			{
 				Debug.LogException(new System.Exception(string.Format(
@@ -51,12 +51,12 @@ namespace Audio
 				return new KeyValuePair<AudioManagerAudioClip, AudioSource>();
 			}
 
-			return audioSources.First();
+			return audioSourcePairs.First();
 		}
 
         public void PlayAudio(string audioName)
         {
-			KeyValuePair<AudioManagerAudioClip, AudioSource> pair = GetAudioSourceByName(audioName);
+			KeyValuePair<AudioManagerAudioClip, AudioSource> pair = GetAudioSourcePairByName(audioName);
 			AudioManagerAudioClip audioManagerAudioClip = pair.Key;
 			AudioSource audioSource = pair.Value;
 			audioSource.volume = audioManagerAudioClip.volume;
@@ -67,7 +67,7 @@ namespace Audio
 
 		public void IncreaseVolume(string audioName)
 		{
-			KeyValuePair<AudioManagerAudioClip, AudioSource> pair = GetAudioSourceByName(audioName);
+			KeyValuePair<AudioManagerAudioClip, AudioSource> pair = GetAudioSourcePairByName(audioName);
 			AudioManagerAudioClip audioManagerAudioClip = pair.Key;
 			AudioSource audioSource = pair.Value;
 			audioSource.volume += audioManagerAudioClip.VolumeIncrementAmount;
