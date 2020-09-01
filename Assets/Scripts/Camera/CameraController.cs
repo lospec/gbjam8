@@ -1,6 +1,9 @@
-﻿using System;
+﻿using System.Linq;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
+[ExecuteAlways]
 public class CameraController : MonoBehaviour
 {
     [SerializeField] private Transform _target;
@@ -11,6 +14,15 @@ public class CameraController : MonoBehaviour
 
     private Vector3 _velocity;
     public Vector2 Velocity => _velocity;
+
+
+    [InitializeOnLoadMethod]
+    private static void EnablePixelPerfectInEditor()
+    {
+        UnityEngine.Camera.allCameras.Select(c => c.GetComponent<PixelPerfectCamera>())
+            .Where(controller => controller).ToList().ForEach(perfectCamera =>
+                perfectCamera.runInEditMode = true);
+    }
 
     private void LateUpdate()
     {
