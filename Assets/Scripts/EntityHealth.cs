@@ -17,8 +17,8 @@ class EntityHealth : MonoBehaviour
 		}
 	}
 
-	[SerializeField] public UnityEvent<int> OnHealthSet;
-	[SerializeField] public UnityEvent<int> OnTakeDamage;
+	public UnityEvent<int> OnHealthSet;
+	public UnityEvent<int> OnTakeDamage;
 
 	private void Start()
 	{

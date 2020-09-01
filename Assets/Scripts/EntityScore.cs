@@ -17,7 +17,7 @@ class EntityScore : MonoBehaviour
 		}
 	}
 
-	[SerializeField] public UnityEvent<int> OnScoreSet;
+	public UnityEvent<int> OnScoreSet;
 
 	private void Start()
 	{
