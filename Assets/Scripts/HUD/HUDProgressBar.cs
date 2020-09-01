@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Player;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class HUDProgressBar : MonoBehaviour
 {
-	[SerializeField] private Player.CharacterController _player;
+	[SerializeField] private PlayerController _player;
 	[SerializeField] private float _minPlayerPosY;
 	[SerializeField] private float _maxPlayerPosY;
 	[SerializeField] private Slider _slider;
