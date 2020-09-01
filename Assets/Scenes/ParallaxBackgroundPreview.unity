@@ -1738,7 +1738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1021891475}
   - component: {fileID: 1021891474}
-  - component: {fileID: 1021891477}
+  - component: {fileID: 1021891476}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -1805,14 +1805,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1021891473}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalPosition: {x: 0, y: 80, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2115048805}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1021891477
+--- !u!61 &1021891476
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1829,14 +1829,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20, y: 18}
+    oldSize: {x: 20, y: 180}
     newSize: {x: 20, y: 18}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 18}
+  m_Size: {x: 20, y: 180}
   m_EdgeRadius: 0
 --- !u!4 &1050582407 stripped
 Transform:
@@ -1995,7 +1995,7 @@ SpriteRenderer:
   m_Size: {x: 20, y: 18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &1407969974
@@ -2033,14 +2033,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20, y: 18}
+    oldSize: {x: 20, y: 180}
     newSize: {x: 20, y: 18}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 18}
+  m_Size: {x: 20, y: 180}
   m_EdgeRadius: 0
 --- !u!212 &1407969977
 SpriteRenderer:
@@ -2101,7 +2101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1407969974}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 18, z: 1}
+  m_LocalPosition: {x: 0, y: 260, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1340636461}
@@ -2231,7 +2231,7 @@ SpriteRenderer:
   m_Size: {x: 20, y: 18}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &4032554401890836813

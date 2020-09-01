@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 
 	private Vector3 _velocity;
 
-	private void FixedUpdate()
+	private void LateUpdate()
 	{
 		Vector3 targetPos = new Vector3(transform.position.x, _target.position.y + _targetOffsetY, transform.position.z);
 		targetPos = new Vector3(targetPos.x, Mathf.Clamp(targetPos.y, _minPosY, _maxPosY), targetPos.z);
