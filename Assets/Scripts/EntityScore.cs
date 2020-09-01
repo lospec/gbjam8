@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 class EntityScore : MonoBehaviour
 {
@@ -8,7 +9,7 @@ class EntityScore : MonoBehaviour
 		protected set
 		{
 			_score = value;
-			OnScoreSet(value);
+			OnScoreSet?.Invoke(value);
 		}
 		get
 		{
@@ -16,16 +17,10 @@ class EntityScore : MonoBehaviour
 		}
 	}
 
-	public delegate void ScoreSetEventHandler(int score);
-	public event ScoreSetEventHandler ScoreSetEvent;
-
-	protected virtual void OnScoreSet(int health)
-	{
-		ScoreSetEvent?.Invoke(health);
-	}
+	[SerializeField] public UnityEvent<int> OnScoreSet;
 
 	private void Start()
 	{
-		OnScoreSet(Score);
+		OnScoreSet?.Invoke(Score);
 	}
 }

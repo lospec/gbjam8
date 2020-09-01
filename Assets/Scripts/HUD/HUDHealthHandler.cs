@@ -2,17 +2,11 @@
 
 public class HUDHealthHandler : MonoBehaviour
 {
-	[SerializeField] private EntityHealth _targetEntityHealth;
 	[SerializeField] private GameObject _healthImagePrefab;
 	[SerializeField] private int _healthImagePadding;
 	[SerializeField] private int _healthImageTopPadding;
 
-    private void Awake()
-    {
-		_targetEntityHealth.HealthSetEvent += SetHUDHealth;
-	}
-
-	private void SetHUDHealth(int health)
+	public void SetHUDHealth(int health)
 	{
 		for (int i = 0; i < transform.childCount; i++)
 		{

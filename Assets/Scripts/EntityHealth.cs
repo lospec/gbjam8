@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 class EntityHealth : MonoBehaviour
 {
@@ -8,7 +9,7 @@ class EntityHealth : MonoBehaviour
 		protected set
 		{
 			_health = value;
-			OnHealthSet(value);
+			OnHealthSet?.Invoke(value);
 		}
 		get
 		{
@@ -16,30 +17,17 @@ class EntityHealth : MonoBehaviour
 		}
 	}
 
-	public delegate void HealthSetEventHandler(int health);
-	public event HealthSetEventHandler HealthSetEvent;
-
-	public delegate void TakeDamageEventHandler(int damage);
-	public event TakeDamageEventHandler TakeDamageEvent;
-
-	protected virtual void OnHealthSet(int health)
-	{
-		HealthSetEvent?.Invoke(health);
-	}
-
-	protected virtual void OnTakeDamage(int damage)
-	{
-		TakeDamageEvent?.Invoke(damage);
-	}
+	[SerializeField] public UnityEvent<int> OnHealthSet;
+	[SerializeField] public UnityEvent<int> OnTakeDamage;
 
 	private void Start()
 	{
-		OnHealthSet(Health);
+		OnHealthSet?.Invoke(Health);
 	}
 
 	public virtual void Hurt(int damage)
 	{
 		Health -= damage;
-		OnTakeDamage(damage);
+		OnTakeDamage?.Invoke(damage);
 	}
 }
