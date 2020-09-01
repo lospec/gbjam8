@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class ToolChanger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public LevelEditor.Tool tool;
+    
+    public void ChangeTool()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        LevelEditor.Instance.SetTool(tool);
     }
 }
