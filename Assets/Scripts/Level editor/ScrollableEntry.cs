@@ -9,15 +9,30 @@ public class ScrollableEntry : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private string resourcePath;
     private GameObject resource;
     private GameObject rect;
+    private LevelEditor editor;
+
+    private void Start()
+    {
+        editor = LevelEditor.Instance;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         // Creo la preview, un rettangolo semitrasparente sul layer canvas (così posso spostare gli oggetti
         // se ho sbagliato a collocarli)
-        resource = 
+        resource = (GameObject)Resources.Load(resourcePath);
+        resource = Instantiate(resource, editor.transform);
+
+        MonoBehaviour[] scripts = resource.GetComponentsInChildren<MonoBehaviour>();
+        for (int i=0; i<scripts.Length; i++)
+        {
+            scripts[i].enabled = false;
+        }
+
+        editor.SetBrushPreview(resource);
 
         // Associo la preview al pennello
-        LevelEditor.Instance.isDragging = true;
+        editor.isDragging = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -30,11 +45,16 @@ public class ScrollableEntry : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         // Istanzio l'oggetto
         Debug.Log("Smetto di trascinare");
-        LevelEditor.Instance.isDragging = false;
+
+        editor.AddToAssetList(resource);
+
+        editor.ResetBrushPreview();
+        editor.isDragging = false;
     }
 
-    public void SetPath(string path)
+    public void SetPath(string path, string name)
     {
+        GetComponentInChildren<Text>().text = name;
         resourcePath = path;
     }
 }

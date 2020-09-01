@@ -14,12 +14,12 @@ public class ToggleTest : MonoBehaviour
 
         if (isPlaying)
         {
-            Time.timeScale = 1;
+            LevelEditor.Instance.StartPlayMode();
             text.text = "STOP";
         }
         else
         {
-            Time.timeScale = 0;
+            LevelEditor.Instance.EndPlayMode();
             text.text = "TEST";
         }
     }

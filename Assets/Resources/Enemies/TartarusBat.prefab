@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 4338764739658670798}
   - component: {fileID: 4338764739658670793}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: TartarusBat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

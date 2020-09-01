@@ -1784,6 +1784,8 @@ MonoBehaviour:
   brushPreview: {fileID: 49430413}
   uiEvents: {fileID: 941114962}
   cameraSpeed: 5
+  isDragging: 0
+  cursorOnUI: 0
 --- !u!1 &1317999336
 GameObject:
   m_ObjectHideFlags: 0
@@ -2711,7 +2713,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 150, y: 150}
   m_Spacing: {x: 20, y: 20}
   m_Constraint: 0
   m_ConstraintCount: 2

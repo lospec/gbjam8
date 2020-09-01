@@ -37,7 +37,9 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     private Vector2 cameraVelocity;
     private GameObject prevBrushPreview;
 
-    private Dictionary<(int, int), string> tilemapData;
+    private List<GameObject> instantiatedAssets;
+    private List<Vector2> startPositions;
+    private Dictionary<(float, float), string> tilemapData;
 
     private void Awake()
     {
@@ -57,7 +59,10 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         mouseTilemapPosition = new Vector3();
         cameraVelocity = new Vector3();
         intTilemapPosition = new Vector3Int();
-        tilemapData = new Dictionary<(int, int), string>();
+
+        instantiatedAssets = new List<GameObject>();
+        startPositions = new List<Vector2>();
+        tilemapData = new Dictionary<(float, float), string>();
 
         _input.Camera.CameraMovement.performed += OnCameraMovement;
         _input.Camera.CameraMovement.canceled += _ => cameraVelocity = Vector2.zero;
@@ -164,5 +169,51 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     public void ResetBrushPreview()
     {
         brushPreview = prevBrushPreview;
+    }
+
+    public void AddToAssetList(GameObject toAdd)
+    {
+        instantiatedAssets.Add(toAdd);
+        tilemapData[(toAdd.transform.position.x, toAdd.transform.position.y)] = toAdd.name;
+    }
+    
+    public void StartPlayMode()
+    {
+        Time.timeScale = 1;
+
+        for (int i=0; i<instantiatedAssets.Count; i++)
+        { 
+
+            MonoBehaviour[] behaviours = instantiatedAssets[i].GetComponentsInChildren<MonoBehaviour>();
+            startPositions.Add(instantiatedAssets[i].transform.position);
+
+            /*
+            for (int j=0; j<behaviours.Length; j++)
+            {
+                behaviours[j].enabled = true;
+            }
+            */
+        }
+    }
+
+    public void EndPlayMode()
+    {
+        Time.timeScale = 0;
+
+        for (int i = 0; i < instantiatedAssets.Count; i++)
+        {
+            MonoBehaviour[] behaviours = instantiatedAssets[i].GetComponentsInChildren<MonoBehaviour>();
+            instantiatedAssets[i].transform.position = startPositions[i];
+
+            for (int j = 0; j < behaviours.Length; j++)
+            {
+                behaviours[j].enabled = false;
+            }
+        }
+    }
+
+    public void Save()
+    {
+
     }
 }

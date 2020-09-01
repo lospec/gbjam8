@@ -30,6 +30,7 @@ public class GridPopulator : MonoBehaviour
                 newObj = (GameObject)Instantiate(prefab, transform);
                 newObj.GetComponent<Image>().sprite = Sprite.Create(
                     AssetPreview.GetAssetPreview(currentResources[j]), new Rect(0, 0, 100, 100), new Vector2(50, 50));
+                newObj.GetComponent<ScrollableEntry>().SetPath(assetPaths[i] + "/" + currentResources[j].name, currentResources[j].name);
             }
             
         }
