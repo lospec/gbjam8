@@ -29,8 +29,10 @@ namespace Weapon.Hook
         [SerializeField] private Transform hook;
 
         private Vector2 _aim = Vector2.right;
+        private Vector2 _previousAim;
         private float _lastDirection = 1f;
-
+        private float _sameDirectionCooldown = 2f;
+        private float _timer = 0f;
 
         private Vector2 HookPosition
         {
@@ -62,6 +64,14 @@ namespace Weapon.Hook
         private void Start()
         {
             enabled = false;
+        }
+
+        private void Update()
+        {
+            if (_timer <= _sameDirectionCooldown)
+            {
+                _timer += Time.deltaTime;
+            }
         }
 
         private void FixedUpdate()
@@ -108,6 +118,14 @@ namespace Weapon.Hook
 
         public void PerformGrapple()
         {
+            if (_aim == _previousAim && enabled && _timer < _sameDirectionCooldown)
+            {
+                return;
+            }
+
+            _previousAim = _aim;
+            _timer = 0;
+            
             enabled = false;
             var hit = maxHookDistance > 0f
                 ? Physics2D.Raycast(HookOrigin, _aim, maxHookDistance)

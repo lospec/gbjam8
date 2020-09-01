@@ -51,10 +51,14 @@ namespace Weapon.Hook
         private void GrapplingGunOnHookShot(float speed, Vector2 target, Transform hook,
             Action callBack)
         {
-            hook.SetParent(null, true);
             Line.enabled = true;
-            if (_shootRoutine != null) StopCoroutine(_shootRoutine);
-            if (_retractRoutine != null) StopCoroutine(_retractRoutine);
+            if (_retractRoutine != null) return;
+            if (_shootRoutine != null)
+            {
+                StopCoroutine(_shootRoutine);
+            }
+
+            hook.SetParent(null, true);
             _shootRoutine = StartCoroutine(ShootHook(speed, target, hook, callBack));
         }
 
@@ -87,7 +91,9 @@ namespace Weapon.Hook
             hook.position = hookPosition;
             Line.Simplify(1f);
             enabled = true;
-            callBack.Invoke();
+
+            callBack?.Invoke();
+            _shootRoutine = null;
         }
 
         private IEnumerator RetractHook(float speed, Transform hook, Action callBack)
@@ -106,7 +112,8 @@ namespace Weapon.Hook
             hook.position = Vector2.Lerp(startPosition, transform.position, 1f);
             Line.enabled = false;
             enabled = false;
-            callBack.Invoke();
+            callBack?.Invoke();
+            _retractRoutine = null;
         }
 
         private void SetRopePoints(Vector2 startPoint, Vector2 targetPoint, float
