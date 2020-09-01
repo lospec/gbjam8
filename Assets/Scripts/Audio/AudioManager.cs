@@ -1,46 +1,60 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class AudioManager : MonoBehaviour
+namespace Audio
 {
-	[SerializeField] private List<AudioManagerAudioClip> _audioClips;
+    public class AudioManager : MonoBehaviour
+    {
+        [FormerlySerializedAs("_audioClips")] [SerializeField]
+        private List<AudioManagerAudioClip> audioClips;
 
-	readonly private Dictionary<AudioManagerAudioClip, AudioSource> _audioSystemClipToSource = new Dictionary<AudioManagerAudioClip, AudioSource>();
+        private readonly Dictionary<AudioManagerAudioClip, AudioSource>
+            _audioSystemClipToSource =
+                new Dictionary<AudioManagerAudioClip, AudioSource>();
 
-	private void Start()
-	{
-		foreach (AudioManagerAudioClip audioSystemAudioClip in _audioClips)
-		{
-			AudioSource audioSource = gameObject.AddComponent<AudioSource>();
-			audioSource.clip = audioSystemAudioClip.AudioClip;
-			audioSource.volume = audioSystemAudioClip.Volume;
-			audioSource.pitch = audioSystemAudioClip.Pitch;
+        private void Start()
+        {
+            foreach (var audioSystemAudioClip in audioClips)
+            {
+                var audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource.clip = audioSystemAudioClip.audioClip;
+                audioSource.volume = audioSystemAudioClip.volume;
+                audioSource.pitch = audioSystemAudioClip.pitch;
 
-			_audioSystemClipToSource.Add(audioSystemAudioClip, audioSource);
-		}
-	}
+                _audioSystemClipToSource.Add(audioSystemAudioClip, audioSource);
+            }
+        }
 
-	public void PlayAudio(string name)
-	{
-		var audioSources =
-			from pair in _audioSystemClipToSource
-			where pair.Key.Name == name
-			select pair.Value;
+        public void PlayAudio(string audioName)
+        {
+            var audioSources =
+                (from pair in _audioSystemClipToSource
+                    where pair.Key.name == audioName
+                    select pair.Value).ToArray();
 
-		int count = audioSources.Count();
-		if (count > 1)
-		{
-			Debug.LogException(new System.Exception(string.Format("{0} audio sources with the same name of {1} were found", count, name)));
-			return;
-		}
-		if (count < 1)
-		{
-			Debug.LogException(new System.Exception(string.Format("No audio sources with the name of {0} were found", name)));
-			return;
-		}
+            var count = audioSources.Length;
+            if (count > 1)
+            {
+                Debug.LogException(new System.Exception(string.Format(
+                    "{0} audio sources with the same audioName of {1} were found",
+                    count,
+                    audioName)));
+                return;
+            }
 
-		AudioSource audioSource = audioSources.First();
-		audioSource.Play();
-	}
+            if (count < 1)
+            {
+                Debug.LogException(new System.Exception(
+                    string.Format(
+                        "No audio sources with the audioName of {0} were found",
+                        audioName)));
+                return;
+            }
+
+            var audioSource = audioSources.First();
+            audioSource.Play();
+        }
+    }
 }

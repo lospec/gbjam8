@@ -1,11 +1,15 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[Serializable]
-public class AudioManagerAudioClip
+namespace Audio
 {
-	public string Name;
-	public AudioClip AudioClip;
-	public float Volume = 1;
-	public float Pitch = 1;
+    [Serializable]
+    public class AudioManagerAudioClip
+    {
+        [FormerlySerializedAs("Name")] public string name;
+        [FormerlySerializedAs("AudioClip")] public AudioClip audioClip;
+        [FormerlySerializedAs("Volume")] public float volume = 1;
+        [FormerlySerializedAs("Pitch")] public float pitch = 1;
+    }
 }
