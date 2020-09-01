@@ -323,9 +323,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bec65237596dd43b91e44c021b35cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimLineDistance: 1
   grapplingGun: {fileID: 7161776770310817343}
   aimLine: {fileID: 7161776769959950316}
-  aimLineDistance: 1
 --- !u!114 &7161776770310817343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootSpeed: 60
   returnSpeed: 60
-  pullSpeed: 15
+  pullSpeed: 10
   maxHookDistance: 50
   hook: {fileID: 7161776771014116243}
 --- !u!1 &7161776771014116242
