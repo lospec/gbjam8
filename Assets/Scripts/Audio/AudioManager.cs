@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -36,30 +37,35 @@ namespace Audio
             var count = audioSourcePairs.Length;
             if (count > 1)
             {
-                Debug.LogException(new System.Exception(
-                    $"{count} audio sources with the same audioName of {audioName} were found"));
+                Debug.LogException(new System.Exception(string.Format(
+                    "{0} audio sources with the same audioName of {1} were found",
+                    count,
+                    audioName)));
                 return new KeyValuePair<AudioManagerAudioClip, AudioSource>();
             }
 
             if (count < 1)
             {
                 Debug.LogException(new System.Exception(
-                    $"No audio sources with the audioName of {audioName} were found"));
+                    string.Format(
+                        "No audio sources with the audioName of {0} were found",
+                        audioName)));
                 return new KeyValuePair<AudioManagerAudioClip, AudioSource>();
             }
 
             return audioSourcePairs.First();
         }
 
-        public void PlayAudio(string audioName)
+        private AudioSource GetClipSource(AudioManagerAudioClip clip)
         {
-            KeyValuePair<AudioManagerAudioClip, AudioSource> pair =
-                GetAudioSourcePairByName(audioName);
-            AudioManagerAudioClip audioManagerAudioClip = pair.Key;
-            AudioSource audioSource = pair.Value;
-            audioSource.volume = audioManagerAudioClip.volume;
-            audioSource.pitch = audioManagerAudioClip.pitch;
+            throw new NotImplementedException();
+        }
 
+        public void PlayAudio(AudioManagerAudioClip clip)
+        {
+            var audioSource = GetClipSource(clip);
+            audioSource.volume = clip.volume;
+            audioSource.pitch = clip.pitch;
             audioSource.Play();
         }
 
@@ -69,7 +75,7 @@ namespace Audio
                 GetAudioSourcePairByName(audioName);
             AudioManagerAudioClip audioManagerAudioClip = pair.Key;
             AudioSource audioSource = pair.Value;
-            audioSource.volume += audioManagerAudioClip.volumeIncrementAmount;
+            audioSource.volume += audioManagerAudioClip.VolumeIncrementAmount;
         }
     }
 }
