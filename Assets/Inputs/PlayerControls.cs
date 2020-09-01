@@ -22,7 +22,7 @@ namespace Inputs
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""cc1e027c-93be-41dd-8a0b-352eac4cfff9"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
