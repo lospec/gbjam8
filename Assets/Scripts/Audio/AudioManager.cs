@@ -41,8 +41,6 @@ public class AudioManager : MonoBehaviour
 		}
 
 		AudioSource audioSource = audioSources.First();
-		Debug.Log(string.Format("AudioSource: {0} Clip Name: {1} Volume: {2} Pitch: {3} IsPlaying: {4}", audioSource, audioSource.clip.name, audioSource.volume, audioSource.pitch, audioSource.isPlaying));
 		audioSource.Play();
-		Debug.Log(string.Format("AudioSource: {0} Clip Name: {1} Volume: {2} Pitch: {3} IsPlaying: {4}", audioSource, audioSource.clip.name, audioSource.volume, audioSource.pitch, audioSource.isPlaying));
 	}
 }
