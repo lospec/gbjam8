@@ -11,7 +11,7 @@ namespace Audio
         private List<AudioManagerAudioClip> audioClips;
 
         private readonly Dictionary<AudioManagerAudioClip, AudioSource>
-            _audioSystemClipToSource =
+            _audioManagerClipToSource =
                 new Dictionary<AudioManagerAudioClip, AudioSource>();
 
         private void Start()
@@ -20,41 +20,57 @@ namespace Audio
             {
                 var audioSource = gameObject.AddComponent<AudioSource>();
                 audioSource.clip = audioSystemAudioClip.audioClip;
-                audioSource.volume = audioSystemAudioClip.volume;
-                audioSource.pitch = audioSystemAudioClip.pitch;
 
-                _audioSystemClipToSource.Add(audioSystemAudioClip, audioSource);
+                _audioManagerClipToSource.Add(audioSystemAudioClip, audioSource);
             }
         }
+
+		private KeyValuePair<AudioManagerAudioClip, AudioSource> GetAudioSourceByName(string audioName)
+		{
+			var audioSources =
+				(from pair in _audioManagerClipToSource
+				 where pair.Key.name == audioName
+				 select pair).ToArray();
+
+			var count = audioSources.Length;
+			if (count > 1)
+			{
+				Debug.LogException(new System.Exception(string.Format(
+					"{0} audio sources with the same audioName of {1} were found",
+					count,
+					audioName)));
+				return new KeyValuePair<AudioManagerAudioClip, AudioSource>();
+			}
+
+			if (count < 1)
+			{
+				Debug.LogException(new System.Exception(
+					string.Format(
+						"No audio sources with the audioName of {0} were found",
+						audioName)));
+				return new KeyValuePair<AudioManagerAudioClip, AudioSource>();
+			}
+
+			return audioSources.First();
+		}
 
         public void PlayAudio(string audioName)
         {
-            var audioSources =
-                (from pair in _audioSystemClipToSource
-                    where pair.Key.name == audioName
-                    select pair.Value).ToArray();
+			KeyValuePair<AudioManagerAudioClip, AudioSource> pair = GetAudioSourceByName(audioName);
+			AudioManagerAudioClip audioManagerAudioClip = pair.Key;
+			AudioSource audioSource = pair.Value;
+			audioSource.volume = audioManagerAudioClip.volume;
+			audioSource.pitch = audioManagerAudioClip.pitch;
 
-            var count = audioSources.Length;
-            if (count > 1)
-            {
-                Debug.LogException(new System.Exception(string.Format(
-                    "{0} audio sources with the same audioName of {1} were found",
-                    count,
-                    audioName)));
-                return;
-            }
-
-            if (count < 1)
-            {
-                Debug.LogException(new System.Exception(
-                    string.Format(
-                        "No audio sources with the audioName of {0} were found",
-                        audioName)));
-                return;
-            }
-
-            var audioSource = audioSources.First();
-            audioSource.Play();
+			audioSource.Play();
         }
+
+		public void IncreaseVolume(string audioName)
+		{
+			KeyValuePair<AudioManagerAudioClip, AudioSource> pair = GetAudioSourceByName(audioName);
+			AudioManagerAudioClip audioManagerAudioClip = pair.Key;
+			AudioSource audioSource = pair.Value;
+			audioSource.volume += audioManagerAudioClip.VolumeIncrementAmount;
+		}
     }
 }

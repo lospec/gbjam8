@@ -382,6 +382,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerJumpHeld.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnPlayerJump.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
       objectReference: {fileID: 0}
@@ -408,6 +416,62 @@ PrefabInstance:
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnPlayerJump.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: Jump2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 32619758}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio.AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerJumpHeld.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerJumpHeld.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerJumpHeld.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 32619758}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerJumpHeld.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio.AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerJumpHeld.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IncreaseVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerJumpHeld.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnPlayerJumpHeld.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Jump
       objectReference: {fileID: 0}
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.size
@@ -687,6 +751,46 @@ PrefabInstance:
     - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
       propertyPath: _audioClips.Array.data[0].Pitch
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[0].name
+      value: Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: df8048e19699ef54da8fef3e2479b31b, type: 3}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[0].volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[0].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[1].name
+      value: Jump2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[1].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: df8048e19699ef54da8fef3e2479b31b, type: 3}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[1].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[1].pitch
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[1].VolumeIncrementAmount
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioClips.Array.data[0].VolumeIncrementAmount
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 8392549148684731853, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
       propertyPath: m_LocalPosition.x
