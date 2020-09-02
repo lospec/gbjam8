@@ -9,7 +9,7 @@ public class FrequentlyAccessed : MonoBehaviour
 
     public GameObject playerObject;
     public CharacterController playerController;
-    public Camera camera;
+    public UnityEngine.Camera camera;
 
     private void Awake()
     {

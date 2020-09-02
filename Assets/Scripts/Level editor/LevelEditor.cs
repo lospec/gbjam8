@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 using Inputs;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEditor;
 
 /**
  * TODO: 
@@ -50,9 +51,10 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     private Vector3 mouseWorldPosition;
     private Vector3 mouseTilemapPosition;
     private Vector3Int intTilemapPosition;
+    private Vector3 playerStartPos;
 
     private Tool currentTool;
-    private Camera camera;
+    private UnityEngine.Camera camera;
     private Vector2 cameraVelocity;
 
     private GameObject prevBrushPreview;
@@ -79,6 +81,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         mouseTilemapPosition = new Vector3();
         cameraVelocity = new Vector3();
         intTilemapPosition = new Vector3Int();
+        playerStartPos = FrequentlyAccessed.Instance.playerObject.transform.position;
 
         instantiatedAssets = new List<GameObject>();
         startPositions = new List<Vector2>();
@@ -103,7 +106,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     {
         bool leftMousePressed = Mouse.current.leftButton.isPressed;
         bool rightMousePressed = Mouse.current.rightButton.isPressed;
-        RaycastHit2D hit;
+        Collider2D overlapped;
 
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition.z = camera.nearClipPlane;
@@ -115,11 +118,12 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         intTilemapPosition.y = Mathf.RoundToInt(mouseTilemapPosition.y);
 
         brushPreview.transform.position = mouseWorldPosition;
-        hit = Physics2D.Raycast(mouseWorldPosition, new Vector2(1f, 0f), 0.1f);
+        overlapped = Physics2D.OverlapPoint(mouseWorldPosition);
 
-        if (hit && hit.collider.GetComponent<MovableAsset>() != null)
+        if (overlapped != null && overlapped.GetComponent<MovableAsset>() != null)
         {
             canDraw = false;
+            isDrawing = false;
         }
         else
         {
@@ -283,6 +287,8 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
 
             instantiatedAssets[i].AddComponent<PolygonCollider2D>();
         }
+
+        FrequentlyAccessed.Instance.playerObject.transform.position = playerStartPos;
     }
 
     public void SetSelected(GameObject toSet)
@@ -404,5 +410,15 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
             }
 
         }
+    }
+
+    public void SavePrefab()
+    {
+        tilemap.transform.parent.gameObject.name = fileName.text.Substring(0, fileName.text.Length - 4);
+
+        /*
+        PrefabUtility.SaveAsPrefabAsset(tilemap.transform.parent.gameObject, 
+            tilemap.transform.parent.gameObject.name + ".prefab");
+            */
     }
 }
