@@ -21,8 +21,8 @@ namespace Player
         [SerializeField] private Transform topLeftBound = default;
         [SerializeField] private Transform bottomRightBound = default;
 
-		public UnityEvent<float> OnPlayerStartJump;
-		public UnityEvent<float> OnPlayerJumpHeld;
+        public UnityEvent<float> OnPlayerStartJump;
+        public UnityEvent<float> OnPlayerJumpHeld;
 
         private float _jumpTime;
         private bool _isGrounded;
@@ -37,6 +37,11 @@ namespace Player
         {
             Body = GetComponent<Rigidbody2D>();
             Body.gravityScale = 0;
+        }
+
+        private void OnDisable()
+        {
+            _gravity = Vector2.zero;
         }
 
         private void FixedUpdate()
@@ -73,9 +78,9 @@ namespace Player
 
             var netJumpMagnitude = jumpPower;
 
-			OnPlayerStartJump?.Invoke(netJumpMagnitude);
+            OnPlayerStartJump?.Invoke(netJumpMagnitude);
 
-			var nextFixedUpdated = new WaitForFixedUpdate();
+            var nextFixedUpdated = new WaitForFixedUpdate();
 
             while (IsJumping)
             {
@@ -89,8 +94,8 @@ namespace Player
 
                     netJumpMagnitude += jumpMagnitude;
 
-					OnPlayerJumpHeld?.Invoke(netJumpMagnitude);
-				}
+                    OnPlayerJumpHeld?.Invoke(netJumpMagnitude);
+                }
 
                 var prevGrounded = _isGrounded;
                 yield return nextFixedUpdated;
@@ -100,7 +105,7 @@ namespace Player
                 }
             }
 
-			IsJumping = false;
+            IsJumping = false;
         }
 
         private bool GroundCheck()
