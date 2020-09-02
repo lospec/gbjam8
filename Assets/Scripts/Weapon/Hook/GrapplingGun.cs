@@ -131,6 +131,8 @@ namespace Weapon.Hook
 
         public void PerformGrapple()
         {
+            // the player shot in the same direction and the player is using the grappling(plus some cooldown)
+            // Don't do anything
             if (_aim == _previousAim && enabled && _timer < _sameDirectionCooldown)
             {
                 return;
@@ -139,27 +141,54 @@ namespace Weapon.Hook
             _previousAim = _aim;
             _timer = 0;
 
+            bool prevEnabled = enabled;
             enabled = false;
             var hit = maxHookDistance > 0f
                 ? Physics2D.Raycast(HookOrigin, _aim, maxHookDistance)
                 : Physics2D.Raycast(HookOrigin, _aim);
 
+            Target = hit.point;
 
             // If hook hit something
             if (hit.collider)
             {
-                Target = hit.point;
-                HookPosition = shootSpeed > 0f ? HookOrigin : Target;
-
-                // Start shooting the hook
-                OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+                // If the hook is enabled(the player is grappling)
+                if (prevEnabled)
                 {
-                    // When the shot is landed(animation finished, etc)
+                    // Retract the hook first, then 
+                    OnRetractHook?.Invoke(retractSpeed, hook, () =>
+                    {
+                        // When the hook finished retracting
+                        OnHookRetracted?.Invoke();
 
-                    // enable grapple pull and invoke OnHookTargetHit
-                    enabled = true;
-                    OnHookTargetHit?.Invoke();
-                });
+                        // THEN, Start shooting the hook
+                        HookPosition = shootSpeed > 0f ? HookOrigin : Target;
+
+                        // Start shooting the hook
+                        OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+                        {
+                            // When the shot is landed(animation finished, etc)
+
+                            // enable grapple pull and invoke OnHookTargetHit
+                            enabled = true;
+                            OnHookTargetHit?.Invoke();
+                        });
+                    });
+                }
+                else
+                {
+                    HookPosition = shootSpeed > 0f ? HookOrigin : Target;
+
+                    // Start shooting the hook
+                    OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+                    {
+                        // When the shot is landed(animation finished, etc)
+
+                        // enable grapple pull and invoke OnHookTargetHit
+                        enabled = true;
+                        OnHookTargetHit?.Invoke();
+                    });
+                }
             }
 
             else if (shootSpeed > 0f && maxHookDistance > 0f &&
