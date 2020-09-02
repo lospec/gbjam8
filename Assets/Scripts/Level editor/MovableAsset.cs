@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+/*
+ * TODO:
+ * - update position when ending drag
+ * - delete key, value when deleting asset
+ */
+
 public class MovableAsset : MonoBehaviour
 {
     private LevelEditor editor;
@@ -29,7 +35,7 @@ public class MovableAsset : MonoBehaviour
 
         if (Mouse.current.leftButton.isPressed)
         {
-            if (collider.Equals(overlapped) && !prevDragging && !editor.isDrawing)
+            if (collider.Equals(overlapped) && !prevDragging && !editor.isDrawing && !editor.isDragging)
             {
                 Select();
                 Drag();
@@ -40,14 +46,15 @@ public class MovableAsset : MonoBehaviour
             Drop();
         }
 
+        /*
         if (overlapped != null && overlapped.Equals(collider) && !editor.isDragging)
         {
             editor.canDraw = false;
         }
-        else
+        else if (!editor.cursorOnUI)
         {
             editor.canDraw = true;
-        }
+        }*/
 
         if (isSelected)
         {
@@ -61,16 +68,16 @@ public class MovableAsset : MonoBehaviour
         prevDragging = isDragging;
     }
 
-    private void Select()
+    public void Select()
     {
+        editor.SetSelected(this.gameObject);
         editor.selectedIcon.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
         editor.selectedIcon.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 0.5f);
-        editor.SetSelected(this.gameObject);
 
         isSelected = true;
     }
 
-    private void Deselect()
+    public void Deselect()
     {
         isSelected = false;
         editor.ResetSelected(this.gameObject);

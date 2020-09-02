@@ -11,6 +11,8 @@ public class ScrollableEntry : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     private GameObject rect;
     private LevelEditor editor;
 
+    private int n = 0;
+
     private void Start()
     {
         editor = LevelEditor.Instance;
@@ -49,6 +51,9 @@ public class ScrollableEntry : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         resource.AddComponent<MovableAsset>();
         resource.AddComponent<PolygonCollider2D>();
+        resource.name += n;
+
+        n++;
     }
 
     public void SetPath(string path, string name)

@@ -87,6 +87,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     {
         bool leftMousePressed = Mouse.current.leftButton.isPressed;
         bool rightMousePressed = Mouse.current.rightButton.isPressed;
+        RaycastHit2D hit;
 
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition.z = camera.nearClipPlane;
@@ -98,71 +99,84 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         intTilemapPosition.y = Mathf.RoundToInt(mouseTilemapPosition.y);
 
         brushPreview.transform.position = mouseWorldPosition;
-        
-        if (!uiEvents.IsPointerOverGameObject() && !isDragging && canDraw)
+        hit = Physics2D.Raycast(mouseWorldPosition, new Vector2(1f, 0f), 0.1f);
+
+        if (hit && hit.collider.GetComponent<MovableAsset>() != null)
+        {
+            canDraw = false;
+        }
+        else
+        {
+            canDraw = true;
+        }
+
+        if (!uiEvents.IsPointerOverGameObject())
         {
             cursorOnUI = false;
 
-            switch (currentTool)
+            if (!isDragging && canDraw)
             {
-                case Tool.Pencil:
-                    if (leftMousePressed)
-                    {
-                        isDrawing = true;
-                        // Saving data
-                        tilemapData[(intTilemapPosition.x, intTilemapPosition.y)] = "tile";
+                switch (currentTool)
+                {
+                    case Tool.Pencil:
+                        if (leftMousePressed)
+                        {
+                            isDrawing = true;
+                            // Saving data
+                            tilemapData[(intTilemapPosition.x, intTilemapPosition.y)] = "tile";
 
-                        // Paint the current tile
-                        tilemap.SetTile(intTilemapPosition, defaultTile);
-                        tilemap.RefreshAllTiles();
-                    }
-                    else if (rightMousePressed)
-                    {
-                        isDrawing = true;
-                        // Saving data
-                        tilemapData.Remove((intTilemapPosition.x, intTilemapPosition.y));
+                            // Paint the current tile
+                            tilemap.SetTile(intTilemapPosition, defaultTile);
+                            tilemap.RefreshAllTiles();
+                        }
+                        else if (rightMousePressed)
+                        {
+                            isDrawing = true;
+                            // Saving data
+                            tilemapData.Remove((intTilemapPosition.x, intTilemapPosition.y));
 
-                        // Clear the current tile
-                        tilemap.SetTile(intTilemapPosition, null);
-                    }
-                    else
-                    {
-                        isDrawing = false;
-                    }
+                            // Clear the current tile
+                            tilemap.SetTile(intTilemapPosition, null);
+                        }
+                        else
+                        {
+                            isDrawing = false;
+                        }
 
-                    break;
-                case Tool.Eraser:
-                    if (leftMousePressed)
-                    {
-                        isDrawing = true;
-                        // Saving data
-                        tilemapData.Remove((intTilemapPosition.x, intTilemapPosition.y));
+                        break;
+                    case Tool.Eraser:
+                        if (leftMousePressed)
+                        {
+                            isDrawing = true;
+                            // Saving data
+                            tilemapData.Remove((intTilemapPosition.x, intTilemapPosition.y));
 
-                        tilemap.SetTile(intTilemapPosition, null);
-                    }
-                    else
-                    {
-                        isDrawing = false;
-                    }
+                            tilemap.SetTile(intTilemapPosition, null);
+                        }
+                        else
+                        {
+                            isDrawing = false;
+                        }
 
-                    break;
-                case Tool.Fill:
-                    if (Mouse.current.leftButton.wasReleasedThisFrame)
-                    {
-                        isDrawing = true;
-                        // Saving data
-                        tilemapData[(intTilemapPosition.x, intTilemapPosition.y)] = "flood";
+                        break;
+                    case Tool.Fill:
+                        if (Mouse.current.leftButton.wasReleasedThisFrame)
+                        {
+                            isDrawing = true;
+                            // Saving data
+                            tilemapData[(intTilemapPosition.x, intTilemapPosition.y)] = "flood";
 
-                        tilemap.FloodFill(intTilemapPosition, defaultTile);
-                    }
-                    else
-                    {
-                        isDrawing = false;
-                    }
+                            tilemap.FloodFill(intTilemapPosition, defaultTile);
+                        }
+                        else
+                        {
+                            isDrawing = false;
+                        }
 
-                    break;
-                default:
-                    break;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         else
@@ -242,6 +256,11 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
 
     public void SetSelected(GameObject toSet)
     {
+        if (selectedAsset != null)
+        {
+            selectedAsset.GetComponent<MovableAsset>().Deselect();
+        }
+
         selectedAsset = toSet;
     }
 
@@ -263,6 +282,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         Debug.Log("Delete");
         if (selectedAsset != null)
         {
+            selectedIcon.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
             Destroy(selectedAsset);
         }
     }
