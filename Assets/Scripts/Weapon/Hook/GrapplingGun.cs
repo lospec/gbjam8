@@ -82,11 +82,23 @@ namespace Weapon.Hook
             MoveTowardsTarget();
         }
 
-        public static event Action<float, Vector2, Transform, Action> HookShot;
-        public static event Action HookTargetHit;
-        public static event Action<float, Transform, Action> HookRetract;
-        public static event Action HookRetractEnd;
-        public static event Action EndPull;
+        public delegate void HookShotDelegate(float speed, Vector2 target, Transform
+            hook, Action callback);
+
+        public delegate void HookTargetHitDelegate();
+
+        public delegate void HookRetractDelegate(float retractDuration, Transform
+            hook, Action callBack);
+
+        public delegate void HookRetractEndDelegate();
+
+        public delegate void EndPullDelegate();
+
+        public static event HookShotDelegate HookShot;
+        public static event HookTargetHitDelegate HookTargetHit;
+        public static event HookRetractDelegate HookRetract;
+        public static event HookRetractEndDelegate HookRetractEnd;
+        public static event EndPullDelegate EndPull;
 
 
         private void MoveTowardsTarget()
@@ -126,7 +138,7 @@ namespace Weapon.Hook
 
             _previousAim = _aim;
             _timer = 0;
-            
+
             enabled = false;
             var hit = maxHookDistance > 0f
                 ? Physics2D.Raycast(HookOrigin, _aim, maxHookDistance)
