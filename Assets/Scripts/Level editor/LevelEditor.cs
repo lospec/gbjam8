@@ -254,17 +254,16 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         Time.timeScale = 1;
 
         for (int i=0; i<instantiatedAssets.Count; i++)
-        { 
-
+        {
             MonoBehaviour[] behaviours = instantiatedAssets[i].GetComponentsInChildren<MonoBehaviour>();
             startPositions.Add(instantiatedAssets[i].transform.position);
 
-            /*
             for (int j=0; j<behaviours.Length; j++)
             {
                 behaviours[j].enabled = true;
             }
-            */
+
+            Destroy(instantiatedAssets[i].GetComponent<PolygonCollider2D>());
         }
     }
 
@@ -281,6 +280,8 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
             {
                 behaviours[j].enabled = false;
             }
+
+            instantiatedAssets[i].AddComponent<PolygonCollider2D>();
         }
     }
 
