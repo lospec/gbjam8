@@ -52,7 +52,7 @@ namespace Spawn
             return randomPos;
         }
 
-        private void SpawnWingedEnemyLocation(WingedEnemyController enemy,
+        private void SpawnWingedEnemyLocation(FlyingEnemyController enemy,
             out bool result)
         {
             var cell = GetRandomEmptyCell(out result);
@@ -82,8 +82,8 @@ namespace Spawn
             var startState = Enumerable.Range(0, 2)
                 .Select(i => new Vector3Int(cell.x, cell.y - i, 0))
                 .Any(c => RoomData.tilemap.HasTile(c))
-                ? WingedEnemyController.StartState.Grounded
-                : WingedEnemyController.StartState.Flying;
+                ? FlyingEnemyController.StartState.Grounded
+                : FlyingEnemyController.StartState.Flying;
 
             // TODO: singleton usage is ugly here...
             instance.Initialize(FrequentlyAccessed.Instance.playerObject.transform,
@@ -108,7 +108,7 @@ namespace Spawn
         {
             result = false;
 
-            if (enemy is WingedEnemyController enemyController)
+            if (enemy is FlyingEnemyController enemyController)
             {
                 SpawnWingedEnemyLocation(enemyController, out result);
             }

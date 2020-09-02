@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class WingedEnemyController : EnemyController
+    public class FlyingEnemyController : EnemyController
     {
         public enum StartState
         {

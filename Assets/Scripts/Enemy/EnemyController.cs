@@ -8,6 +8,8 @@ namespace Enemy
 {
     public abstract class EnemyController : MonoBehaviour
     {
+        [SerializeField] private EnemyStat enemyStat;
+
         public Transform Player { get; set; }
 
         [SerializeField] protected Rigidbody2D body;
@@ -18,6 +20,7 @@ namespace Enemy
 
         protected Vector2 velocity;
 
+        public EnemyStat EnemyStat => enemyStat;
         protected Vector2 DirectionToPlayer =>
             (Player.position - transform.position).normalized;
         protected float DistanceToPlayer =>
