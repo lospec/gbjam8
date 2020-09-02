@@ -40,6 +40,7 @@ namespace Weapon.Hook
         }
         public Vector2 HookOrigin => Motor.Body.position;
         private Vector2 Target { get; set; }
+        private GameObject TargetObject { get; set; }
 
         public PlayerMotor Motor { get; set; }
 
@@ -83,22 +84,22 @@ namespace Weapon.Hook
         }
 
         public delegate void HookShotDelegate(float speed, Vector2 target, Transform
-            hook, Action callback);
+            hook, Action finishShooting);
 
         public delegate void HookTargetHitDelegate();
 
-        public delegate void HookRetractDelegate(float retractDuration, Transform
-            hook, Action callBack);
+        public delegate void RetractHookDelegate(float retractDuration, Transform
+            hook, Action finishRetracting);
 
-        public delegate void HookRetractEndDelegate();
+        public delegate void HookRetractedDelegate();
 
-        public delegate void EndPullDelegate();
+        public delegate void PullEndedDelegate();
 
-        public static event HookShotDelegate HookShot;
-        public static event HookTargetHitDelegate HookTargetHit;
-        public static event HookRetractDelegate HookRetract;
-        public static event HookRetractEndDelegate HookRetractEnd;
-        public static event EndPullDelegate EndPull;
+        public static event HookShotDelegate OnHookShot;
+        public static event HookTargetHitDelegate OnHookTargetHit;
+        public static event RetractHookDelegate OnRetractHook;
+        public static event HookRetractedDelegate OnHookRetracted;
+        public static event PullEndedDelegate OnPullEnded;
 
 
         private void MoveTowardsTarget()
@@ -115,7 +116,7 @@ namespace Weapon.Hook
             if (Motor.Body.OverlapPoint(Target) ||
                 Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f)
             {
-                EndPull?.Invoke();
+                OnPullEnded?.Invoke();
                 StopGrappling();
             }
 
@@ -145,30 +146,44 @@ namespace Weapon.Hook
                 : Physics2D.Raycast(HookOrigin, _aim);
 
 
+            // If hook hit something
             if (hit.collider)
             {
                 Target = hit.point;
                 HookPosition = shootSpeed > 0f ? HookOrigin : Target;
-                HookShot?.Invoke(shootSpeed, Target, hook, () =>
+
+                // Start shooting the hook
+                OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
                 {
+                    // When the shot is landed(animation finished, etc)
+                    
+                    // enable grapple pull and invoke OnHookTargetHit
                     enabled = true;
-                    HookTargetHit?.Invoke();
+                    OnHookTargetHit?.Invoke();
                 });
             }
 
-            else if (shootSpeed > 0f && maxHookDistance > 0f &&
-                     !float.IsPositiveInfinity(maxHookDistance))
+            else if (shootSpeed > 0f && maxHookDistance > 0f && !float.IsPositiveInfinity(maxHookDistance))
             {
                 EnableMovement();
                 Target = HookOrigin + _aim.normalized * maxHookDistance;
                 HookPosition = HookOrigin;
-                HookShot?.Invoke(shootSpeed, Target, hook, () => HookRetract?.Invoke
-                (returnDuration, hook,
-                    () =>
+
+                // Start shooting the hook
+                OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+                {
+                    // When the shot is finished(animation finished, etc)
+
+                    // Start retracting the hook
+                    OnRetractHook?.Invoke(returnDuration, hook, () =>
                     {
+                        // When the hook finished retracting
+                        
+                        // Stop grappling(if it's enabled) and invoke OnHookRetracted
                         StopGrappling();
-                        HookRetractEnd?.Invoke();
-                    }));
+                        OnHookRetracted?.Invoke();
+                    });
+                });
             }
         }
 

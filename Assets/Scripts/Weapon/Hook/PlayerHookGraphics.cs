@@ -13,9 +13,9 @@ namespace Weapon.Hook
 
         private void Start()
         {
-            GrapplingGun.HookRetractEnd += EnableAimLine;
-            GrapplingGun.EndPull += EnableAimLine;
-            GrapplingGun.HookShot += DisableAimLine;
+            GrapplingGun.OnHookRetracted += EnableAimLine;
+            GrapplingGun.OnPullEnded += EnableAimLine;
+            GrapplingGun.OnHookShot += DisableAimLine;
         }
 
 
@@ -45,9 +45,9 @@ namespace Weapon.Hook
 
         private void OnDestroy()
         {
-            GrapplingGun.HookRetractEnd -= EnableAimLine;
-            GrapplingGun.EndPull -= EnableAimLine;
-            GrapplingGun.HookShot -= DisableAimLine;
+            GrapplingGun.OnHookRetracted -= EnableAimLine;
+            GrapplingGun.OnPullEnded -= EnableAimLine;
+            GrapplingGun.OnHookShot -= DisableAimLine;
         }
 
         private void DisableAimLine(float arg1, Vector2 arg2, Transform arg3,

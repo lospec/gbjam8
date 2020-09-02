@@ -24,9 +24,9 @@ namespace Weapon.Hook
             Line.useWorldSpace = true;
             Line.positionCount = 0;
             enabled = false;
-            GrapplingGun.HookShot += GrapplingGunOnHookShot;
-            GrapplingGun.HookRetract += GrapplingGunOnHookRetract;
-            GrapplingGun.EndPull += GrapplingGunOnEndPull;
+            GrapplingGun.OnHookShot += GrapplingGunOnHookShot;
+            GrapplingGun.OnRetractHook += GrapplingGunOnHookRetract;
+            GrapplingGun.OnPullEnded += GrapplingGunOnEndPull;
         }
 
 
@@ -37,9 +37,9 @@ namespace Weapon.Hook
 
         private void OnDestroy()
         {
-            GrapplingGun.HookShot -= GrapplingGunOnHookShot;
-            GrapplingGun.HookRetract -= GrapplingGunOnHookRetract;
-            GrapplingGun.EndPull -= GrapplingGunOnEndPull;
+            GrapplingGun.OnHookShot -= GrapplingGunOnHookShot;
+            GrapplingGun.OnRetractHook -= GrapplingGunOnHookRetract;
+            GrapplingGun.OnPullEnded -= GrapplingGunOnEndPull;
         }
 
         private void GrapplingGunOnEndPull()
