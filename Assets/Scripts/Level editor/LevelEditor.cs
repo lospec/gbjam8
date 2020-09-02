@@ -60,7 +60,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
 
     private List<GameObject> instantiatedAssets;
     private List<Vector2> startPositions;
-    private Dictionary<(float, float), string> tilemapData;
+    private List<(float, float, string)> tilemapData;
 
     private void Awake()
     {
@@ -82,7 +82,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
 
         instantiatedAssets = new List<GameObject>();
         startPositions = new List<Vector2>();
-        tilemapData = new Dictionary<(float, float), string>();
+        tilemapData = new List<(float, float, string)>();
 
         _input.Camera.CameraMovement.performed += OnCameraMovement;
         _input.Camera.CameraMovement.canceled += _ => cameraVelocity = Vector2.zero;
@@ -139,7 +139,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
                         {
                             isDrawing = true;
                             // Saving data
-                            tilemapData[(intTilemapPosition.x, intTilemapPosition.y)] = "tile";
+                            AddTileToList(intTilemapPosition.x, intTilemapPosition.y, "tile");
 
                             // Paint the current tile
                             tilemap.SetTile(intTilemapPosition, defaultTile);
@@ -149,7 +149,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
                         {
                             isDrawing = true;
                             // Saving data
-                            tilemapData.Remove((intTilemapPosition.x, intTilemapPosition.y));
+                            AddTileToList(intTilemapPosition.x, intTilemapPosition.y, "erase");
 
                             // Clear the current tile
                             tilemap.SetTile(intTilemapPosition, null);
@@ -165,7 +165,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
                         {
                             isDrawing = true;
                             // Saving data
-                            tilemapData.Remove((intTilemapPosition.x, intTilemapPosition.y));
+                            AddTileToList(intTilemapPosition.x, intTilemapPosition.y, "erase");
 
                             tilemap.SetTile(intTilemapPosition, null);
                         }
@@ -180,7 +180,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
                         {
                             isDrawing = true;
                             // Saving data
-                            tilemapData[(intTilemapPosition.x, intTilemapPosition.y)] = "flood";
+                            AddTileToList(intTilemapPosition.x, intTilemapPosition.y, "fill");
 
                             tilemap.FloodFill(intTilemapPosition, defaultTile);
                         }
@@ -201,6 +201,16 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         }
 
         MoveCamera();
+    }
+
+    private void AddTileToList(float x, float y, string name)
+    {
+        if (tilemapData.Contains((x, y, name)))
+        {
+            tilemapData.Remove((x, y, name));
+        }
+
+        tilemapData.Add((x, y, name));
     }
 
     private void MoveCamera()
@@ -232,16 +242,11 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     public void AddToAssetList(GameObject toAdd)
     {
         instantiatedAssets.Add(toAdd);
-
-        Debug.Log("Added at " + toAdd.transform.position);
-        tilemapData[(toAdd.transform.position.x, toAdd.transform.position.y)] = toAdd.name;
     }
 
     public void RemoveFromAssetList(GameObject toRemove)
     {
-        Debug.Log("Removed at " + toRemove.transform.position);
         instantiatedAssets.Remove(toRemove);
-        tilemapData.Remove((toRemove.transform.position.x, toRemove.transform.position.y));
     }
     
     public void StartPlayMode()
@@ -311,19 +316,19 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         {
             Vector2 currentPos = instantiatedAssets[i].transform.position;
 
-            tilemapData[(currentPos.x, currentPos.y)] = instantiatedAssets[i].name;
+            AddTileToList(currentPos.x, currentPos.y, instantiatedAssets[i].name);
         }
 
-        saveUtility.items = new SavedItem[tilemapData.Keys.Count];
+        saveUtility.items = new SavedItem[tilemapData.Count];
 
         // Saving the tilemap data to the list
-        foreach ((float, float) key in tilemapData.Keys)
+        foreach ((float, float, string) value in tilemapData)
         {
             // Creating a new saved item
             saveUtility.items[j] = new SavedItem();
-            saveUtility.items[j].x = key.Item1;
-            saveUtility.items[j].y = key.Item2;
-            saveUtility.items[j].name = tilemapData[key];
+            saveUtility.items[j].x = value.Item1;
+            saveUtility.items[j].y = value.Item2;
+            saveUtility.items[j].name = value.Item3;
 
             j++;
         }
@@ -341,6 +346,62 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
             selectedIcon.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
             RemoveFromAssetList(selectedAsset);
             Destroy(selectedAsset);
+        }
+    }
+
+    public void Load()
+    {
+        string json;
+        SaveUtility saveUtility;
+        SaveSystem.Instance.Initialize(fileName.text);
+        SaveSystem.Instance.Load();
+
+        Vector3Int tilePosition = new Vector3Int();
+        Vector3 assetPosition = new Vector3();
+
+        Debug.Log("Carico");
+        
+        if (SaveSystem.Instance.HasKey("TileMap"))
+        {
+            json = SaveSystem.Instance.GetString("TileMap");
+            saveUtility = JsonUtility.FromJson<SaveUtility>(json);
+
+            for (int i=0; i<saveUtility.items.Length; i++)
+            {
+                SavedItem currentItem = saveUtility.items[i];
+
+                tilePosition.x = Mathf.RoundToInt(currentItem.x);
+                tilePosition.y = Mathf.RoundToInt(currentItem.y);
+
+                assetPosition.x = currentItem.x;
+                assetPosition.y = currentItem.y;
+
+                switch (currentItem.name)
+                {
+                    case "tile":
+                        tilemap.SetTile(tilePosition, defaultTile);
+                        break;
+                    case "erase":
+                        tilemap.SetTile(tilePosition, null);
+                        break;
+                    case "fill":
+                    case "flood":
+                        Debug.LogError("sto per flooddare");
+                        // ISSUE: make sure floods are made at the end 
+                        tilemap.FloodFill(tilePosition, defaultTile);
+                        break;
+                    default:
+                        Debug.Log(currentItem.name);
+
+                        // load prefab
+                        GameObject prefab = Instantiate((GameObject)Resources.Load(currentItem.name), 
+                            assetPosition, Quaternion.Euler(Vector3.zero));
+                        prefab.transform.parent = tilemap.transform;
+
+                        break;
+                }
+            }
+
         }
     }
 }
