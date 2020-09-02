@@ -1,36 +1,37 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class ParallaxBackgroundController : MonoBehaviour
+namespace Camera
 {
-	[SerializeField] private Transform _background1;
-	[SerializeField] private Transform _background2;
+    [RequireComponent(typeof(CameraController))]
+    public class ParallaxBackgroundController : MonoBehaviour
+    {
+        private static class BackgroundParams
+        {
+            public static readonly int Offset = Shader.PropertyToID("_Offset");
+        }
 
-	private float _size;
+        private const float ParallaxScale = 10000;
 
-	private void Start()
-	{
-		_size = _background1.GetComponent<BoxCollider2D>().size.y;
-	}
+        [SerializeField] private MeshRenderer background;
+        [SerializeField] private float parallaxStrength;
 
-	private void Update()
-	{
-		if (transform.position.y > _background2.position.y)
-		{
-			_background1.position = new Vector3(_background1.position.x, _background2.position.y + _size, _background1.position.z);
-			SwitchBackgrounds();
-		}
+        private CameraController _camera;
+        private Vector2 BackgroundOffset
+        {
+            get => background.material.GetVector(BackgroundParams.Offset);
+            set => background.material.SetVector(BackgroundParams.Offset, value);
+        }
 
-		if (transform.position.y < _background1.position.y)
-		{
-			_background2.position = new Vector3(_background2.position.x, _background1.position.y - _size, _background2.position.z);
-			SwitchBackgrounds();
-		}
-	}
+        private void Start()
+        {
+            _camera = GetComponent<CameraController>();
+        }
 
-	private void SwitchBackgrounds()
-	{
-		Transform tempBackground1 = _background1;
-		_background1 = _background2;
-		_background2 = tempBackground1;
-	}
+
+        private void Update()
+        {
+            BackgroundOffset += _camera.Velocity * (parallaxStrength / ParallaxScale);
+        }
+    }
 }

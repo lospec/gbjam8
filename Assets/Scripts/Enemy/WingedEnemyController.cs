@@ -7,6 +7,12 @@ namespace Enemy
 {
     public class WingedEnemyController : EnemyController
     {
+        public enum StartState
+        {
+            Grounded,
+            Flying
+        }
+
         private static class AnimParams
         {
             public static readonly int IsFlying = Animator.StringToHash("IsFlying");
@@ -21,20 +27,31 @@ namespace Enemy
         [SerializeField] private CircleCollider2D flyingCollider;
         [SerializeField] private BoxCollider2D groundCollider;
 
-        // Test
-        [SerializeField] private Transform player;
-
-
         protected override void Start()
         {
             base.Start();
-            flyingCollider.enabled = false;
-            groundCollider.enabled = true;
-            StartCoroutine(Drop());
-            Initialize(player);
-            InvokeWhen(() => StartCoroutine(TakeOff()),
-                () => DistanceToPlayer <= searchRange && !enabled, 2f);
+            body.gravityScale = 0;
             enabled = false;
+        }
+
+        public void Initialize(Transform player, StartState state)
+        {
+            Initialize(player);
+            bool StartCondition() => DistanceToPlayer <= searchRange && !enabled;
+            switch (state)
+            {
+                case StartState.Grounded:
+                    StartCoroutine(Drop());
+                    InvokeWhen(() => StartCoroutine(TakeOff()), StartCondition, 2f);
+                    break;
+                case StartState.Flying:
+                    flyingCollider.enabled = true;
+                    animator.SetBool(AnimParams.IsFlying, true);
+                    InvokeWhen(() => enabled = true, StartCondition, 2f);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(state), state, null);
+            }
         }
 
 
@@ -83,6 +100,8 @@ namespace Enemy
 
         private IEnumerator Drop()
         {
+            flyingCollider.enabled = false;
+            groundCollider.enabled = true;
             animator.SetBool(AnimParams.IsFlying, false);
             body.gravityScale = 10f;
             var result = new Collider2D[1];
