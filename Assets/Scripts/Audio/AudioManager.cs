@@ -9,6 +9,8 @@ namespace Audio
         [FormerlySerializedAs("_audioClips")] [SerializeField]
         private List<AudioManagerAudioClip> audioClips;
 
+		[SerializeField] private AudioManagerAudioClip _startingAudioClip;
+
         private readonly Dictionary<AudioManagerAudioClip, AudioSource>
             _audioManagerClipToSource =
                 new Dictionary<AudioManagerAudioClip, AudioSource>();
@@ -29,6 +31,11 @@ namespace Audio
 
                 _audioManagerClipToSource.Add(audioSystemAudioClip, audioSource);
             }
+
+			if (_startingAudioClip)
+			{
+				PlayAudio(_startingAudioClip);
+			}
         }
 
         private AudioSource GetClipSource(AudioManagerAudioClip clip)
@@ -41,6 +48,7 @@ namespace Audio
             var audioSource = GetClipSource(clip);
             audioSource.volume = clip.volume;
             audioSource.pitch = clip.pitch;
+			audioSource.loop = clip.loop;
             audioSource.Play();
         }
 

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c3e992173d4184438ebdccd255b51a4, type: 3}
-  m_Name: Jump
+  m_Name: GBJam
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: df8048e19699ef54da8fef3e2479b31b, type: 3}
-  volume: 0.03
+  audioClip: {fileID: 8300000, guid: 067def503e8da734b9dffc181ec70dfe, type: 3}
+  volume: 0.003
   pitch: 1
-  volumeIncrementAmount: 0.03
-  loop: 0
+  volumeIncrementAmount: 0.1
+  loop: 1
