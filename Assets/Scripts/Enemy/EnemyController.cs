@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public abstract class EnemyController : MonoBehaviour
+    [RequireComponent(typeof(EntityHealth))]
+    public abstract class EnemyController : MonoBehaviour, ITakeDamage
     {
         [SerializeField] private EnemyStat enemyStat;
 
@@ -17,6 +18,7 @@ namespace Enemy
         [SerializeField] protected SpriteRenderer spriteRenderer;
 
         private List<MethodInfo> _trackedRoutines = new List<MethodInfo>();
+        private EntityHealth _entityHealth = default;
 
         protected Vector2 velocity;
 
@@ -29,6 +31,7 @@ namespace Enemy
 
         protected virtual void Start()
         {
+            _entityHealth = GetComponent<EntityHealth>();
         }
 
         protected void Initialize(Transform player)
@@ -75,5 +78,13 @@ namespace Enemy
 
             action.Invoke();
         }
+
+        public virtual void Damage(int damage)
+        {
+            _entityHealth.Hurt(damage);
+        }
+
+
+        public int CurrentHealth => _entityHealth.Health;
     }
 }
