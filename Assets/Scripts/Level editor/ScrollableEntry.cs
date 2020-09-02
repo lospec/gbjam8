@@ -51,7 +51,7 @@ public class ScrollableEntry : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
         resource.AddComponent<MovableAsset>();
         resource.AddComponent<PolygonCollider2D>();
-        resource.name += n;
+        resource.name = resourcePath;
 
         n++;
     }

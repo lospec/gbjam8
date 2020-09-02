@@ -4,12 +4,27 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 using Inputs;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 /**
  * TODO: 
  * - Possibilità di nascondere nemici e asset per poter disegnare meglio
  */
+
+[System.Serializable]
+public class SavedItem
+{
+    public float x;
+    public float y;
+    public string name;
+}
+
+[System.Serializable]
+public class SaveUtility
+{
+    public SavedItem[] items;
+}
 
 public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
 {
@@ -20,6 +35,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     public GameObject brushPreview;
     public GameObject selectedIcon;
     public EventSystem uiEvents;
+    public Text fileName;
     public float cameraSpeed = 5f;
     [Header("Please mark as readonly I don't know how to do that")]
     public bool isDragging;
@@ -283,7 +299,39 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
 
     public void Save()
     {
+        List<(float, float, string)> toSave = new List<(float, float, string)>();
+        SaveUtility saveUtility = new SaveUtility();
+        string dataJSON;
+        int j = 0;
 
+        SaveSystem.Instance.Initialize(fileName.text + ".bin");
+
+        // Saving all the instantiated assets to the tilemap data
+        for (int i=0; i<instantiatedAssets.Count; i++)
+        {
+            Vector2 currentPos = instantiatedAssets[i].transform.position;
+
+            tilemapData[(currentPos.x, currentPos.y)] = instantiatedAssets[i].name;
+        }
+
+        saveUtility.items = new SavedItem[tilemapData.Keys.Count];
+
+        // Saving the tilemap data to the list
+        foreach ((float, float) key in tilemapData.Keys)
+        {
+            // Creating a new saved item
+            saveUtility.items[j] = new SavedItem();
+            saveUtility.items[j].x = key.Item1;
+            saveUtility.items[j].y = key.Item2;
+            saveUtility.items[j].name = tilemapData[key];
+
+            j++;
+        }
+        dataJSON = JsonUtility.ToJson(saveUtility);
+  
+        SaveSystem.Instance.SetString("TileMap", dataJSON);
+        Debug.Log(dataJSON);
+        SaveSystem.Instance.SaveToDisk();
     }
 
     public void OnDelete(InputAction.CallbackContext context)
