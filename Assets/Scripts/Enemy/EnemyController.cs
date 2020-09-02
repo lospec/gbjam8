@@ -32,6 +32,7 @@ namespace Enemy
         protected virtual void Start()
         {
             _entityHealth = GetComponent<EntityHealth>();
+            _entityHealth.Health = enemyStat.maxHealth;
         }
 
         protected void Initialize(Transform player)
