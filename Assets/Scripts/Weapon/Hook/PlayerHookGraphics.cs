@@ -50,8 +50,8 @@ namespace Weapon.Hook
             GrapplingGun.OnHookShot -= DisableAimLine;
         }
 
-        private void DisableAimLine(float arg1, Vector2 arg2, Transform arg3,
-            Action arg4)
+        private void DisableAimLine(float speed, Vector2 target, Transform hook,
+            Action finishShooting)
         {
             aimLine.enabled = false;
             enabled = false;

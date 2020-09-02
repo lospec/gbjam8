@@ -83,8 +83,8 @@ namespace Weapon.Hook
             MoveTowardsTarget();
         }
 
-        public delegate void HookShotDelegate(float speed, Vector2 target, Transform
-            hook, Action finishShooting);
+        public delegate void HookShotDelegate(float speed, Vector2 target,
+            Transform hook, Action finishShooting);
 
         public delegate void HookTargetHitDelegate();
 
@@ -156,14 +156,15 @@ namespace Weapon.Hook
                 OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
                 {
                     // When the shot is landed(animation finished, etc)
-                    
+
                     // enable grapple pull and invoke OnHookTargetHit
                     enabled = true;
                     OnHookTargetHit?.Invoke();
                 });
             }
 
-            else if (shootSpeed > 0f && maxHookDistance > 0f && !float.IsPositiveInfinity(maxHookDistance))
+            else if (shootSpeed > 0f && maxHookDistance > 0f &&
+                     !float.IsPositiveInfinity(maxHookDistance))
             {
                 EnableMovement();
                 Target = HookOrigin + _aim.normalized * maxHookDistance;
@@ -178,7 +179,7 @@ namespace Weapon.Hook
                     OnRetractHook?.Invoke(returnDuration, hook, () =>
                     {
                         // When the hook finished retracting
-                        
+
                         // Stop grappling(if it's enabled) and invoke OnHookRetracted
                         StopGrappling();
                         OnHookRetracted?.Invoke();

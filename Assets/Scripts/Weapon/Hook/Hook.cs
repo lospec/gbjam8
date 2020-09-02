@@ -49,7 +49,7 @@ namespace Weapon.Hook
 
 
         private void GrapplingGunOnHookShot(float speed, Vector2 target, Transform hook,
-            Action callBack)
+            Action finishShooting)
         {
             Line.enabled = true;
             if (_retractRoutine != null) return;
@@ -59,7 +59,8 @@ namespace Weapon.Hook
             }
 
             hook.SetParent(null, true);
-            _shootRoutine = StartCoroutine(ShootHook(speed, target, hook, callBack));
+            _shootRoutine =
+                StartCoroutine(ShootHook(speed, target, hook, finishShooting));
         }
 
 
@@ -75,18 +76,20 @@ namespace Weapon.Hook
             enabled = false;
             Line.positionCount = ropeResolution;
             var d = Vector2.Distance(hook.position, target);
+            var abort = false;
             Vector2 hookPosition;
             var t = 0f;
-            while (t <= 1f)
+            while (t <= 1f && !abort)
             {
                 t += Time.deltaTime * speed / d;
 
-                SetRopePoints(transform.position, target, t, d, out hookPosition);
+                SetRopePoints(transform.position, target, t, d, out hookPosition, out
+                    abort);
                 hook.position = hookPosition;
                 yield return null;
             }
 
-            SetRopePoints(transform.position, target, 1f, d, out hookPosition);
+            SetRopePoints(transform.position, target, 1f, d, out hookPosition, out _);
 
             hook.position = hookPosition;
             Line.Simplify(1f);
@@ -116,11 +119,17 @@ namespace Weapon.Hook
         }
 
         private void SetRopePoints(Vector2 startPoint, Vector2 targetPoint, float
-            t, float distance, out Vector2 ropeEnd)
+            t, float distance, out Vector2 ropeEnd, out bool abort)
         {
+            abort = false;
             var angle = GetAngle(targetPoint - startPoint);
             ropeEnd = Vector2.Lerp(startPoint, targetPoint, t);
             var length = Vector2.Distance(startPoint, ropeEnd);
+            if (length >= distance)
+            {
+                abort = true;
+            }
+
             for (var i = 0; i < ropeResolution; i++)
             {
                 var xPos = (float) i / ropeResolution * length;
