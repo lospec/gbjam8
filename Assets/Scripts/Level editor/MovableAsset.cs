@@ -46,16 +46,6 @@ public class MovableAsset : MonoBehaviour
             Drop();
         }
 
-        /*
-        if (overlapped != null && overlapped.Equals(collider) && !editor.isDragging)
-        {
-            editor.canDraw = false;
-        }
-        else if (!editor.cursorOnUI)
-        {
-            editor.canDraw = true;
-        }*/
-
         if (isSelected)
         {
             if (editor.isDrawing)
@@ -86,6 +76,8 @@ public class MovableAsset : MonoBehaviour
 
     private void Drag()
     {
+        editor.RemoveFromAssetList(this.gameObject);
+
         editor.isDragging = true;
         isDragging = true;
         editor.SetBrushPreview(this.gameObject);
@@ -93,6 +85,8 @@ public class MovableAsset : MonoBehaviour
 
     private void Drop()
     {
+        editor.AddToAssetList(this.gameObject);
+
         editor.isDragging = false;
         isDragging = false;
         editor.ResetBrushPreview();

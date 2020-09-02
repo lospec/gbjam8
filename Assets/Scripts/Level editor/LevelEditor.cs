@@ -216,7 +216,16 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     public void AddToAssetList(GameObject toAdd)
     {
         instantiatedAssets.Add(toAdd);
+
+        Debug.Log("Added at " + toAdd.transform.position);
         tilemapData[(toAdd.transform.position.x, toAdd.transform.position.y)] = toAdd.name;
+    }
+
+    public void RemoveFromAssetList(GameObject toRemove)
+    {
+        Debug.Log("Removed at " + toRemove.transform.position);
+        instantiatedAssets.Remove(toRemove);
+        tilemapData.Remove((toRemove.transform.position.x, toRemove.transform.position.y));
     }
     
     public void StartPlayMode()
@@ -279,10 +288,10 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
 
     public void OnDelete(InputAction.CallbackContext context)
     {
-        Debug.Log("Delete");
         if (selectedAsset != null)
         {
             selectedIcon.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, 0);
+            RemoveFromAssetList(selectedAsset);
             Destroy(selectedAsset);
         }
     }
