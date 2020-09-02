@@ -83,6 +83,7 @@ namespace Weapon.Hook
         }
 
         public static event Action<float, Vector2, Transform, Action> HookShot;
+        public static event Action HookTargetHit;
         public static event Action<float, Transform, Action> HookRetract;
         public static event Action HookRetractEnd;
         public static event Action EndPull;
@@ -136,7 +137,11 @@ namespace Weapon.Hook
             {
                 Target = hit.point;
                 HookPosition = shootSpeed > 0f ? HookOrigin : Target;
-                HookShot?.Invoke(shootSpeed, Target, hook, () => { enabled = true; });
+                HookShot?.Invoke(shootSpeed, Target, hook, () =>
+                {
+                    enabled = true;
+                    HookTargetHit?.Invoke();
+                });
             }
 
             else if (shootSpeed > 0f && maxHookDistance > 0f &&
