@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Audio
 {
-    public class AudioManager : MonoBehaviour
+	public class AudioManager : MonoBehaviour
     {
         [FormerlySerializedAs("_audioClips")] [SerializeField]
         private List<AudioManagerAudioClip> audioClips;
@@ -19,6 +17,13 @@ namespace Audio
         {
             foreach (var audioSystemAudioClip in audioClips)
             {
+				if (audioSystemAudioClip == null)
+				{
+					Debug.LogException(new System.Exception(
+						"An AudioSystemAudioClip was found null in the Audio Clips list"));
+					continue;
+				}
+
                 var audioSource = gameObject.AddComponent<AudioSource>();
                 audioSource.clip = audioSystemAudioClip.audioClip;
 
@@ -26,39 +31,9 @@ namespace Audio
             }
         }
 
-        private KeyValuePair<AudioManagerAudioClip, AudioSource>
-            GetAudioSourcePairByName(string audioName)
-        {
-            var audioSourcePairs =
-                (from pair in _audioManagerClipToSource
-                    where pair.Key.name == audioName
-                    select pair).ToArray();
-
-            var count = audioSourcePairs.Length;
-            if (count > 1)
-            {
-                Debug.LogException(new System.Exception(string.Format(
-                    "{0} audio sources with the same audioName of {1} were found",
-                    count,
-                    audioName)));
-                return new KeyValuePair<AudioManagerAudioClip, AudioSource>();
-            }
-
-            if (count < 1)
-            {
-                Debug.LogException(new System.Exception(
-                    string.Format(
-                        "No audio sources with the audioName of {0} were found",
-                        audioName)));
-                return new KeyValuePair<AudioManagerAudioClip, AudioSource>();
-            }
-
-            return audioSourcePairs.First();
-        }
-
         private AudioSource GetClipSource(AudioManagerAudioClip clip)
         {
-            throw new NotImplementedException();
+			return _audioManagerClipToSource[clip];
         }
 
         public void PlayAudio(AudioManagerAudioClip clip)
@@ -69,13 +44,10 @@ namespace Audio
             audioSource.Play();
         }
 
-        public void IncreaseVolume(string audioName)
+        public void IncreaseVolume(AudioManagerAudioClip clip)
         {
-            KeyValuePair<AudioManagerAudioClip, AudioSource> pair =
-                GetAudioSourcePairByName(audioName);
-            AudioManagerAudioClip audioManagerAudioClip = pair.Key;
-            AudioSource audioSource = pair.Value;
-            audioSource.volume += audioManagerAudioClip.VolumeIncrementAmount;
-        }
+			var audioSource = GetClipSource(clip);
+			audioSource.volume += clip.volumeIncrementAmount;
+		}
     }
 }

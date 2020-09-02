@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c3e992173d4184438ebdccd255b51a4, type: 3}
-  m_Name: Jump
+  m_Name: Jump 1
   m_EditorClassIdentifier: 
   name: Jump
   audioClip: {fileID: 8300000, guid: df8048e19699ef54da8fef3e2479b31b, type: 3}
