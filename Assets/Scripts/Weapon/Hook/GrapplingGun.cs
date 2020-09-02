@@ -11,12 +11,11 @@ namespace Weapon.Hook
         public float shootSpeed = 0f;
 
         /// <summary>
-        ///     The time it takes in seconds for the hook to return if it can't hit a target, this will only be used when
+        ///     The retraction speed of the hook in unit distance per seconds, this will only be used when
         ///     Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance)
         /// </summary>
-        [Tooltip(
-            "The time it takes in seconds for the hook to return if it can't hit a target, this will only be used when Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance)")]
-        public float returnDuration = 1f;
+        [Tooltip("The retraction speed of the hook in unit distance per seconds, this will only be used when Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance)")]
+        public float retractSpeed = 1f;
 
         /// <summary> The speed of the hook when shot, use 0 for instant shot </summary>
         [Tooltip("The grapples pulling speed")]
@@ -176,7 +175,7 @@ namespace Weapon.Hook
                     // When the shot is finished(animation finished, etc)
 
                     // Start retracting the hook
-                    OnRetractHook?.Invoke(returnDuration, hook, () =>
+                    OnRetractHook?.Invoke(retractSpeed, hook, () =>
                     {
                         // When the hook finished retracting
 

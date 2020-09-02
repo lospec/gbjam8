@@ -103,11 +103,40 @@ namespace Weapon.Hook
         {
             var t = 0f;
             var startPosition = hook.position;
+            float dist = (startPosition - transform.position).magnitude;
             while (t <= 1f)
             {
-                t += Time.deltaTime * speed;
+                t += Time.deltaTime * speed / dist;
                 hook.position = Vector2.Lerp(startPosition, transform.position, t);
                 Line.SetPosition(1, hook.position);
+                yield return null;
+            }
+
+            hook.position = Vector2.Lerp(startPosition, transform.position, 1f);
+            Line.enabled = false;
+            enabled = false;
+            _retractRoutine = null;
+            callBack?.Invoke();
+        }
+
+        private IEnumerator RetractHookB(float speed, Transform hook, Action callBack)
+        {
+            // DISTANCE BASED RETRACTION
+            Vector3 startPosition = hook.position;
+            float d = 0f;
+            float retractAcceleration = 10f;
+
+            while (true)
+            {
+                d += Time.deltaTime * speed;
+                hook.position = Vector2.MoveTowards(startPosition, transform.position, d);
+                Line.SetPosition(1, hook.position);
+
+                Vector2 diff = (startPosition - transform.position);
+                if (diff.sqrMagnitude < d * d)
+                    break;
+
+                speed += retractAcceleration * Time.deltaTime;
                 yield return null;
             }
 
