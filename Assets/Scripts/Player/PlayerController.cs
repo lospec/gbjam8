@@ -38,7 +38,7 @@ namespace Player
         private void Start()
         {
             _input.Player.Movement.performed += OnMovement;
-            _input.Player.Primary.performed += OnPrimary;
+            _input.Player.Primary.performed += _motor.JumpManagement;
             _input.Player.Secondary.performed += OnSecondary;
         }
 
@@ -48,6 +48,8 @@ namespace Player
             grapplingGun.Aim = _inputVector;
             UpdateSpriteAndAnimations();
         }
+
+        
 
         private void OnEnable()
         {
@@ -66,8 +68,9 @@ namespace Player
 
         public void OnPrimary(InputAction.CallbackContext context)
         {
+            /*
             if (context.control.IsPressed())
-                StartCoroutine(_motor.Jump(context.action));
+                StartCoroutine(_motor.Jump(context.action));*/
         }
 
 

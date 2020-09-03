@@ -12,9 +12,14 @@ namespace Player
     {
         private const float MoveSpeedModifier = 10f;
         public LayerMask floorLayer;
+        [Header("Speeds")]
         public float moveSpeed = 10f;
+        [Header("Jump management")]
         public float jumpPower = 30f;
         public float jumpTimer = 0.1f;
+        public float minAscensionTime;
+        public float maxAscensionTime;
+
         public float customGravity = 9.88f;
         public float terminalVelocity = 50f;
 
@@ -25,6 +30,9 @@ namespace Player
         public UnityEvent<float> OnPlayerJumpHeld;
 
         private float _jumpTime;
+        private float jumpFinishedTime;
+        private float minJumpFinishedTime;
+        private bool isJumping = false;
         private bool _isGrounded;
         private Vector2 _gravity;
         private Collider2D[] _groundCollision = new Collider2D[1];
@@ -44,7 +52,7 @@ namespace Player
             _gravity = Vector2.zero;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             _isGrounded = GroundCheck();
 
@@ -67,6 +75,36 @@ namespace Player
             Move = Vector2.zero;
         }
 
+        public void JumpManagement(InputAction.CallbackContext context)
+        {
+            bool jumping = context.performed;
+
+            if (jumping)
+            {
+                JumpUtility(minAscensionTime, maxAscensionTime, jumpPower, jumping);
+            }
+        }
+        private void JumpUtility(float minAscension, float maxAscension, float power, bool jumping)
+        {
+            // Se è il primo frame che sto saltando, imposto i tempi 
+            if (!isJumping)
+            {
+                jumpFinishedTime = Time.time + maxAscension;
+                minJumpFinishedTime = Time.time + minAscension;
+                Body.AddForce(Vector2.up * power);
+
+                isJumping = true;
+            }
+
+            if ((jumping && Time.time < jumpFinishedTime) || Time.time < minJumpFinishedTime)
+            {
+                Body.velocity = new Vector2(Body.velocity.x, Vector2.up.y * jumpPower);
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
 
         public IEnumerator Jump(InputAction contextAction)
         {
@@ -116,6 +154,16 @@ namespace Player
                 bottomRightBound.position, _groundCollision, floorLayer);
 
             return _groundCollision.First();
+        }
+
+        public void Knockback()
+        {
+
+        }
+
+        public void JumpHit()
+        {
+
         }
     }
 }
