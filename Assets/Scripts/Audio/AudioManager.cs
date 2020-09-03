@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,7 +10,7 @@ namespace Audio
         [FormerlySerializedAs("_audioClips")] [SerializeField]
         private List<AudioManagerAudioClip> audioClips;
 
-		[SerializeField] private AudioManagerAudioClip _startingAudioClip;
+		[SerializeField] private List<AudioManagerAudioClip> _startingAudioClips = new List<AudioManagerAudioClip>();
 
         private readonly Dictionary<AudioManagerAudioClip, AudioSource>
             _audioManagerClipToSource =
@@ -32,11 +33,20 @@ namespace Audio
                 _audioManagerClipToSource.Add(audioSystemAudioClip, audioSource);
             }
 
-			if (_startingAudioClip)
+			if (_startingAudioClips.Count > 0)
 			{
-				PlayAudio(_startingAudioClip);
+				StartCoroutine(PlayStartingAudio());
 			}
         }
+
+		private IEnumerator PlayStartingAudio()
+		{
+			foreach (AudioManagerAudioClip clip in _startingAudioClips)
+			{
+				PlayAudio(clip);
+				yield return new WaitForSeconds(clip.audioClip.length);
+			}
+		}
 
         private AudioSource GetClipSource(AudioManagerAudioClip clip)
         {
