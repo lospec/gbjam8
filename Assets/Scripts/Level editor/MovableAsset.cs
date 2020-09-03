@@ -35,7 +35,9 @@ public class MovableAsset : MonoBehaviour
 
         if (Mouse.current.leftButton.isPressed)
         {
-            if (collider.Equals(overlapped) && !prevDragging && !editor.isDrawing && !editor.isDragging)
+            if ((collider.transform.GetComponentInParent<PolygonCollider2D>().Equals(overlapped) 
+                || collider.transform.GetComponent<PolygonCollider2D>().Equals(overlapped))
+                && !prevDragging && !editor.isDrawing && !editor.isDragging)
             {
                 Select();
                 Drag();

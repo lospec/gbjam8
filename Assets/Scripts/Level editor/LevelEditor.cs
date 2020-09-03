@@ -7,6 +7,7 @@ using Inputs;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEditor;
+using Weapon.Hook;
 
 /**
  * TODO: 
@@ -120,10 +121,13 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         brushPreview.transform.position = mouseWorldPosition;
         overlapped = Physics2D.OverlapPoint(mouseWorldPosition);
 
-        if (overlapped != null && overlapped.GetComponent<MovableAsset>() != null)
+        if (overlapped != null)
         {
-            canDraw = false;
-            isDrawing = false;
+            if (overlapped.transform.root.GetComponentInChildren<MovableAsset>() != null)
+            {
+                canDraw = false;
+                isDrawing = false;
+            }
         }
         else
         {
@@ -275,6 +279,8 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     {
         Time.timeScale = 0;
 
+        FrequentlyAccessed.Instance.playerObject.GetComponentInChildren<GrapplingGun>().transform.GetChild(0).GetComponent<LineRenderer>().enabled = false;
+
         for (int i = 0; i < instantiatedAssets.Count; i++)
         {
             MonoBehaviour[] behaviours = instantiatedAssets[i].GetComponentsInChildren<MonoBehaviour>();
@@ -408,17 +414,6 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
                         break;
                 }
             }
-
         }
-    }
-
-    public void SavePrefab()
-    {
-        tilemap.transform.parent.gameObject.name = fileName.text.Substring(0, fileName.text.Length - 4);
-
-        /*
-        PrefabUtility.SaveAsPrefabAsset(tilemap.transform.parent.gameObject, 
-            tilemap.transform.parent.gameObject.name + ".prefab");
-            */
     }
 }
