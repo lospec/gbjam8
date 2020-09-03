@@ -65,6 +65,8 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     private List<Vector2> startPositions;
     private List<(float, float, string)> tilemapData;
 
+    private bool isInPlayMode;
+
     private void Awake()
     {
         _input = new PlayerControls();
@@ -138,7 +140,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
         {
             cursorOnUI = false;
 
-            if (!isDragging && canDraw)
+            if (!isDragging && canDraw && !isInPlayMode)
             {
                 switch (currentTool)
                 {
@@ -259,6 +261,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     
     public void StartPlayMode()
     {
+        isInPlayMode = true;
         Time.timeScale = 1;
 
         for (int i=0; i<instantiatedAssets.Count; i++)
@@ -278,6 +281,7 @@ public class LevelEditor : MonoBehaviour, PlayerControls.ICameraActions
     public void EndPlayMode()
     {
         Time.timeScale = 0;
+        isInPlayMode = false;
 
         FrequentlyAccessed.Instance.playerObject.GetComponentInChildren<GrapplingGun>().transform.GetChild(0).GetComponent<LineRenderer>().enabled = false;
 
