@@ -9,5 +9,6 @@ namespace Enemy
         public string enemyName;
         public int maxHealth;
         public int moveSpeed;
+        public int damage;
     }
 }
