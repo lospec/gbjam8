@@ -161,7 +161,7 @@ namespace Player
 
         }
 
-        public void JumpHit()
+        public void JumpHit(float height)
         {
 
         }
