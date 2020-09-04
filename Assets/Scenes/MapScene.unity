@@ -180,6 +180,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb90f3d2d8b2af4fb2a9f63434e3906, type: 3}
+--- !u!20 &85504199 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7563845085234993633, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
+  m_PrefabInstance: {fileID: 760903450}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &160619479 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2398325253306777006, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
@@ -196,31 +201,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65e32f66c365674ebc8cab679b0b714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &529228617 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1499829436783023940, guid: 2c2d8a7e093c7e24c8ce2d4dd3f11a40, type: 3}
-  m_PrefabInstance: {fileID: 2131025634}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &529228618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529228617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AssetsPPU: 144
-  m_RefResolutionX: 160
-  m_RefResolutionY: 144
-  m_UpscaleRT: 0
-  m_PixelSnapping: 1
-  m_CropFrameX: 0
-  m_CropFrameY: 0
-  m_StretchFill: 0
 --- !u!1001 &612268923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -289,17 +269,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7563845085234993633, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
-      propertyPath: orthographic size
-      value: 12.102199
-      objectReference: {fileID: 0}
     - target: {fileID: 7563845085236464421, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
       propertyPath: m_Name
       value: Game Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 7563845085236464421, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7563845085236508208, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
       propertyPath: leftDeco
@@ -370,6 +342,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 7821156551021953877, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 85504199}
     - target: {fileID: 7821156551021953878, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
