@@ -1,11 +1,18 @@
 ﻿using System;
 using Player;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+
+#if UNITY_EDITOR
+using Handles = UnityEditor.Handles;
+#endif
 
 namespace Weapon.Hook
 {
     public class GrapplingGun : MonoBehaviour
     {
+        [SerializeField] private LayerMask hookableLayers = default;
+
         /// <summary> The speed of the hook when shot, use 0 for instant shot </summary>
         [Tooltip("The speed of the hook when shot, use 0 for instant shot")]
         public float shootSpeed = 0f;
@@ -34,6 +41,10 @@ namespace Weapon.Hook
         [Tooltip("The maximum range the player can grapple, use 0 for infinite range")]
         public float maxHookDistance = 0f;
 
+        /// <summary> The minimum distance from the gunpoint(see: <see cref="HookOrigin"/>) to the target for it count the player has arrived at the target </summary>
+        [Tooltip("The minimum distance from the gunpoint to the target for it count that the player has arrived at the target")]
+        public float arrivedDistance = 5f;
+
         public float stuckCheckThreshold = .01f;
         public float stuckTimeThreshold = .01f;
 
@@ -45,14 +56,27 @@ namespace Weapon.Hook
         private float _sameDirectionCooldown = 2f;
         private float _sameDirectionTimer = 0f;
         private float _stuckTime = 0f;
+        private bool _grappleEnabled = true;
 
+        public bool Enabled
+        {
+            get => _grappleEnabled;
+            set
+            {
+                if (value == false)
+                    StopGrappling();
+
+                _grappleEnabled = value;
+            }
+        }
         private Vector2 HookPosition
         {
-            set => hook.transform.position = value;
+            get => hook.position;
+            set => hook.position = value;
         }
-        public Vector2 HookOrigin => Motor.Body.position;
+        public Vector2 HookOrigin => transform.position;
         private Vector2 Target { get; set; }
-        private GameObject TargetObject { get; set; }
+        private Collider2D TargetObject { get; set; }
 
         public PlayerMotor Motor { get; set; }
 
@@ -89,6 +113,12 @@ namespace Weapon.Hook
 
         private void FixedUpdate()
         {
+            if (!Enabled)
+            {
+                if (enabled) StopGrappling();
+                return;
+            }
+
             if (Motor.enabled)
                 DisableMovement();
 
@@ -98,14 +128,14 @@ namespace Weapon.Hook
         public delegate void HookShotDelegate(float speed, Vector2 target,
             Transform hook, Action finishShooting);
 
-        public delegate void HookTargetHitDelegate();
+        public delegate void HookTargetHitDelegate(Vector2 hookPosition, Collider2D targetObject);
 
         public delegate void RetractHookDelegate(float retractDuration, Transform
             hook, Action finishRetracting);
 
         public delegate void HookRetractedDelegate();
 
-        public delegate void PullEndedDelegate();
+        public delegate void PullEndedDelegate(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject);
 
         public static event HookShotDelegate OnHookShot;
         public static event HookTargetHitDelegate OnHookTargetHit;
@@ -126,7 +156,7 @@ namespace Weapon.Hook
             Vector2 velNormalized = Motor.Body.velocity;
             if (velMag > 0f) velNormalized /= velMag;
             Vector2 dragForce = dragMag * -velNormalized;
-            Debug.Log(dragMag);
+
             Motor.Body.AddForce(dragForce);
 
             Vector2 dir = (Target - HookOrigin).normalized;
@@ -143,7 +173,7 @@ namespace Weapon.Hook
             Motor.Body.AddForce(dir * pullForce * Motor.Body.mass);
 
             // Player hits an obstacle
-            var hits = new RaycastHit2D[4];
+            var hits = new RaycastHit2D[1];
             bool hitObject = Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f;
 
             // Stuck Check
@@ -154,7 +184,8 @@ namespace Weapon.Hook
             approximatelyStuck = _stuckTime >= stuckTimeThreshold;
 
             // Player reaches the target
-            bool collideNearTarget = hitObject && (Target - HookOrigin).sqrMagnitude <= 1.0025f;
+            bool arrived = (Target - HookOrigin).sqrMagnitude <= arrivedDistance * arrivedDistance;
+            bool collideNearTarget = hitObject && arrived;
             bool reachesTarget = Motor.Body.OverlapPoint(Target);
 
             if (reachesTarget || collideNearTarget || approximatelyStuck)
@@ -162,8 +193,13 @@ namespace Weapon.Hook
                 if (hitObject)
                     Motor.Body.velocity = Vector2.zero;
 
-                OnPullEnded?.Invoke();
+                Collider2D collidedObject = hits[0] ? hits[0].collider : null;
                 StopGrappling();
+
+                OnPullEnded?.Invoke(arrived, TargetObject, collidedObject);
+
+                // Resets Target just in case
+                TargetObject = null;
             }
         }
 
@@ -186,14 +222,15 @@ namespace Weapon.Hook
 
             enabled = false;
             var hit = maxHookDistance > 0f
-                ? Physics2D.Raycast(HookOrigin, _aim, maxHookDistance)
-                : Physics2D.Raycast(HookOrigin, _aim);
+                ? Physics2D.Raycast(HookOrigin, _aim, maxHookDistance, hookableLayers)
+                : Physics2D.Raycast(HookOrigin, _aim, Mathf.Infinity, hookableLayers);
 
 
             // If hook hit something
             if (hit.collider)
             {
                 Target = hit.point;
+                TargetObject = hit.collider;
                 HookPosition = shootSpeed > 0f ? HookOrigin : Target;
 
                 // Start shooting the hook
@@ -203,7 +240,12 @@ namespace Weapon.Hook
 
                     // enable grapple pull and invoke OnHookTargetHit
                     enabled = true;
-                    OnHookTargetHit?.Invoke();
+
+                    // also make the hook stuck on target object(if any)
+                    if (TargetObject != null)
+                        hook.SetParent(TargetObject.transform, true);
+                    
+                    OnHookTargetHit?.Invoke(HookPosition, TargetObject);
                 });
             }
 
@@ -245,5 +287,43 @@ namespace Weapon.Hook
             // Motor.Body.velocity = Vector2.zero;
             Motor.enabled = true;
         }
+
+        #region Gizmos and Debug
+
+#if UNITY_EDITOR
+        [System.Serializable]
+        public struct GizmoOptions
+        {
+            public bool grappleRange;
+            public bool arrivalDistance;
+        }
+
+        [Header("GIZMOS/DEBUG")]
+        public bool showGizmos = true;
+        public GizmoOptions gizmoOptions = new GizmoOptions()
+        {
+            grappleRange = false,
+            arrivalDistance = true,
+        };
+
+        private void OnDrawGizmosSelected()
+        {
+            if (!showGizmos) return;
+
+            if (gizmoOptions.arrivalDistance)
+            {
+                Handles.color = new Color(0f, 1f, 1f, .025f);
+                Handles.DrawSolidDisc(HookOrigin, Vector3.forward, arrivedDistance);
+            }
+
+            if (gizmoOptions.grappleRange)
+            {
+                Handles.color = new Color(0f, 1f, 0f, .05f);
+                Handles.DrawSolidDisc(HookOrigin, Vector3.forward, maxHookDistance);
+            }
+        }
+#endif
+
+        #endregion
     }
 }
