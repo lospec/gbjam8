@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: -2334467552660704122}
   - component: {fileID: 6262053135007084238}
   - component: {fileID: 2986168658672864587}
+  - component: {fileID: 5924115762259938559}
   m_Layer: 0
   m_Name: EmptyRoom
   m_TagString: Untagged
@@ -64,6 +65,24 @@ MonoBehaviour:
   minY: 0
   maxY: 0
   height: 1
+--- !u!114 &5924115762259938559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: -6330707306490166235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c7c983f166847b19ead2c7d26664b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 4338764739658670793, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
+  enemySpawnTable:
+  - enemy: {fileID: 4338764739658670793, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
+    weight: 1
+  enemySpawnCount: 0
 --- !u!1 &193748876849457773
 GameObject:
   m_ObjectHideFlags: 0
