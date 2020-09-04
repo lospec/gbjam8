@@ -82,7 +82,7 @@ MonoBehaviour:
   enemySpawnTable:
   - enemy: {fileID: 4338764739658670793, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
     weight: 1
-  minSpawnCount: 0
+  minSpawnCount: 2
   maxSpawnCount: 4
 --- !u!1 &193748876849457773
 GameObject:
