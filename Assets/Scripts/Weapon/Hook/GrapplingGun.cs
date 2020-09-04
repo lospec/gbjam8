@@ -22,6 +22,14 @@ namespace Weapon.Hook
         [Tooltip("The grapples pulling speed")]
         public float pullSpeed = 50f;
 
+        /// <summary> The time it takes for the grapple to pull at max speed </summary>
+        [Tooltip("The time it takes for the grapple to pull at max speed")]
+        public float pullAccelerationTime = .2f;
+
+        /// <summary> The time it takes for the grapple to pull at max speed </summary>
+        [Tooltip("The time it takes for the grapple to pull at max speed")]
+        public float drag = .2f;
+
         /// <summary> The maximum range the player can grapple, use 0 for infinite range </summary>
         [Tooltip("The maximum range the player can grapple, use 0 for infinite range")]
         public float maxHookDistance = 0f;
@@ -104,23 +112,45 @@ namespace Weapon.Hook
 
         private void MoveTowardsTarget()
         {
-            // if anybody have a better way to move the player, feel free to change my script
-            var dir = (Target - HookOrigin).normalized;
-            var vel = dir * pullSpeed;
+            // Drag
+            float velMag = Motor.Body.velocity.magnitude;
+            float maxDrag = velMag / Time.deltaTime;
+
+            float dragMag = velMag * velMag * drag;
+            if (dragMag > maxDrag) dragMag = maxDrag;
+
+            Vector2 velNormalized = Motor.Body.velocity;
+            if (velMag > 0f) velNormalized /= velMag;
+            Vector2 dragForce = dragMag * -velNormalized;
+            Debug.Log(dragMag);
+            Motor.Body.AddForce(dragForce);
+
+            Vector2 dir = (Target - HookOrigin).normalized;
+            float dot = Vector2.Dot(Motor.Body.velocity, dir);
+            float diff = pullSpeed - dot;
+            float maxPullForce = diff / Time.deltaTime;
+            float tension = Mathf.Max(0f, -dot) / Time.deltaTime;
+
+            float pullForce = (pullAccelerationTime > 0f) ?
+                pullSpeed / pullAccelerationTime + tension :
+                maxPullForce;
+
+            pullForce = (pullForce < maxPullForce) ? pullForce : maxPullForce;
+            Motor.Body.AddForce(dir * pullForce * Motor.Body.mass);
 
             // Player hits an obstacle
             var hits = new RaycastHit2D[4];
 
-
             // Player reaches the target
-            if (Motor.Body.OverlapPoint(Target) ||
-                Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f)
+            bool hitObject = Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f;
+            if (Motor.Body.OverlapPoint(Target) || (hitObject && (Target - HookOrigin).sqrMagnitude <= 1.0025f))
             {
+                if (hitObject)
+                    Motor.Body.velocity = Vector2.zero;
+
                 OnPullEnded?.Invoke();
                 StopGrappling();
             }
-
-            Motor.Body.AddForce(vel, ForceMode2D.Impulse);
         }
 
         private void StopGrappling()

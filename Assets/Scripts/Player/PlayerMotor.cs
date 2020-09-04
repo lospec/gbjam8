@@ -99,12 +99,19 @@ namespace Player
 
             if (_jumpTime > 0f)
                 _jumpTime -= Time.deltaTime;
+                float gravity = _jumpTime > 0f ? JumpGravity : FallGravity;
+                float maxGravity = (terminalVelocity + Body.velocity.y) / Time.deltaTime;
 
-            float gravity = _jumpTime > 0f ? JumpGravity : FallGravity;
-            float maxGravity = (terminalVelocity + Body.velocity.y) / Time.deltaTime;
+                if (gravity > maxGravity) gravity = maxGravity;
 
-            if (gravity > maxGravity) gravity = maxGravity;
-            Body.AddForce(new Vector2(0f, -gravity * Body.mass));
+            if (!_isGrounded || _jumpTime > 0f)
+            {
+                Body.AddForce(new Vector2(0f, -gravity * Body.mass));
+            }
+            else
+            {
+                Body.velocity = new Vector2(Body.velocity.x, 0f);
+            }
 
             //Vector2 velocity = Body.velocity;
             //velocity.x = Math.Abs(velocity.x) > moveSpeed ?
@@ -121,7 +128,7 @@ namespace Player
             IsJumping = true;
 
             float jumpForce = Mathf.Sqrt(2f * maxJumpHeight * JumpGravity);
-            Body.AddForce(new Vector2(0f, jumpForce) , ForceMode2D.Impulse);
+            Body.AddForce(new Vector2(0f, jumpForce) * Body.mass, ForceMode2D.Impulse);
 
             _jumpTime = maxJumpTime;
         }
