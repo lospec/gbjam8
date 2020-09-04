@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 5358716840214067765}
-  parallaxStrength: -25
+  parallaxStrength: -3
   leftDeco: {fileID: 0}
   rightDeco: {fileID: 0}
 --- !u!114 &7563845085236508215
