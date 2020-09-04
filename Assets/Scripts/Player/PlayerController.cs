@@ -23,7 +23,7 @@ namespace Player
         private SpriteRenderer _spriteRenderer;
         private PlayerMotor _motor;
 
-
+        private bool jumpPressed;
         private Vector2 _inputVector;
 
         private void Awake()
@@ -38,7 +38,7 @@ namespace Player
         private void Start()
         {
             _input.Player.Movement.performed += OnMovement;
-            _input.Player.Primary.performed += _motor.JumpManagement;
+            _input.Player.Primary.performed += OnPrimary;
             _input.Player.Secondary.performed += OnSecondary;
         }
 
@@ -46,10 +46,11 @@ namespace Player
         {
             _motor.Move = new Vector2(_inputVector.x, _motor.Move.y);
             grapplingGun.Aim = _inputVector;
+            // Use Jump pressed for you jump
+            Debug.Log(jumpPressed);
             UpdateSpriteAndAnimations();
         }
 
-        
 
         private void OnEnable()
         {
@@ -68,9 +69,7 @@ namespace Player
 
         public void OnPrimary(InputAction.CallbackContext context)
         {
-            /*
-            if (context.control.IsPressed())
-                StartCoroutine(_motor.Jump(context.action));*/
+            jumpPressed = context.ReadValueAsButton();
         }
 
 

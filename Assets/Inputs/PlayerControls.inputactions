@@ -15,9 +15,9 @@
                 },
                 {
                     "name": "Primary",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "db4df0bf-90dd-4aff-a4cf-c2fc5537beeb",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
