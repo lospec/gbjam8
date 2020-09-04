@@ -263,7 +263,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 4, y: 0, z: 0, w: 4}
+  m_margin: {x: 3, y: 0, z: 0, w: 4}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -281,7 +281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6632917b3ae76284f92a17b4618f82ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalSecondsPassed: 0
   _textMeshProText: {fileID: 2069060627506527725}
 --- !u!1 &6284392719817022683
 GameObject:
@@ -648,7 +647,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 4, y: 4, z: 0, w: 0}
+  m_margin: {x: 3, y: 3, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
