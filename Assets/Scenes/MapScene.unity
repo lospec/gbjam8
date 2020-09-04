@@ -251,7 +251,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7563845085234993633, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
       propertyPath: orthographic size
-      value: 9
+      value: 12.102199
       objectReference: {fileID: 0}
     - target: {fileID: 7563845085236464421, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
       propertyPath: m_Name
@@ -439,6 +439,10 @@ PrefabInstance:
       propertyPath: invincibilityTime
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4440360343425128921, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
+      propertyPath: knockBackStrength
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
 --- !u!1 &1029235795 stripped
@@ -530,6 +534,10 @@ PrefabInstance:
     - target: {fileID: 6099035587017450207, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: health
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7412625108201747397, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: m_TagString
