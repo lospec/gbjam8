@@ -34,13 +34,17 @@ namespace Weapon.Hook
         [Tooltip("The maximum range the player can grapple, use 0 for infinite range")]
         public float maxHookDistance = 0f;
 
+        public float stuckCheckThreshold = .01f;
+        public float stuckTimeThreshold = .01f;
+
         [SerializeField] private Transform hook;
 
         private Vector2 _aim = Vector2.right;
         private Vector2 _previousAim;
         private float _lastDirection = 1f;
         private float _sameDirectionCooldown = 2f;
-        private float _timer = 0f;
+        private float _sameDirectionTimer = 0f;
+        private float _stuckTime = 0f;
 
         private Vector2 HookPosition
         {
@@ -77,9 +81,9 @@ namespace Weapon.Hook
 
         private void Update()
         {
-            if (_timer <= _sameDirectionCooldown)
+            if (_sameDirectionTimer <= _sameDirectionCooldown)
             {
-                _timer += Time.deltaTime;
+                _sameDirectionTimer += Time.deltaTime;
             }
         }
 
@@ -140,10 +144,20 @@ namespace Weapon.Hook
 
             // Player hits an obstacle
             var hits = new RaycastHit2D[4];
+            bool hitObject = Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f;
+
+            // Stuck Check
+            bool approximatelyStuck = false;
+            if (hitObject) approximatelyStuck = Motor.Body.velocity.sqrMagnitude <= stuckCheckThreshold;
+            if (approximatelyStuck) _stuckTime += Time.deltaTime;
+            else _stuckTime = 0f;
+            approximatelyStuck = _stuckTime >= stuckTimeThreshold;
 
             // Player reaches the target
-            bool hitObject = Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f;
-            if (Motor.Body.OverlapPoint(Target) || (hitObject && (Target - HookOrigin).sqrMagnitude <= 1.0025f))
+            bool collideNearTarget = hitObject && (Target - HookOrigin).sqrMagnitude <= 1.0025f;
+            bool reachesTarget = Motor.Body.OverlapPoint(Target);
+
+            if (reachesTarget || collideNearTarget || approximatelyStuck)
             {
                 if (hitObject)
                     Motor.Body.velocity = Vector2.zero;
@@ -162,13 +176,13 @@ namespace Weapon.Hook
 
         public void PerformGrapple()
         {
-            if (_aim == _previousAim && enabled && _timer < _sameDirectionCooldown)
+            if (_aim == _previousAim && enabled && _sameDirectionTimer < _sameDirectionCooldown)
             {
                 return;
             }
 
             _previousAim = _aim;
-            _timer = 0;
+            _sameDirectionTimer = 0;
 
             enabled = false;
             var hit = maxHookDistance > 0f
