@@ -24,11 +24,11 @@ namespace Weapon.Hook
             Line.useWorldSpace = true;
             Line.positionCount = 0;
             enabled = false;
+
             GrapplingGun.OnHookShot += GrapplingGunOnHookShot;
             GrapplingGun.OnRetractHook += GrapplingGunOnHookRetract;
             GrapplingGun.OnPullEnded += GrapplingGunOnEndPull;
         }
-
 
         private void Update()
         {
@@ -42,11 +42,10 @@ namespace Weapon.Hook
             GrapplingGun.OnPullEnded -= GrapplingGunOnEndPull;
         }
 
-        private void GrapplingGunOnEndPull()
-        {
-            Line.enabled = false;
-        }
+        #region Callbacks
 
+        private void GrapplingGunOnEndPull(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject) =>
+            Line.enabled = false;
 
         private void GrapplingGunOnHookShot(float speed, Vector2 target, Transform hook,
             Action finishShooting)
@@ -69,6 +68,9 @@ namespace Weapon.Hook
         {
             _retractRoutine = StartCoroutine(RetractHook(speed, hook, callBack));
         }
+
+        #endregion
+
 
         private IEnumerator ShootHook(float speed, Vector2 target, Transform hook,
             Action callBack)
