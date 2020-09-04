@@ -178,10 +178,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5796d3685b791574e9123bcbd77522c1, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -237,12 +237,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   moveSpeed: 10
-  jumpPower: 10
-  jumpTimer: 0.4
-  customGravity: 9.88
-  terminalVelocity: 25
+  accelerationTime: 0.05
+  decelerationTime: 0.1
+  maxJumpHeight: 4
+  maxJumpTime: 0.4
+  minAscensionTime: 1.5
+  maxAscensionTime: 1.5
+  fallMultiplier: 2.2
+  terminalVelocity: 50
   topLeftBound: {fileID: 4543650564093325621}
   bottomRightBound: {fileID: 2438136982488890962}
+  OnPlayerStartJump:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPlayerJumpHeld:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6509435940849865162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,10 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b748bf69c2eaac041b646769b96c16eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 0
-  OnHealthSet:
-    m_PersistentCalls:
-      m_Calls: []
+  health: 0
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []

@@ -10,7 +10,6 @@ namespace Player
 {
     public class PlayerMotor : MonoBehaviour
     {
-        public bool testLeft = false;
         private const float MoveSpeedModifier = 10f;
         public LayerMask floorLayer;
         [Header("Moving")]
