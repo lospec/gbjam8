@@ -109,5 +109,10 @@ namespace Player
             isKnockingBack = false;
             this.enabled = true;
         }
+
+        public bool IsInvincible()
+        {
+            return !_healthManager.canTakeDamage;
+        }
     }
 }

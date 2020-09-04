@@ -26,10 +26,13 @@ public class DamageGiver : MonoBehaviour
         if (collision.tag.Contains("Player") && !collided)
         {
             Player.PlayerController player = collision.GetComponent<Player.PlayerController>();
+            EntityHealth health = player.GetComponent<EntityHealth>();
 
-            if (!player.isKnockingBack)
+            if (!player.isKnockingBack && health.canTakeDamage)
             {
                 collided = true;
+                health.Hurt(damage);
+
                 StartCoroutine(collision.GetComponent<Player.PlayerController>().Knockback(
                     knockBackDuration, knockBackStrength, transform.position.x < collision.transform.position.x,
                     invincibilityTime));
