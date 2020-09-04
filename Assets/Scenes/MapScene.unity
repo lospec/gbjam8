@@ -192,14 +192,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2398325253121326965, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2398325253306777006, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -12
-      objectReference: {fileID: 0}
     - target: {fileID: 4470147315589490616, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -257,10 +249,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7563845085234993633, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
-      propertyPath: orthographic size
-      value: 12.102199
-      objectReference: {fileID: 0}
     - target: {fileID: 7563845085236464421, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
       propertyPath: m_Name
       value: Game Camera
@@ -274,17 +262,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1117350031}
     - target: {fileID: 7563845085236508215, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
-      propertyPath: _target
-      value: 
-      objectReference: {fileID: 1029235804}
-    - target: {fileID: 7563845085236508215, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1029235804}
-    - target: {fileID: 7563845085236508215, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
-      propertyPath: targetOffsetY
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7563845085236658189, guid: f3a4b2fa87ae0314d8455ba0c130a5e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
