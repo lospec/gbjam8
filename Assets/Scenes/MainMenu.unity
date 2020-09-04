@@ -306,6 +306,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1858358529364818876, guid: 47663ad19aa870848a9b0c2d42a90e43, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: bdc6e91fb757d409193a452dd0fa27d0, type: 2}
+    - target: {fileID: 1858358530689391566, guid: 47663ad19aa870848a9b0c2d42a90e43, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: bdc6e91fb757d409193a452dd0fa27d0, type: 2}
     - target: {fileID: 1858358531143891910, guid: 47663ad19aa870848a9b0c2d42a90e43, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -394,5 +402,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenuCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1858358531168237462, guid: 47663ad19aa870848a9b0c2d42a90e43, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: bdc6e91fb757d409193a452dd0fa27d0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47663ad19aa870848a9b0c2d42a90e43, type: 3}
