@@ -1,4 +1,5 @@
 ﻿using Inputs;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Weapon.Hook;
@@ -24,7 +25,7 @@ namespace Player
         private PlayerControls _input = default;
         private SpriteRenderer _spriteRenderer;
         private PlayerMotor _motor;
-
+        public bool isKnockingBack;
 
         private Vector2 _inputVector;
 
@@ -42,6 +43,8 @@ namespace Player
             _input.Player.Movement.performed += OnMovement;
             _input.Player.Primary.performed += OnPrimary;
             _input.Player.Secondary.performed += OnSecondary;
+
+            isKnockingBack = false;
         }
 
         private void Update()
@@ -86,6 +89,20 @@ namespace Player
                 Mathf.Abs(_motor.Body.velocity.x) > 0.25f);
             _animator.SetFloat(AnimParams.DirY, _inputVector.y);
             _animator.SetFloat(AnimParams.AbsDirX, Mathf.Abs(_inputVector.x));
+        }
+
+        public IEnumerator Knockback(float duration, float strength, bool fromRight)
+        {
+            this.enabled = false;
+            isKnockingBack = true;
+
+            _motor.Body.velocity = Vector3.zero;
+            _motor.Body.AddForce(new Vector3(!fromRight ? -1 : 1, 1, 0) * strength, ForceMode2D.Impulse);
+
+            yield return new WaitForSeconds(duration);
+
+            isKnockingBack = false;
+            this.enabled = true;
         }
     }
 }

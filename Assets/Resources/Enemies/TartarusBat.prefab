@@ -163,7 +163,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020053387, y: 0.0020054579}
+  m_Offset: {x: 0.0756166, y: -0.4598632}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -174,7 +174,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9601068, y: 1.2416418}
+  m_Size: {x: 0.7048812, y: 0.17899609}
   m_EdgeRadius: 0
 --- !u!1 &4338764739658670799
 GameObject:
@@ -188,6 +188,8 @@ GameObject:
   - component: {fileID: 4338764739658670798}
   - component: {fileID: 4338764739658670793}
   - component: {fileID: 6532980285192562097}
+  - component: {fileID: 4440360343425128921}
+  - component: {fileID: 1227732992}
   m_Layer: 0
   m_Name: TartarusBat
   m_TagString: Untagged
@@ -272,6 +274,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  OnHealthSet:
+    m_PersistentCalls:
+      m_Calls: []
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4440360343425128921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338764739658670799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd36467b8718be48b12648f4b39cfc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  knockBackStrength: 20
+  knockBackDuration: 1
+  invincibilityTime: 0
+--- !u!58 &1227732992
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338764739658670799}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.05, y: -0.05}
+  serializedVersion: 2
+  m_Radius: 0.6
