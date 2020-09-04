@@ -31,6 +31,8 @@ namespace Player
 
         public Rigidbody2D Body { get; private set; }
         public bool IsJumping { get; private set; }
+
+        public bool IsAir => IsJumping || !_isGrounded;
         public Vector2 Move { get; set; }
 
         private void Awake()
