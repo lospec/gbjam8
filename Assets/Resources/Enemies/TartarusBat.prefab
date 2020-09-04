@@ -275,6 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  canTakeDamage: 1
   OnHealthSet:
     m_PersistentCalls:
       m_Calls: []
@@ -293,10 +294,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd36467b8718be48b12648f4b39cfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 1
   knockBackStrength: 20
   knockBackDuration: 1
-  invincibilityTime: 0
+  invincibilityTime: 1.5
 --- !u!58 &1227732992
 CircleCollider2D:
   m_ObjectHideFlags: 0

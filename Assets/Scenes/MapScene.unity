@@ -431,18 +431,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TartarusBat
       objectReference: {fileID: 0}
-    - target: {fileID: 4440360343425128921, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
-      propertyPath: damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4440360343425128921, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
-      propertyPath: invincibilityTime
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4440360343425128921, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
-      propertyPath: knockBackStrength
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
 --- !u!1 &1029235795 stripped
