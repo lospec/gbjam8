@@ -2,14 +2,17 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Serialization;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
-    [SerializeField] private float _smoothMovementMaxSpeed = Mathf.Infinity;
-    [SerializeField] private float _minPosY = Mathf.NegativeInfinity;
-    [SerializeField] private float _maxPosY = Mathf.Infinity;
-    [SerializeField] private float _targetOffsetY = 0;
+    [SerializeField] private Transform target;
+    [SerializeField] private float smoothMovementMaxSpeed = Mathf.Infinity;
+    [SerializeField] private float minPosY = Mathf.NegativeInfinity;
+    [SerializeField] private float maxPosY = Mathf.Infinity;
+    [SerializeField] private float targetOffsetY = 0;
+    [SerializeField] private float xOffset = 3f;
+
 
     private Vector3 _velocity;
     public Vector2 Velocity => _velocity;
@@ -25,12 +28,14 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 targetPos = new Vector3(transform.position.x,
-            _target.position.y + _targetOffsetY, transform.position.z);
-        targetPos = new Vector3(targetPos.x,
-            Mathf.Clamp(targetPos.y, _minPosY, _maxPosY), targetPos.z);
+        var position = transform.position;
+        var targetPos = new Vector3(target.position.x,
+            target.position.y + targetOffsetY, position.z);
+        targetPos = new Vector3(Mathf.Clamp(targetPos.x, -xOffset, xOffset),
+            Mathf.Clamp(targetPos.y, minPosY, maxPosY), targetPos.z);
 
-        transform.position = Vector3.SmoothDamp(transform.position, targetPos,
-            ref _velocity, default, _smoothMovementMaxSpeed);
+        position = Vector3.SmoothDamp(position, targetPos,
+            ref _velocity, default, smoothMovementMaxSpeed);
+        transform.position = position;
     }
 }
