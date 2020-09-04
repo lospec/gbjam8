@@ -13,7 +13,9 @@ namespace Player
         private static class AnimParams
         {
             public static readonly int IsRunning = Animator.StringToHash("IsRunning");
-            public static readonly int IsJumping = Animator.StringToHash("IsJumping");
+            public static readonly int IsAir = Animator.StringToHash("IsAir");
+            public static readonly int AbsDirX = Animator.StringToHash("AbsDirX");
+            public static readonly int DirY = Animator.StringToHash("DirY");
         }
 
         [SerializeField] private GrapplingGun grapplingGun;
@@ -79,9 +81,11 @@ namespace Player
         private void UpdateSpriteAndAnimations()
         {
             if (_inputVector.x != 0) _spriteRenderer.flipX = !(_inputVector.x >= 0);
-            _animator.SetBool(AnimParams.IsJumping, _motor.IsJumping);
+            _animator.SetBool(AnimParams.IsAir, _motor.IsAir);
             _animator.SetBool(AnimParams.IsRunning,
                 Mathf.Abs(_motor.Body.velocity.x) > 0.25f);
+            _animator.SetFloat(AnimParams.DirY, _inputVector.y);
+            _animator.SetFloat(AnimParams.AbsDirX, Mathf.Abs(_inputVector.x));
         }
     }
 }
