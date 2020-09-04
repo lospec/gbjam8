@@ -191,6 +191,15 @@ TextureImporter:
   - first:
       213: 5843120120363627565
     second: TartarusTilesSheet_0
+  - first:
+      213: 6716295518973098226
+    second: TartarusTilesSheet_1
+  - first:
+      213: 4692346502728633692
+    second: TartarusTilesSheet_2
+  - first:
+      213: 528961337091209985
+    second: TartarusTilesSheet_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -330,7 +339,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 24
+        y: 40
         width: 8
         height: 8
       alignment: 0
@@ -358,7 +367,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 8
-        y: 24
+        y: 40
         width: 8
         height: 8
       alignment: 0
@@ -384,7 +393,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 24
+        y: 40
         width: 8
         height: 8
       alignment: 0
@@ -409,7 +418,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 24
+        y: 40
         width: 8
         height: 8
       alignment: 0
@@ -435,7 +444,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
+        y: 32
         width: 8
         height: 8
       alignment: 0
@@ -462,7 +471,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 8
-        y: 16
+        y: 32
         width: 8
         height: 8
       alignment: 0
@@ -487,7 +496,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 16
+        y: 32
         width: 8
         height: 8
       alignment: 0
@@ -512,7 +521,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 16
+        y: 32
         width: 8
         height: 8
       alignment: 0
@@ -537,7 +546,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 8
+        y: 24
         width: 8
         height: 8
       alignment: 0
@@ -562,7 +571,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 8
-        y: 8
+        y: 24
         width: 8
         height: 8
       alignment: 0
@@ -587,7 +596,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 8
+        y: 24
         width: 8
         height: 8
       alignment: 0
@@ -612,7 +621,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 8
+        y: 24
         width: 8
         height: 8
       alignment: 0
@@ -637,7 +646,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 16
         width: 8
         height: 8
       alignment: 0
@@ -664,7 +673,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 8
-        y: 0
+        y: 16
         width: 8
         height: 8
       alignment: 0
@@ -691,7 +700,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 0
+        y: 16
         width: 8
         height: 8
       alignment: 0
@@ -716,7 +725,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 24
-        y: 0
+        y: 16
         width: 8
         height: 8
       alignment: 0
@@ -734,6 +743,90 @@ TextureImporter:
       bones: []
       spriteID: ada105681d4e14f20800000000000000
       internalID: 3405254381821500122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTilesSheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2436329acee61150800000000000000
+      internalID: 5843120120363627565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTilesSheet_1
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 8
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f870f6a033153d50800000000000000
+      internalID: 6716295518973098226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTilesSheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5dcf2a78409e1140800000000000000
+      internalID: 4692346502728633692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TartarusTilesSheet_3
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10bbc35988f375700800000000000000
+      internalID: 528961337091209985
       vertices: []
       indices: 
       edges: []

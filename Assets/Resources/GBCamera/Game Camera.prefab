@@ -142,6 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 5358716840214067765}
   parallaxStrength: 1
+  leftDeco: {fileID: 0}
+  rightDeco: {fileID: 0}
 --- !u!114 &7563845085236508215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,11 +156,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b02fbeb67cf454eaebe7a9ce0b3ce6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
-  _smoothMovementMaxSpeed: 4000
-  _minPosY: 0
-  _maxPosY: Infinity
-  _targetOffsetY: 5
+  target: {fileID: 0}
+  smoothMovementMaxSpeed: Infinity
+  minPosY: -Infinity
+  maxPosY: Infinity
+  targetOffsetY: 5
+  xOffset: 3
 --- !u!114 &7563845085236508214
 MonoBehaviour:
   m_ObjectHideFlags: 0

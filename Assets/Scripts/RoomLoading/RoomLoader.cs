@@ -30,12 +30,22 @@ namespace RoomLoading
 
         private GameObject _topRoom;
 
+        [Header("Deco")]
+        [SerializeField] private Transform bottomDecoration;
+
+
         // Start is called before the first frame update
         private void Start()
         {
             _loadedRooms = new List<GameObject>();
             _player = FrequentlyAccessed.Instance.playerObject;
-            SpawnRoom(startRoom);
+            var start = SpawnRoom(startRoom);
+            PlaceBottomDecoration(start);
+        }
+
+        private void PlaceBottomDecoration(GameObject start)
+        {
+            bottomDecoration.position = start.transform.position;
         }
 
         // Update is called once per frame
