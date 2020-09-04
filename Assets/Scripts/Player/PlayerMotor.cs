@@ -10,18 +10,28 @@ namespace Player
 {
     public class PlayerMotor : MonoBehaviour
     {
+        public bool testLeft = false;
         private const float MoveSpeedModifier = 10f;
         public LayerMask floorLayer;
-        [Header("Speeds")]
+        [Header("Moving")]
         public float moveSpeed = 10f;
-        [Header("Jump management")]
-        public float jumpPower = 30f;
-        public float jumpTimer = 0.1f;
+
+        [Tooltip("The time it takes for the player to go from 0 to moveSpeed")]
+        public float accelerationTime = .2f;
+        [Tooltip("The time it takes for the player to go from moveSpeed to zero")]
+        public float decelerationTime = 0f;
+
+        [Header("Jumping")]
+        public float maxJumpHeight = 5f;
+        public float maxJumpTime = .1f;
         public float minAscensionTime;
         public float maxAscensionTime;
 
-        public float customGravity = 9.88f;
+        [Header("Falling")]
+        public float fallMultiplier = 2f;
         public float terminalVelocity = 50f;
+        public float JumpGravity => 2f * maxJumpHeight / (maxJumpTime * maxJumpTime);
+        public float FallGravity => JumpGravity * fallMultiplier;
 
         [SerializeField] private Transform topLeftBound = default;
         [SerializeField] private Transform bottomRightBound = default;
@@ -41,6 +51,18 @@ namespace Player
         public bool IsJumping { get; private set; }
         public Vector2 Move { get; set; }
 
+        public float Acceleration
+        {
+            get => accelerationTime > 0f ? moveSpeed / accelerationTime : Mathf.Infinity;
+            set => accelerationTime = moveSpeed > 0f ? value / moveSpeed : 0f;
+        }
+
+        public float Deceleration
+        {
+            get => decelerationTime > 0f ? moveSpeed / decelerationTime : Mathf.Infinity;
+            set => decelerationTime = moveSpeed > 0f ? value / moveSpeed : 0f;
+        }
+
         private void Awake()
         {
             Body = GetComponent<Rigidbody2D>();
@@ -52,38 +74,63 @@ namespace Player
             _gravity = Vector2.zero;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             _isGrounded = GroundCheck();
 
-            _gravity = _isGrounded
-                ? Vector2.zero
-                : _gravity + Vector2.down * customGravity;
+            // Movement
+            float targetSpeed = Move.x * moveSpeed;
+            float diff = targetSpeed - Body.velocity.x;
 
-            Body.AddForce(_gravity);
+            float maxMoveForce = Mathf.Abs(diff / Time.deltaTime);
+            float moveForce = Math.Abs(diff) < Mathf.Abs(targetSpeed) ? Acceleration : Deceleration;
 
-            var velocity = Body.velocity;
-            velocity.x = Mathf.Abs(Move.x) > 0
-                ? Mathf.Sign(Move.x) * moveSpeed
-                : velocity.x;
+            if (moveForce <= 0f) moveForce = maxMoveForce;
+            else moveForce = moveForce < maxMoveForce ? moveForce : maxMoveForce;
 
-            velocity.y = velocity.y < -terminalVelocity
-                ? -terminalVelocity
-                : velocity.y;
+            moveForce *= Mathf.Sign(diff);
+            Body.AddForce(new Vector2(moveForce, 0f) * Body.mass);
 
-            Body.velocity = velocity;
-            Move = Vector2.zero;
+            // Apply Gravity
+            //_gravity = _isGrounded
+            //    ? Vector2.zero
+            //    : _gravity + Vector2.down * fallingGravity;
+
+            if (_jumpTime > 0f)
+                _jumpTime -= Time.deltaTime;
+
+            float gravity = _jumpTime > 0f ? JumpGravity : FallGravity;
+            float maxGravity = (terminalVelocity + Body.velocity.y) / Time.deltaTime;
+
+            if (gravity > maxGravity) gravity = maxGravity;
+            Body.AddForce(new Vector2(0f, -gravity * Body.mass));
+
+            //Vector2 velocity = Body.velocity;
+            //velocity.x = Math.Abs(velocity.x) > moveSpeed ?
+            //    Math.Sign(velocity.x) * moveSpeed :
+            //    velocity.x;
+
+            //Body.velocity = velocity;
+            //Move = Vector2.zero;
         }
 
-        public void JumpManagement(InputAction.CallbackContext context)
+        public void StartJump()
         {
-            bool jumping = context.performed;
+            if (!_isGrounded) return;
+            IsJumping = true;
 
-            if (jumping)
-            {
-                JumpUtility(minAscensionTime, maxAscensionTime, jumpPower, jumping);
-            }
+            float jumpForce = Mathf.Sqrt(2f * maxJumpHeight * JumpGravity);
+            Body.AddForce(new Vector2(0f, jumpForce) , ForceMode2D.Impulse);
+
+            _jumpTime = maxJumpTime;
         }
+
+        public void EndJump()
+        {
+            IsJumping = false;
+            _jumpTime = 0f;
+        }
+
         private void JumpUtility(float minAscension, float maxAscension, float power, bool jumping)
         {
             // Se è il primo frame che sto saltando, imposto i tempi 
@@ -98,7 +145,7 @@ namespace Player
 
             if ((jumping && Time.time < jumpFinishedTime) || Time.time < minJumpFinishedTime)
             {
-                Body.velocity = new Vector2(Body.velocity.x, Vector2.up.y * jumpPower);
+                Body.velocity = new Vector2(Body.velocity.x, Vector2.up.y * maxJumpHeight);
             }
             else
             {
@@ -111,10 +158,10 @@ namespace Player
             if (!_isGrounded || IsJumping) yield break;
 
             IsJumping = true;
-            _jumpTime = jumpTimer;
-            Body.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            _jumpTime = maxJumpTime;
+            Body.AddForce(Vector2.up * maxJumpHeight, ForceMode2D.Impulse);
 
-            var netJumpMagnitude = jumpPower;
+            var netJumpMagnitude = maxJumpHeight;
 
             OnPlayerStartJump?.Invoke(netJumpMagnitude);
 
@@ -124,7 +171,7 @@ namespace Player
             {
                 if (contextAction.ReadValue<float>() > 0 && _jumpTime > 0)
                 {
-                    float jumpMagnitude = jumpPower * (_jumpTime / jumpTimer);
+                    float jumpMagnitude = maxJumpHeight * (_jumpTime / maxJumpTime);
                     Body.AddForce(
                         Vector2.up * jumpMagnitude,
                         ForceMode2D.Impulse);
