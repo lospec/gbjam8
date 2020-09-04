@@ -2,9 +2,9 @@
 using Player;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
-
 #if UNITY_EDITOR
 using Handles = UnityEditor.Handles;
+
 #endif
 
 namespace Weapon.Hook
@@ -32,7 +32,8 @@ namespace Weapon.Hook
         public float maxHookDistance = 0f;
 
         /// <summary> The minimum distance from the gunpoint(see: <see cref="HookOrigin"/>) to the target for it count the player has arrived at the target </summary>
-        [Tooltip("The minimum distance from the gunpoint to the target for it count that the player has arrived at the target")]
+        [Tooltip(
+            "The minimum distance from the gunpoint to the target for it count that the player has arrived at the target")]
         public float arrivedDistance = 5f;
 
         [SerializeField] private Transform hook = default;
@@ -43,19 +44,7 @@ namespace Weapon.Hook
         private float _lastDirection = 1f;
         private float _sameDirectionCooldown = 2f;
         private float _timer = 0f;
-        private bool _grappleEnabled = true;
 
-        public bool Enabled
-        {
-            get => _grappleEnabled;
-            set
-            {
-                if (value == false)
-                    StopGrappling();
-
-                _grappleEnabled = value;
-            }
-        }
         private Vector2 HookPosition
         {
             get => hook.position;
@@ -100,29 +89,30 @@ namespace Weapon.Hook
 
         private void FixedUpdate()
         {
-            if (!Enabled)
-            {
-                if (enabled) StopGrappling();
-                return;
-            }
-
             if (Motor.enabled)
                 DisableMovement();
 
             MoveTowardsTarget();
         }
 
+        private void OnDisable()
+        {
+            StopGrappling();
+        }
+
         public delegate void HookShotDelegate(float speed, Vector2 target,
             Transform hook, Action finishShooting);
 
-        public delegate void HookTargetHitDelegate(Vector2 hookPosition, Collider2D targetObject);
+        public delegate void HookTargetHitDelegate(Vector2 hookPosition,
+            Collider2D targetObject);
 
         public delegate void RetractHookDelegate(float retractDuration, Transform
             hook, Action finishRetracting);
 
         public delegate void HookRetractedDelegate();
 
-        public delegate void PullEndedDelegate(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject);
+        public delegate void PullEndedDelegate(bool arrivedAtTarget,
+            Collider2D targetObject, Collider2D collidedObject);
 
         public static event HookShotDelegate OnHookShot;
         public static event HookTargetHitDelegate OnHookTargetHit;
@@ -146,9 +136,10 @@ namespace Weapon.Hook
                 Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f)
             {
                 Collider2D collidedObject = hits[0] ? hits[0].collider : null;
-                StopGrappling();
+                enabled = false;
 
-                bool arrived = (Target - HookOrigin).sqrMagnitude < arrivedDistance * arrivedDistance;
+                bool arrived = (Target - HookOrigin).sqrMagnitude <
+                               arrivedDistance * arrivedDistance;
                 OnPullEnded?.Invoke(arrived, TargetObject, collidedObject);
 
                 // Resets Target just in case
@@ -160,7 +151,6 @@ namespace Weapon.Hook
 
         private void StopGrappling()
         {
-            enabled = false;
             EnableMovement();
             hook.SetParent(transform, true);
         }
@@ -184,49 +174,58 @@ namespace Weapon.Hook
             // If hook hit something
             if (hit.collider)
             {
-                Target = hit.point;
-                TargetObject = hit.collider;
-                HookPosition = shootSpeed > 0f ? HookOrigin : Target;
-
-                // Start shooting the hook
-                OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
-                {
-                    // When the shot is landed(animation finished, etc)
-
-                    // enable grapple pull and invoke OnHookTargetHit
-                    enabled = true;
-
-                    // also make the hook stuck on target object(if any)
-                    if (TargetObject != null)
-                        hook.SetParent(TargetObject.transform, true);
-                    
-                    OnHookTargetHit?.Invoke(HookPosition, TargetObject);
-                });
+                HootHit(hit);
             }
-
             else if (shootSpeed > 0f && maxHookDistance > 0f &&
                      !float.IsPositiveInfinity(maxHookDistance))
             {
-                EnableMovement();
-                Target = HookOrigin + _aim.normalized * maxHookDistance;
-                HookPosition = HookOrigin;
-
-                // Start shooting the hook
-                OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
-                {
-                    // When the shot is finished(animation finished, etc)
-
-                    // Start retracting the hook
-                    OnRetractHook?.Invoke(returnDuration, hook, () =>
-                    {
-                        // When the hook finished retracting
-
-                        // Stop grappling(if it's enabled) and invoke OnHookRetracted
-                        StopGrappling();
-                        OnHookRetracted?.Invoke();
-                    });
-                });
+                HookMiss();
             }
+        }
+
+        private void HootHit(RaycastHit2D hit)
+        {
+            Target = hit.point;
+            TargetObject = hit.collider;
+            HookPosition = shootSpeed > 0f ? HookOrigin : Target;
+
+            // Start shooting the hook
+            OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+            {
+                // When the shot is landed(animation finished, etc)
+
+                // enable grapple pull and invoke OnHookTargetHit
+                enabled = true;
+
+                // also make the hook stuck on target object(if any)
+                if (TargetObject != null)
+                    hook.SetParent(TargetObject.transform, true);
+
+                OnHookTargetHit?.Invoke(HookPosition, TargetObject);
+            });
+        }
+
+        private void HookMiss()
+        {
+            EnableMovement();
+            Target = HookOrigin + _aim.normalized * maxHookDistance;
+            HookPosition = HookOrigin;
+
+            // Start shooting the hook
+            OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+            {
+                // When the shot is finished(animation finished, etc)
+
+                // Start retracting the hook
+                OnRetractHook?.Invoke(returnDuration, hook, () =>
+                {
+                    // When the hook finished retracting
+
+                    // Stop grappling(if it's enabled) and invoke OnHookRetracted
+                    enabled = false;
+                    OnHookRetracted?.Invoke();
+                });
+            });
         }
 
 
@@ -239,7 +238,6 @@ namespace Weapon.Hook
         private void EnableMovement()
         {
             hook.SetParent(transform, true);
-            // Motor.Body.velocity = Vector2.zero;
             Motor.enabled = true;
         }
 
