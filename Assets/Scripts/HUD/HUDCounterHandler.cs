@@ -21,10 +21,10 @@ public class HUDCounterHandler : MonoBehaviour
 			image.transform.SetParent(transform);
 
 			RectTransform imageRectTransform = image.GetComponent<RectTransform>();
-			imageRectTransform.anchoredPosition = new Vector3(
+			imageRectTransform.anchoredPosition = (Vector3)Vector3Int.RoundToInt(new Vector3(
 				-imageRectTransform.rect.width / 2,
 				-imageRectTransform.rect.height / 2 - _imageTopPadding - (imageRectTransform.rect.height + _imagePadding) * i,
-				0);
+				0));
 			imageRectTransform.localScale = Vector3.one;
 		}
 	}
