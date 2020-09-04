@@ -24,6 +24,7 @@ namespace Player
         private Animator _animator;
         private PlayerControls _input = default;
         private SpriteRenderer _spriteRenderer;
+        private EntityHealth _healthManager;
         private PlayerMotor _motor;
         public bool isKnockingBack;
 
@@ -35,6 +36,8 @@ namespace Player
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _animator = GetComponent<Animator>();
             _motor = GetComponent<PlayerMotor>();
+            _healthManager = GetComponent<EntityHealth>();
+
             grapplingGun.Motor = _motor;
         }
 
@@ -91,16 +94,18 @@ namespace Player
             _animator.SetFloat(AnimParams.AbsDirX, Mathf.Abs(_inputVector.x));
         }
 
-        public IEnumerator Knockback(float duration, float strength, bool fromRight)
+        public IEnumerator Knockback(float duration, float strength, bool fromRight, float invincibility)
         {
             this.enabled = false;
             isKnockingBack = true;
 
+            StartCoroutine(_healthManager.MakeInvincible(invincibility));
             _motor.Body.velocity = Vector3.zero;
             _motor.Body.AddForce(new Vector3(!fromRight ? -1 : 1, 1, 0) * strength, ForceMode2D.Impulse);
 
             yield return new WaitForSeconds(duration);
 
+            _healthManager.canTakeDamage = true;
             isKnockingBack = false;
             this.enabled = true;
         }

@@ -31,7 +31,8 @@ public class DamageGiver : MonoBehaviour
             {
                 collided = true;
                 StartCoroutine(collision.GetComponent<Player.PlayerController>().Knockback(
-                    knockBackDuration, knockBackStrength, transform.position.x < collision.transform.position.x));
+                    knockBackDuration, knockBackStrength, transform.position.x < collision.transform.position.x,
+                    invincibilityTime));
             }
         }
     }
