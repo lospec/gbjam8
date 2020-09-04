@@ -13,6 +13,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float targetOffsetY = 0;
     [SerializeField] private float xOffset = 3f;
 
+    [SerializeField] private int pixelPerUnit = 8;
+    
 
     private Vector3 _velocity;
     public Vector2 Velocity => _velocity;
@@ -36,6 +38,13 @@ public class CameraController : MonoBehaviour
 
         position = Vector3.SmoothDamp(position, targetPos,
             ref _velocity, default, smoothMovementMaxSpeed);
+        
+        position = new Vector3
+        {
+            x = Mathf.Round(position.x * pixelPerUnit) / pixelPerUnit,
+            y = Mathf.Round(position.y * pixelPerUnit) / pixelPerUnit,
+            z = Mathf.Round(position.z * pixelPerUnit) / pixelPerUnit
+        };
         transform.position = position;
     }
 }
