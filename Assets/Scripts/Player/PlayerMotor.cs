@@ -75,18 +75,21 @@ namespace Player
             Move = Vector2.zero;
         }
 
-        public void JumpManagement(InputAction.CallbackContext context)
+        public void JumpManagement(bool justJumped, bool jumping)
         {
-            bool jumping = context.performed;
+            if (jumping && _isGrounded)
+            {
+                JumpUtility(minAscensionTime, maxAscensionTime, jumpPower, jumping);
+            }
 
-            if (jumping)
+            if (isJumping)
             {
                 JumpUtility(minAscensionTime, maxAscensionTime, jumpPower, jumping);
             }
         }
         private void JumpUtility(float minAscension, float maxAscension, float power, bool jumping)
         {
-            // Se è il primo frame che sto saltando, imposto i tempi 
+            // If this is the first jumping frame, I set the timings
             if (!isJumping)
             {
                 jumpFinishedTime = Time.time + maxAscension;

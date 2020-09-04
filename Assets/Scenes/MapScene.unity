@@ -625,19 +625,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: minAscensionTime
-      value: 1.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: maxAscensionTime
-      value: 1.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: jumpPower
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: customGravity
-      value: 5
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: moveSpeed
@@ -645,7 +645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: terminalVelocity
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6099035587017450194, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: m_Name

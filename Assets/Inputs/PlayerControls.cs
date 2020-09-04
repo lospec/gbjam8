@@ -43,6 +43,14 @@ namespace Inputs
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""JumpButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""ededa3f9-5c62-492e-85d3-ed707c75a157"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -122,6 +130,17 @@ namespace Inputs
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b7eca31-38b4-44cf-b807-8b467dd6747a"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard"",
+                    ""action"": ""JumpButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -145,6 +164,7 @@ namespace Inputs
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_Primary = m_Player.FindAction("Primary", throwIfNotFound: true);
             m_Player_Secondary = m_Player.FindAction("Secondary", throwIfNotFound: true);
+            m_Player_JumpButton = m_Player.FindAction("JumpButton", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -197,6 +217,7 @@ namespace Inputs
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_Primary;
         private readonly InputAction m_Player_Secondary;
+        private readonly InputAction m_Player_JumpButton;
         public struct PlayerActions
         {
             private @PlayerControls m_Wrapper;
@@ -204,6 +225,7 @@ namespace Inputs
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @Primary => m_Wrapper.m_Player_Primary;
             public InputAction @Secondary => m_Wrapper.m_Player_Secondary;
+            public InputAction @JumpButton => m_Wrapper.m_Player_JumpButton;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -222,6 +244,9 @@ namespace Inputs
                     @Secondary.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondary;
                     @Secondary.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondary;
                     @Secondary.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSecondary;
+                    @JumpButton.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJumpButton;
+                    @JumpButton.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJumpButton;
+                    @JumpButton.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJumpButton;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -235,6 +260,9 @@ namespace Inputs
                     @Secondary.started += instance.OnSecondary;
                     @Secondary.performed += instance.OnSecondary;
                     @Secondary.canceled += instance.OnSecondary;
+                    @JumpButton.started += instance.OnJumpButton;
+                    @JumpButton.performed += instance.OnJumpButton;
+                    @JumpButton.canceled += instance.OnJumpButton;
                 }
             }
         }
@@ -253,6 +281,7 @@ namespace Inputs
             void OnMovement(InputAction.CallbackContext context);
             void OnPrimary(InputAction.CallbackContext context);
             void OnSecondary(InputAction.CallbackContext context);
+            void OnJumpButton(InputAction.CallbackContext context);
         }
     }
 }

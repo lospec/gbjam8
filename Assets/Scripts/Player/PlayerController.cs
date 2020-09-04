@@ -47,7 +47,7 @@ namespace Player
             _motor.Move = new Vector2(_inputVector.x, _motor.Move.y);
             grapplingGun.Aim = _inputVector;
             // Use Jump pressed for you jump
-            Debug.Log(jumpPressed);
+            _motor.JumpManagement(jumpPressed);
             UpdateSpriteAndAnimations();
         }
 
@@ -84,6 +84,11 @@ namespace Player
             _animator.SetBool(AnimParams.IsJumping, _motor.IsJumping);
             _animator.SetBool(AnimParams.IsRunning,
                 Mathf.Abs(_motor.Body.velocity.x) > 0.25f);
+        }
+
+        public void OnJumpButton(InputAction.CallbackContext context)
+        {
+            
         }
     }
 }

@@ -28,6 +28,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "JumpButton",
+                    "type": "Button",
+                    "id": "ededa3f9-5c62-492e-85d3-ed707c75a157",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -107,6 +115,17 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "6b7eca31-38b4-44cf-b807-8b467dd6747a",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard",
+                    "action": "JumpButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
