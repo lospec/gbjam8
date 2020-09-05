@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 using Weapon.Hook;
 
 public class DamageGiver : MonoBehaviour
@@ -15,7 +16,7 @@ public class DamageGiver : MonoBehaviour
 
     private void Start()
     {
-        grapple = FrequentlyAccessed.Instance.playerObject.GetComponentInChildren<GrapplingGun>();
+        grapple = GameManager.instance.playerObject.GetComponentInChildren<GrapplingGun>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

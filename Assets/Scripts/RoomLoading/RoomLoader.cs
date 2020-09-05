@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Spawn;
 using UnityEngine;
+using Utility;
 
 namespace RoomLoading
 {
@@ -38,7 +39,7 @@ namespace RoomLoading
         private void Start()
         {
             _loadedRooms = new List<GameObject>();
-            _player = FrequentlyAccessed.Instance.playerObject;
+            _player = GameManager.instance.playerObject;
             var start = SpawnRoom(startRoom);
             PlaceBottomDecoration(start);
         }

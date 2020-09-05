@@ -4,6 +4,7 @@ using System.Linq;
 using Enemy;
 using RoomLoading;
 using UnityEngine;
+using Utility;
 using Random = UnityEngine.Random;
 
 namespace Spawn
@@ -86,7 +87,7 @@ namespace Spawn
                 : FlyingEnemyController.StartState.Flying;
 
             // TODO: singleton usage is ugly here...
-            instance.Initialize(FrequentlyAccessed.Instance.playerObject.transform,
+            instance.Initialize(GameManager.instance.playerObject.transform,
                 startState);
         }
 

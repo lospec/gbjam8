@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 [System.Serializable]
 public class GameObjectMatrix
@@ -42,7 +43,7 @@ public class ParallaxRepeaterV2 : MonoBehaviour {
             children.Add(transform.GetChild(i));
         }
 
-        cameraTransform = FrequentlyAccessed.Instance.playerObject.transform;
+        cameraTransform = GameManager.instance.playerObject.transform;
         middleTransform = children[middle];
 	}
 	

@@ -21,7 +21,7 @@ class EntityHealth : MonoBehaviour
 
 	private void Start()
 	{
-		OnHealthSet?.Invoke(Health);
+		Health = health;
 	}
 
 	public virtual void Hurt(int damage)

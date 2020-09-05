@@ -147,7 +147,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4032554401914920180, guid: f9b2796a57a5e584d86863701ccd4f7a, type: 3}
       propertyPath: orthographic size
-      value: 10
+      value: 9.4375
       objectReference: {fileID: 0}
     - target: {fileID: 4032554401914920183, guid: f9b2796a57a5e584d86863701ccd4f7a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -806,17 +806,6 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
---- !u!114 &1563633554 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7412625108201747398, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
-  m_PrefabInstance: {fileID: 301441269}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f41141e7680c9b649ae6a9f480d6a885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2053035422
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -824,70 +813,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 138433116669404484, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _player
-      value: 
-      objectReference: {fileID: 1563633554}
-    - target: {fileID: 138433116669404484, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _maxPlayerPosY
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 138433116669404484, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _minPlayerPosY
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3669553167332909829, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _targetEntityHealth
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3669553167332909829, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _healthImageTopPadding
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3669553167332909829, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _healthImagePadding
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3669553167332909829, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _imagePadding
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3669553167332909829, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _imageTopPadding
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3669553167332909829, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _imagePrefab
-      value: 
-      objectReference: {fileID: 1167490444559765074, guid: 29229013a3e2d034d9bb174301715fe7, type: 3}
-    - target: {fileID: 4496418993466511499, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: _targetEntityScore
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4747587153850890915, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4747587153850890915, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5400229545863536846, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -15.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5400229545863536846, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 112.80313
-      objectReference: {fileID: 0}
-    - target: {fileID: 6504124894678965822, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: m_MaxValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6504124894678965822, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-      propertyPath: m_MinValue
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7821156551021953834, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
       propertyPath: m_Name
       value: HUD
