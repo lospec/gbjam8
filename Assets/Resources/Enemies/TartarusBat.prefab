@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4338764739160754745}
   - component: {fileID: 4338764739160754746}
   - component: {fileID: 4338764739160754747}
-  - component: {fileID: 4338764739160754744}
+  - component: {fileID: 1471363742}
   m_Layer: 9
   m_Name: Renderer
   m_TagString: Untagged
@@ -103,22 +103,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &4338764739160754744
-CircleCollider2D:
+--- !u!114 &1471363742
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4338764739160754750}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dda5f985a504b0caa1bbbee8a901f9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveMaterial: {fileID: 2100000, guid: ad2f750b032e2af44b59a6b9aaaae2a1, type: 2}
+  dissolveScale: 98.3
+  dissolveDuration: 0.5
 --- !u!1 &4338764739447683637
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4338764739447683636}
   - component: {fileID: 4338764739447683639}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: groundCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +162,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020053387, y: 0.0020054579}
+  m_Offset: {x: 0.0756166, y: -0.4598632}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -174,7 +173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9601068, y: 1.2416418}
+  m_Size: {x: 0.7048812, y: 0.17899609}
   m_EdgeRadius: 0
 --- !u!1 &4338764739658670799
 GameObject:
@@ -188,9 +187,14 @@ GameObject:
   - component: {fileID: 4338764739658670798}
   - component: {fileID: 4338764739658670793}
   - component: {fileID: 6532980285192562097}
-  m_Layer: 0
+  - component: {fileID: 4440360343425128921}
+  - component: {fileID: 1227732992}
+  - component: {fileID: 6959751044775479203}
+  - component: {fileID: 7868094686041360326}
+  - component: {fileID: 378247544}
+  m_Layer: 9
   m_Name: TartarusBat
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,7 +262,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  flyingCollider: {fileID: 4338764739160754744}
+  flyingCollider: {fileID: 6959751044775479203}
   groundCollider: {fileID: 4338764739447683639}
 --- !u!114 &6532980285192562097
 MonoBehaviour:
@@ -272,7 +276,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b748bf69c2eaac041b646769b96c16eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 3
+  canTakeDamage: 1
+  OnHealthSet:
+    m_PersistentCalls:
+      m_Calls: []
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4440360343425128921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338764739658670799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcd36467b8718be48b12648f4b39cfc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  knockBackStrength: 15
+  knockBackDuration: 0.7
+  invincibilityTime: 1.8
+--- !u!58 &1227732992
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338764739658670799}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.05, y: -0.05}
+  serializedVersion: 2
+  m_Radius: 0.87
+--- !u!58 &6959751044775479203
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338764739658670799}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.06, y: -0.06}
+  serializedVersion: 2
+  m_Radius: 0.76
+--- !u!114 &7868094686041360326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338764739658670799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0513a66b5637aba4dac1faaea4de5510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entityHealth: {fileID: 6532980285192562097}
+  _enemyHurt: {fileID: 11400000, guid: 341a6b411fea679499cd8177ba7112f2, type: 2}
+--- !u!114 &378247544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338764739658670799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a47fbdc0425d4a3e82bc9b104ca80ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyController: {fileID: 4338764739658670793}
+  enemyDissolve: {fileID: 1471363742}
+  explosion: {fileID: 2659463550267547850, guid: 5d194f782feba8c4aa6dbca92430b6f9, type: 3}

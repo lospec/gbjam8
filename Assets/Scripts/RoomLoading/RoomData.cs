@@ -33,6 +33,7 @@ namespace RoomLoading
             // Cellbounds might not be up to date until CompressBounds is called
             tilemap.CompressBounds();
             borderBlender.CompressBounds();
+            tilemap.RefreshAllTiles();
 
             var tilemapBound = tilemap.cellBounds;
             var borderBounds = borderBlender.cellBounds;

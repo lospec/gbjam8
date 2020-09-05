@@ -1,19 +1,31 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Serialization;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform _target;
-    [SerializeField] private float _smoothMovementMaxSpeed = Mathf.Infinity;
-    [SerializeField] private float _minPosY = Mathf.NegativeInfinity;
-    [SerializeField] private float _maxPosY = Mathf.Infinity;
-    [SerializeField] private float _targetOffsetY = 0;
+    [SerializeField] private Transform target;
+    [SerializeField] private float smoothMovementMaxSpeed = Mathf.Infinity;
+    [SerializeField] private float minPosY = Mathf.NegativeInfinity;
+    [SerializeField] private float maxPosY = Mathf.Infinity;
+    [SerializeField] private float targetOffsetY = 0;
+    [SerializeField] private float xOffset = 3f;
+
+    [SerializeField] private int pixelPerUnit = 8;
+
+
+    private Vector3 _previousPosition;
 
     private Vector3 _velocity;
-    public Vector2 Velocity => _velocity;
+    public Vector2 Velocity { get; private set; }
 
+    private void Start()
+    {
+        _previousPosition = transform.position;
+    }
 
     [InitializeOnLoadMethod]
     private static void EnablePixelPerfectInEditor()
@@ -25,12 +37,23 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Vector3 targetPos = new Vector3(transform.position.x,
-            _target.position.y + _targetOffsetY, transform.position.z);
-        targetPos = new Vector3(targetPos.x,
-            Mathf.Clamp(targetPos.y, _minPosY, _maxPosY), targetPos.z);
+        var position = transform.position;
+        var targetPos = new Vector3(target.position.x,
+            target.position.y + targetOffsetY, position.z);
+        targetPos = new Vector3(Mathf.Clamp(targetPos.x, -xOffset, xOffset),
+            Mathf.Clamp(targetPos.y, minPosY, maxPosY), targetPos.z);
 
-        transform.position = Vector3.SmoothDamp(transform.position, targetPos,
-            ref _velocity, default, _smoothMovementMaxSpeed);
+        position = Vector3.SmoothDamp(position, targetPos,
+            ref _velocity, default, smoothMovementMaxSpeed);
+
+        position = new Vector3
+        {
+            x = Mathf.Round(position.x * pixelPerUnit) / pixelPerUnit,
+            y = Mathf.Round(position.y * pixelPerUnit) / pixelPerUnit,
+            z = Mathf.Round(position.z * pixelPerUnit) / pixelPerUnit
+        };
+        transform.position = position;
+        Velocity = position - _previousPosition;
+        _previousPosition = position;
     }
 }

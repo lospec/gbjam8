@@ -11,10 +11,13 @@ namespace Camera
             public static readonly int Offset = Shader.PropertyToID("_Offset");
         }
 
-        private const float ParallaxScale = 10000;
+        private const float ParallaxScale = 1440;
 
         [SerializeField] private MeshRenderer background;
         [SerializeField] private float parallaxStrength;
+        [SerializeField] private Transform leftDeco;
+        [SerializeField] private Transform rightDeco;
+
 
         private CameraController _camera;
         private Vector2 BackgroundOffset
@@ -29,9 +32,18 @@ namespace Camera
         }
 
 
-        private void Update()
+        private void LateUpdate()
         {
             BackgroundOffset += _camera.Velocity * (parallaxStrength / ParallaxScale);
+            var leftDecoPosition = leftDeco.position;
+            var position = transform.position;
+            leftDecoPosition = new Vector3(leftDecoPosition.x, position
+                .y, leftDecoPosition.z);
+            leftDeco.position = leftDecoPosition;
+            var rightDecoPosition = rightDeco.position;
+            rightDecoPosition = new Vector3(rightDecoPosition.x, position
+                .y, rightDecoPosition.z);
+            rightDeco.position = rightDecoPosition;
         }
     }
 }

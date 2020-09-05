@@ -54,7 +54,8 @@ namespace Weapon.Hook
             if (_retractRoutine != null) return;
             if (_shootRoutine != null)
             {
-                return;
+                StopCoroutine(_shootRoutine);
+                _shootRoutine = null;
             }
 
             hook.SetParent(null, true);

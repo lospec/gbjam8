@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3e992173d4184438ebdccd255b51a4, type: 3}
+  m_Name: Tartarus_Intro
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: f41a20069f5ca1a44b910a86486b7e1c, type: 3}
+  volume: 0.015
+  pitch: 1
+  volumeIncrementAmount: 0.1
+  loop: 0

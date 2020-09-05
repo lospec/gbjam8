@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class HUDTimer : MonoBehaviour
 {
-	[SerializeField] private int totalSecondsPassed;
 	[SerializeField] private TMP_Text _textMeshProText;
 
+	private int totalSecondsPassed;
 	private float secondsPassedSinceLastSecond = 0;
 
 	private void Update()
