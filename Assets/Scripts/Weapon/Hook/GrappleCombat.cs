@@ -11,7 +11,8 @@ namespace Weapon.Hook
         [SerializeField] PlayerMotor motor = default;
 
         /// <summary> The lowest Hit Jump height the player can achieve (which means Combo is 1 or 0) </summary>
-        [Tooltip("The lowest Hit Jump height the player can achieve (which means Combo is 0)")]
+        [Tooltip(
+            "The lowest Hit Jump height the player can achieve (which means Combo is 0)")]
         public float baseHitJumpHeight = 2f;
 
         /// <summary> The Hit Jump height multiplier gained from each successful combo </summary>
@@ -19,7 +20,7 @@ namespace Weapon.Hook
         public float hitJumpMultiplier = 1.1f;
 
 
-        public int Combo => 1;// TODO: implement Combo system
+        public int Combo => 1; // TODO: implement Combo system
         private float CurrentHitJumpHeight
         {
             get => baseHitJumpHeight * hitJumpMultiplier * Combo;
@@ -46,7 +47,8 @@ namespace Weapon.Hook
 
         #region Callbacks
 
-        private void GrapplingHookTargetHit(Vector2 hookPosition, Collider2D targetObject)
+        private void GrapplingHookTargetHit(Vector2 hookPosition,
+            Collider2D targetObject)
         {
             // Maybe make an interface for hooked object so they can
             // have behaviour for what happens after they got hooked,
@@ -58,7 +60,8 @@ namespace Weapon.Hook
             // if (targetHookable != null) targetHookable.GetHooked(hookPosition);
         }
 
-        private void GrapplePullEnded(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject)
+        private void GrapplePullEnded(bool arrivedAtTarget, Collider2D targetObject,
+            Collider2D collidedObject)
         {
             // If the grapple stops not within the grapples reach(GrapplingGun.arrivedDistance)
             if (!arrivedAtTarget)
@@ -96,7 +99,8 @@ namespace Weapon.Hook
 
         #endregion
 
-        private EnemyController GetEnemyFromCollider(Collider2D collider, bool checkOtherColliderOnRigid = false)
+        private EnemyController GetEnemyFromCollider(Collider2D collider,
+            bool checkOtherColliderOnRigid = false)
         {
             EnemyController enemy = collider.GetComponent<EnemyController>();
             //Debug.Log(collider);
@@ -118,7 +122,7 @@ namespace Weapon.Hook
 
             return enemy;
         }
-        
+
         private void CollideWithEnemy(EnemyController enemy, bool hitEnemy)
         {
             if (hitEnemy)
@@ -146,8 +150,7 @@ namespace Weapon.Hook
                 }
 
                 enemy.Damage(1);
-                motor.GetComponent<EntityHealth>().MakeInvincible(1f);
-
+                StartCoroutine(motor.GetComponent<EntityHealth>().MakeInvincible(1f));
                 if (enemy.CurrentHealth <= 0)
                 {
                     // Destroy(enemy.gameObject);
@@ -184,7 +187,8 @@ namespace Weapon.Hook
         {
             Vector2 targetVelocity = Vector2.zero;
             targetVelocity.y = CurrentHitJumpHeight;
-            targetVelocity.y = Mathf.Sqrt(2f * motor.FallGravity * CurrentHitJumpHeight);
+            targetVelocity.y =
+                Mathf.Sqrt(2f * motor.FallGravity * CurrentHitJumpHeight);
 
             Vector2 impulse = targetVelocity - motor.Body.velocity;
             motor.Body.AddForce(impulse * motor.Body.mass, ForceMode2D.Impulse);
