@@ -3,21 +3,19 @@ using UnityEngine;
 
 namespace Weapon.Hook
 {
-    public class PlayerHookGraphics : MonoBehaviour
+    public class HookAimGraphics : MonoBehaviour
     {
         public float aimLineDistance = 0f;
 
-        [SerializeField] private GrapplingGun grapplingGun;
-        [SerializeField] private LineRenderer aimLine;
-
+        [SerializeField] private GrapplingGun grapplingGun = default;
+        [SerializeField] private LineRenderer aimLine = default;
 
         private void Start()
         {
-            GrapplingGun.OnHookRetracted += EnableAimLine;
-            GrapplingGun.OnPullEnded += EnableAimLine;
-            GrapplingGun.OnHookShot += DisableAimLine;
+            GrapplingGun.OnHookRetracted += GrappleHookRetracted;
+            GrapplingGun.OnPullEnded += GrapplePullEnded;
+            GrapplingGun.OnHookShot += GrappleHookShot;
         }
-
 
         private void Update()
         {
@@ -45,13 +43,25 @@ namespace Weapon.Hook
 
         private void OnDestroy()
         {
-            GrapplingGun.OnHookRetracted -= EnableAimLine;
-            GrapplingGun.OnPullEnded -= EnableAimLine;
-            GrapplingGun.OnHookShot -= DisableAimLine;
+            GrapplingGun.OnHookRetracted -= GrappleHookRetracted;
+            GrapplingGun.OnPullEnded -= GrapplePullEnded;
+            GrapplingGun.OnHookShot -= GrappleHookShot;
         }
 
-        private void DisableAimLine(float speed, Vector2 target, Transform hook,
-            Action finishShooting)
+        #region Callbacks
+
+        private void GrappleHookRetracted() =>
+            EnableAimLine();
+
+        private void GrapplePullEnded(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject) =>
+            EnableAimLine();
+        
+        private void GrappleHookShot(float speed, Vector2 target, Transform hook, Action finishShooting) =>
+            DisableAimLine();
+
+        #endregion
+
+        private void DisableAimLine()
         {
             aimLine.enabled = false;
             enabled = false;

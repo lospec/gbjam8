@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
 
 class EntityHealth : MonoBehaviour
 {
     [SerializeField] private int health;
+    public bool canTakeDamage = true;
     public int Health
     {
         set
@@ -24,7 +26,19 @@ class EntityHealth : MonoBehaviour
 
 	public virtual void Hurt(int damage)
     {
-        Health -= damage;
-        OnTakeDamage?.Invoke(damage);
+        if (canTakeDamage)
+        {
+            Health -= damage;
+            OnTakeDamage?.Invoke(damage);
+        }
+    }
+
+    public IEnumerator MakeInvincible(float time)
+    {
+        canTakeDamage = false;
+
+        yield return new WaitForSeconds(time);
+
+        canTakeDamage = true;
     }
 }
