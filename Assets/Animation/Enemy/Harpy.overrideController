@@ -8,4 +8,8 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Harpy
   m_Controller: {fileID: 9100000, guid: 833aff26864aaf841b2db59863d442af, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 9efc634096612d14c8d91ddb348e348c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d6a61c80742d5054aba7dd9e4d67e395, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5c1e09c874197b040917ad1ca14dcece, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: aa0cbe8af6dc40648a2e3d13b9bd953b, type: 2}

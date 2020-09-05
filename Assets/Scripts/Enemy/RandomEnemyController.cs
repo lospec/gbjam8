@@ -8,6 +8,7 @@ namespace Enemy
 {
     public class RandomEnemyController : EnemyController
     {
+        [Header("Random Movement Properties")]
         public Vector2 movementArea;
         public float minChangeDirectionDistance = 0.2f;
         public float speed = 5;
