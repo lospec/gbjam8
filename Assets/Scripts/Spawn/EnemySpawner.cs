@@ -53,15 +53,9 @@ namespace Spawn
             return randomPos;
         }
 
-        private void SpawnWingedEnemyLocation(FlyingEnemyController enemy,
-            out bool result)
+        private void SpawnFlyingEnemyLocation(FlyingEnemyController enemy,
+            Vector3Int cell, out bool result)
         {
-            var cell = GetRandomEmptyCell(out result);
-            if (!result)
-            {
-                return;
-            }
-
             if (Enumerable.Range(0, 3)
                 .Select(i => new Vector3Int(cell.x, cell.y + i, 0))
                 .Any(c => RoomData.tilemap.GetTile(c) != null))
@@ -72,12 +66,8 @@ namespace Spawn
 
             var position = RoomData.tilemap.GetCellCenterWorld(cell);
 
-            if (_spawnedEnemies.Any(controller => Vector2.Distance(controller
-                .transform.position, position) < 3f))
-            {
-                result = false;
-                return;
-            }
+            if (AnyNearbySpawned(out result, 3f, position)) return;
+
 
             InstantiateEnemy(enemy, position, out var instance);
             var startState = Enumerable.Range(0, 2)
@@ -109,10 +99,79 @@ namespace Spawn
         {
             result = false;
 
-            if (enemy is FlyingEnemyController enemyController)
+            var cell = GetRandomEmptyCell(out result);
+            if (!result)
             {
-                SpawnWingedEnemyLocation(enemyController, out result);
+                return;
             }
+
+            switch (enemy)
+            {
+                case FlyingEnemyController flyingEnemyController:
+                    SpawnFlyingEnemyLocation(flyingEnemyController, cell,
+                        out result);
+                    break;
+                case HorizontalMoveEnemyController horizontalMoveEnemyController:
+                    SpawnHorizontalMoveEnemyLocation(horizontalMoveEnemyController,
+                        cell, out result);
+                    break;
+                case RandomMoveEnemyController randomMoveEnemyController:
+                    SpawnRandomMoveEnemyLocation(randomMoveEnemyController, cell,
+                        out result);
+                    break;
+            }
+        }
+
+        private void SpawnRandomMoveEnemyLocation(RandomMoveEnemyController enemy,
+            Vector3Int cell,
+            out bool result)
+        {
+            var range = Enumerable.Range(0, 2).ToArray();
+            if (range.Zip(range, (i, j) => new Vector3Int(i, j, 0)).Any(c
+                => RoomData.tilemap.HasTile(c)))
+            {
+                result = false;
+                return;
+            }
+
+            var position = RoomData.tilemap.GetCellCenterWorld(cell);
+
+            if (AnyNearbySpawned(out result, 3f, position)) return;
+
+            InstantiateEnemy(enemy, position, out _);
+        }
+
+        private bool AnyNearbySpawned(out bool result, float distance,
+            Vector3 position)
+        {
+            result = true;
+            
+            if (_spawnedEnemies.Any(controller => Vector2.Distance(controller
+                .transform.position, position) < distance))
+            {
+                result = false;
+                return true;
+            }
+
+            return false;
+        }
+
+        private void SpawnHorizontalMoveEnemyLocation(
+            HorizontalMoveEnemyController enemy, Vector3Int cell,
+            out bool result)
+        {
+            if (Enumerable.Range(-2, 5).Select(i => new Vector3Int(cell.x + i, cell
+                .y, 0)).Any(c => _roomData.tilemap.HasTile(c)))
+            {
+                result = false;
+                return;
+            }
+
+            var position = RoomData.tilemap.GetCellCenterWorld(cell);
+
+            if (AnyNearbySpawned(out result, 3f, position)) return;
+
+            InstantiateEnemy(enemy, position, out _);
         }
     }
 }

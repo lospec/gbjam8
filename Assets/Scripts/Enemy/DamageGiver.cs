@@ -6,10 +6,10 @@ using Weapon.Hook;
 
 public class DamageGiver : MonoBehaviour
 {
-    public int damage;
-    public float knockBackStrength;
-    public float knockBackDuration;
-    public float invincibilityTime;
+    public int damage = 1;
+    public float knockBackStrength = 25;
+    public float knockBackDuration = 0.8f;
+    public float invincibilityTime = 1.5f;
 
     private bool collided = false;
     private GrapplingGun grapple;
