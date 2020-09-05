@@ -13,7 +13,7 @@ namespace Weapon.Hook
 
         /// <summary> The lowest Hit Jump height the player can achieve (which means Combo is 1 or 0) </summary>
         [Tooltip("The lowest Hit Jump height the player can achieve (which means Combo is 0)")]
-        public float baseHitJumpPower = 2f;
+        public float baseHitJumpHeight = 2f;
 
         /// <summary> The Hit Jump height multiplier gained from each successful combo </summary>
         [Tooltip("The Hit Jump height multiplier gained from each successful combo")]
@@ -21,14 +21,14 @@ namespace Weapon.Hook
 
         /// <summary> The highest Hit Jump height the player can achieve </summary>
         [Tooltip("The highest Hit Jump height the player can achieve")]
-        public float maxHitJumpPower = 5f;
+        public float maxHitJumpHeight = 5f;
 
-        public float knockbackPower = 2f;
+        public float knockbackHeight = 2f;
 
         public int Combo => 1;// TODO: implement Combo system
-        private float CurrentHitJumpPower
+        private float CurrentHitJumpHeight
         {
-            get => baseHitJumpPower * hitJumpMultiplier * Combo;
+            get => baseHitJumpHeight * hitJumpMultiplier * Combo;
         }
 
         private GrapplingGun grapple;
@@ -138,8 +138,6 @@ namespace Weapon.Hook
                     Destroy(enemy.gameObject);
                     PerformJumpHit();
                 }
-
-                //Debug.LogFormat("Enemy {0} is hit.", enemy.name);
             }
             else
             {
@@ -184,8 +182,8 @@ namespace Weapon.Hook
         private void PerformJumpHit()
         {
             Vector2 targetVelocity = Vector2.zero;
-            targetVelocity.y = CurrentHitJumpPower / Time.deltaTime;
-            //targetVelocity.y = Mathf.Sqrt(2f * motor.customGravity * CurrentHitJumpHeight) / Time.deltaTime;
+            targetVelocity.y = CurrentHitJumpHeight;
+            targetVelocity.y = Mathf.Sqrt(2f * motor.FallGravity * CurrentHitJumpHeight);
 
             Vector2 impulse = targetVelocity - motor.Body.velocity;
             motor.Body.AddForce(impulse * motor.Body.mass, ForceMode2D.Impulse);
@@ -194,10 +192,10 @@ namespace Weapon.Hook
         private void ApplyKnockback(float totalPower)
         {
             Vector2 targetVelocity = Vector2.zero;
-            targetVelocity.y = knockbackPower / Time.deltaTime;
+            //targetVelocity.y = knockbackPower / Time.deltaTime;
+            //targetVelocity.x = Mathf.Sqrt(totalPower * totalPower - targetVelocity.y * targetVelocity.y);
+            targetVelocity.y = Mathf.Sqrt(2f * motor.FallGravity * knockbackHeight);
             targetVelocity.x = Mathf.Sqrt(totalPower * totalPower - targetVelocity.y * targetVelocity.y);
-            //targetVelocity.y = Mathf.Sqrt(2f * motor.customGravity * knockbackHeight);
-            //targetVelocity.x = Mathf.Sqrt(power * power - targetVelocity.y * targetVelocity.y);
 
             Vector2 impulse = targetVelocity - motor.Body.velocity;
             motor.Body.AddForce(impulse * motor.Body.mass, ForceMode2D.Impulse);

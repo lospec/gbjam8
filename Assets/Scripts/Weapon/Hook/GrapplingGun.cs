@@ -11,6 +11,8 @@ namespace Weapon.Hook
 {
     public class GrapplingGun : MonoBehaviour
     {
+        [SerializeField] private LayerMask hookableLayers = default;
+
         /// <summary> The speed of the hook when shot, use 0 for instant shot </summary>
         [Tooltip("The speed of the hook when shot, use 0 for instant shot")]
         public float shootSpeed = 0f;
@@ -27,6 +29,14 @@ namespace Weapon.Hook
         [Tooltip("The grapples pulling speed")]
         public float pullSpeed = 50f;
 
+        /// <summary> The time it takes for the grapple to pull at max speed </summary>
+        [Tooltip("The time it takes for the grapple to pull at max speed")]
+        public float pullAccelerationTime = .2f;
+
+        /// <summary> The time it takes for the grapple to pull at max speed </summary>
+        [Tooltip("The time it takes for the grapple to pull at max speed")]
+        public float drag = .2f;
+
         /// <summary> The maximum range the player can grapple, use 0 for infinite range </summary>
         [Tooltip("The maximum range the player can grapple, use 0 for infinite range")]
         public float maxHookDistance = 0f;
@@ -35,14 +45,17 @@ namespace Weapon.Hook
         [Tooltip("The minimum distance from the gunpoint to the target for it count that the player has arrived at the target")]
         public float arrivedDistance = 5f;
 
-        [SerializeField] private Transform hook = default;
-        [SerializeField] private LayerMask hookableLayers = default;
+        public float stuckCheckThreshold = .01f;
+        public float stuckTimeThreshold = .01f;
+
+        [SerializeField] private Transform hook;
 
         private Vector2 _aim = Vector2.right;
         private Vector2 _previousAim;
         private float _lastDirection = 1f;
         private float _sameDirectionCooldown = 2f;
-        private float _timer = 0f;
+        private float _sameDirectionTimer = 0f;
+        private float _stuckTime = 0f;
         private bool _grappleEnabled = true;
 
         public bool Enabled
@@ -92,9 +105,9 @@ namespace Weapon.Hook
 
         private void Update()
         {
-            if (_timer <= _sameDirectionCooldown)
+            if (_sameDirectionTimer <= _sameDirectionCooldown)
             {
-                _timer += Time.deltaTime;
+                _sameDirectionTimer += Time.deltaTime;
             }
         }
 
@@ -133,29 +146,61 @@ namespace Weapon.Hook
 
         private void MoveTowardsTarget()
         {
-            // if anybody have a better way to move the player, feel free to change my script
-            var dir = (Target - HookOrigin).normalized;
-            var vel = dir * pullSpeed;
+            // Drag
+            float velMag = Motor.Body.velocity.magnitude;
+            float maxDrag = velMag / Time.deltaTime;
+
+            float dragMag = velMag * velMag * drag;
+            if (dragMag > maxDrag) dragMag = maxDrag;
+
+            Vector2 velNormalized = Motor.Body.velocity;
+            if (velMag > 0f) velNormalized /= velMag;
+            Vector2 dragForce = dragMag * -velNormalized;
+
+            Motor.Body.AddForce(dragForce);
+
+            Vector2 dir = (Target - HookOrigin).normalized;
+            float dot = Vector2.Dot(Motor.Body.velocity, dir);
+            float diff = pullSpeed - dot;
+            float maxPullForce = diff / Time.deltaTime;
+            float tension = Mathf.Max(0f, -dot) / Time.deltaTime;
+
+            float pullForce = (pullAccelerationTime > 0f) ?
+                pullSpeed / pullAccelerationTime + tension :
+                maxPullForce;
+
+            pullForce = (pullForce < maxPullForce) ? pullForce : maxPullForce;
+            Motor.Body.AddForce(dir * pullForce * Motor.Body.mass);
 
             // Player hits an obstacle
             var hits = new RaycastHit2D[1];
+            bool hitObject = Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f;
 
+            // Stuck Check
+            bool approximatelyStuck = false;
+            if (hitObject) approximatelyStuck = Motor.Body.velocity.sqrMagnitude <= stuckCheckThreshold;
+            if (approximatelyStuck) _stuckTime += Time.deltaTime;
+            else _stuckTime = 0f;
+            approximatelyStuck = _stuckTime >= stuckTimeThreshold;
 
             // Player reaches the target
-            if (Motor.Body.OverlapPoint(Target) ||
-                Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f)
+            bool arrived = (Target - HookOrigin).sqrMagnitude <= arrivedDistance * arrivedDistance;
+            bool collideNearTarget = hitObject && arrived;
+            bool reachesTarget = Motor.Body.OverlapPoint(Target);
+
+            if (reachesTarget || collideNearTarget || approximatelyStuck)
             {
+                if (hitObject)
+                    Motor.Body.velocity = Vector2.zero;
+
                 Collider2D collidedObject = hits[0] ? hits[0].collider : null;
                 StopGrappling();
 
-                bool arrived = (Target - HookOrigin).sqrMagnitude < arrivedDistance * arrivedDistance;
                 OnPullEnded?.Invoke(arrived, TargetObject, collidedObject);
 
                 // Resets Target just in case
                 TargetObject = null;
             }
-
-            Motor.Body.AddForce(vel, ForceMode2D.Impulse);
         }
 
         private void StopGrappling()
@@ -167,18 +212,18 @@ namespace Weapon.Hook
 
         public void PerformGrapple()
         {
-            if (_aim == _previousAim && enabled && _timer < _sameDirectionCooldown)
+            if (_aim == _previousAim && enabled && _sameDirectionTimer < _sameDirectionCooldown)
             {
                 return;
             }
 
             _previousAim = _aim;
-            _timer = 0;
+            _sameDirectionTimer = 0;
 
             enabled = false;
             var hit = maxHookDistance > 0f
-                ? Physics2D.Raycast(HookOrigin, _aim, maxHookDistance)
-                : Physics2D.Raycast(HookOrigin, _aim);
+                ? Physics2D.Raycast(HookOrigin, _aim, maxHookDistance, hookableLayers)
+                : Physics2D.Raycast(HookOrigin, _aim, Mathf.Infinity, hookableLayers);
 
 
             // If hook hit something
