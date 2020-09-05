@@ -12,9 +12,9 @@ namespace Utility
 
         public void Explode()
         {
-            var dissolve = enemyController.GetComponentInChildren<Dissolve>();
+            var dissolve = GetComponentInChildren<Dissolve>();
             dissolve.enabled = true;
-            Instantiate(explosion, enemyController.transform.position,
+            Instantiate(explosion, transform.position,
                 Quaternion.identity);
         }
     }
