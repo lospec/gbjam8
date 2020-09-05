@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 public class FrequentlyAccessed : MonoBehaviour
 {
@@ -8,12 +9,12 @@ public class FrequentlyAccessed : MonoBehaviour
 
 
     public GameObject playerObject;
-    public CharacterController playerController;
+    public PlayerController playerController;
 
     private void Awake()
     {
         Instance = this;
 
-        playerController = playerObject.GetComponent<CharacterController>();
+        playerController = playerObject.GetComponent<PlayerController>();
     }
 }
