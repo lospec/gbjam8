@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 15050680584707101}
   - component: {fileID: 15050680584707100}
   - component: {fileID: 606242977}
+  - component: {fileID: 169500029710965837}
   m_Layer: 9
   m_Name: Phantom
   m_TagString: Untagged
@@ -165,6 +166,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDissolve: {fileID: 2601736337025325975}
   explosion: {fileID: 2659463550267547850, guid: 5d194f782feba8c4aa6dbca92430b6f9, type: 3}
+--- !u!114 &169500029710965837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15050680584707091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0513a66b5637aba4dac1faaea4de5510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entityHealth: {fileID: 15050680584707101}
+  _enemyHurt: {fileID: 11400000, guid: 341a6b411fea679499cd8177ba7112f2, type: 2}
 --- !u!1 &392729594575047405
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 
 namespace Enemy
 {
-    public class LeftRightMover : EnemyController
+    public class HorizontalMoveEnemyController : EnemyController
     {
         [Header("HorizontalMover Properties")]
         public float leftOffset;

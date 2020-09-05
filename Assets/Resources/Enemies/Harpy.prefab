@@ -256,8 +256,8 @@ MonoBehaviour:
   body: {fileID: 4338764739658670798}
   animator: {fileID: 4338764739160754747}
   spriteRenderer: {fileID: 4338764739160754746}
-  searchRange: 10
-  moveSpeed: 5
+  searchRange: 20
+  moveSpeed: 15
   takeOffHeight: 5
   groundLayer:
     serializedVersion: 2

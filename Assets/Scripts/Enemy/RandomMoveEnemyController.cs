@@ -6,7 +6,7 @@ using Enemy;
 
 namespace Enemy
 {
-    public class RandomEnemyController : EnemyController
+    public class RandomMoveEnemyController : EnemyController
     {
         [Header("Random Movement Properties")]
         public Vector2 movementArea;
