@@ -57,7 +57,7 @@ namespace Weapon.Hook
         private float _sameDirectionTimer = 0f;
         private float _stuckTime = 0f;
         private bool _grappleEnabled = true;
-        private int _ammo = 0;
+        private int _ammo = 10;
 
         public int Ammo
         {
