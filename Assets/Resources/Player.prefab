@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1997692897}
   m_Layer: 0
   m_Name: AimBeam
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,6 +142,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253397e06aca40cf80c27fd46154698a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1028001889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3637448132770123466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e2b36bb04940c40bc6c1b8e5daed03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motor: {fileID: 3637448133786036102}
+  baseHitJumpHeight: 2
+  hitJumpMultiplier: 1.1
 --- !u!1 &3927918768347650595
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +168,7 @@ GameObject:
   - component: {fileID: 4543650564093325621}
   m_Layer: 0
   m_Name: topLeft
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +198,7 @@ GameObject:
   - component: {fileID: 2438136982488890962}
   m_Layer: 0
   m_Name: bottomRight
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -221,7 +236,7 @@ GameObject:
   - component: {fileID: 2733972916197067242}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -308,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapplingGun: {fileID: 3637448132770123460}
+  isKnockingBack: 0
 --- !u!50 &7412625108201747399
 Rigidbody2D:
   serializedVersion: 4
@@ -408,7 +424,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b748bf69c2eaac041b646769b96c16eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 3
+  canTakeDamage: 1
+  OnHealthSet:
+    m_PersistentCalls:
+      m_Calls: []
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -442,6 +462,14 @@ PrefabInstance:
     - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_Name
       value: GrappleGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817340, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: aimLineDistance
+      value: 45.91
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817342, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_LocalPosition.x
@@ -499,8 +527,21 @@ PrefabInstance:
       propertyPath: drag
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: hookableLayers.m_Bits
+      value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: arrivedDistance
+      value: 1.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+--- !u!1 &3637448132770123466 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+  m_PrefabInstance: {fileID: 5843827100157380859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3637448132770123461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7161776770310817342, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
@@ -511,7 +552,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
   m_PrefabInstance: {fileID: 5843827100157380859}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3637448132770123466}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7900b369a13ba043aa9830c79ddf1cf, type: 3}

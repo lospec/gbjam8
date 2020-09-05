@@ -76,7 +76,7 @@ namespace Weapon.Hook
         }
         public Vector2 HookOrigin => transform.position;
         private Vector2 Target { get; set; }
-        private Collider2D TargetObject { get; set; }
+        public Collider2D TargetObject { get; set; }
 
         public PlayerMotor Motor { get; set; }
 

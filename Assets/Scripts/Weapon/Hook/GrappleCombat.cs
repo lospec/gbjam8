@@ -9,7 +9,6 @@ namespace Weapon.Hook
     public class GrappleCombat : MonoBehaviour
     {
         [SerializeField] PlayerMotor motor = default;
-        [SerializeField] EntityHealth playerHealth = default;
 
         /// <summary> The lowest Hit Jump height the player can achieve (which means Combo is 1 or 0) </summary>
         [Tooltip("The lowest Hit Jump height the player can achieve (which means Combo is 0)")]
@@ -19,11 +18,6 @@ namespace Weapon.Hook
         [Tooltip("The Hit Jump height multiplier gained from each successful combo")]
         public float hitJumpMultiplier = 1.1f;
 
-        /// <summary> The highest Hit Jump height the player can achieve </summary>
-        [Tooltip("The highest Hit Jump height the player can achieve")]
-        public float maxHitJumpHeight = 5f;
-
-        public float knockbackHeight = 2f;
 
         public int Combo => 1;// TODO: implement Combo system
         private float CurrentHitJumpHeight
@@ -72,7 +66,7 @@ namespace Weapon.Hook
                 // If we somehow doesn't hit anything, just don't do anything
                 if (collidedObject == null) return;
 
-                Debug.LogFormat("The player failed to arrive at the target and collided with {0}.", collidedObject.name);
+                //Debug.LogFormat("The player failed to arrive at the target and collided with {0}.", collidedObject.name);
 
                 // If we didn't hit an enemy, don't do anything
                 EnemyController collidedEnemy = GetEnemyFromCollider(collidedObject);
@@ -88,7 +82,7 @@ namespace Weapon.Hook
             // If we arrive at the target successfully (stops within the grapples reach)
             else
             {
-                Debug.LogFormat("The player arrives at the target named {0}.", targetObject.name);
+                //Debug.LogFormat("The player arrives at the target named {0}.", targetObject.name);
 
                 // Check if the target is an enemy or not
                 // if not don't do anything
@@ -105,7 +99,7 @@ namespace Weapon.Hook
         private EnemyController GetEnemyFromCollider(Collider2D collider, bool checkOtherColliderOnRigid = false)
         {
             EnemyController enemy = collider.GetComponent<EnemyController>();
-            Debug.Log(collider);
+            //Debug.Log(collider);
             if (enemy == null && collider.attachedRigidbody != null)
             {
                 enemy = collider.attachedRigidbody.GetComponent<EnemyController>();
@@ -131,27 +125,34 @@ namespace Weapon.Hook
             {
                 // Maybe have an IDamageable interface so we can control what enemy should do
                 // when they take the players damage?
+                // The enemy can't hurt the player if it's being pulled
+                DamageGiver dg = enemy.GetComponent<DamageGiver>();
+                if (dg != null)
+                {
+                    Destroy(dg);
+
+                    Debug.Log("Destroyed dg");
+                }
+                else
+                {
+                    dg = enemy.GetComponentInParent<DamageGiver>();
+
+                    if (dg != null)
+                    {
+                        Destroy(dg);
+
+                        Debug.Log("Destroyed dg");
+                    }
+                }
 
                 enemy.Damage(1);
+                motor.GetComponent<EntityHealth>().MakeInvincible(1f);
+
                 if (enemy.CurrentHealth <= 0)
                 {
                     Destroy(enemy.gameObject);
                     PerformJumpHit();
                 }
-            }
-            else
-            {
-                // or have an IDamaging interface so we can control what enemy will do
-                // after they damage the player instead?
-
-                playerHealth.Hurt(enemy.EnemyStat.damage);
-                if (playerHealth.Health > 0) // or !playerHealth.IsDead
-                {
-                    ApplyKnockback(10);
-                    // TODO: Add invincibility time
-                }
-
-                Debug.LogFormat("Player is hit by {0}.", enemy.name);
             }
 
             // The interfaces should be able to make us able to pass any Entity
@@ -184,18 +185,6 @@ namespace Weapon.Hook
             Vector2 targetVelocity = Vector2.zero;
             targetVelocity.y = CurrentHitJumpHeight;
             targetVelocity.y = Mathf.Sqrt(2f * motor.FallGravity * CurrentHitJumpHeight);
-
-            Vector2 impulse = targetVelocity - motor.Body.velocity;
-            motor.Body.AddForce(impulse * motor.Body.mass, ForceMode2D.Impulse);
-        }
-
-        private void ApplyKnockback(float totalPower)
-        {
-            Vector2 targetVelocity = Vector2.zero;
-            //targetVelocity.y = knockbackPower / Time.deltaTime;
-            //targetVelocity.x = Mathf.Sqrt(totalPower * totalPower - targetVelocity.y * targetVelocity.y);
-            targetVelocity.y = Mathf.Sqrt(2f * motor.FallGravity * knockbackHeight);
-            targetVelocity.x = Mathf.Sqrt(totalPower * totalPower - targetVelocity.y * targetVelocity.y);
 
             Vector2 impulse = targetVelocity - motor.Body.velocity;
             motor.Body.AddForce(impulse * motor.Body.mass, ForceMode2D.Impulse);

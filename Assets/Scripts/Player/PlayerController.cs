@@ -108,7 +108,8 @@ namespace Player
 
         public IEnumerator Knockback(float duration, float strength, bool fromRight, float invincibility)
         {
-            this.enabled = false;
+            Debug.Log("knockback per " + duration + " sec");
+            _input.Disable();
             isKnockingBack = true;
 
             StartCoroutine(_healthManager.MakeInvincible(invincibility));
@@ -117,9 +118,10 @@ namespace Player
 
             yield return new WaitForSeconds(duration);
 
-            _healthManager.canTakeDamage = true;
+            _motor.Body.velocity = Vector3.zero;
             isKnockingBack = false;
-            this.enabled = true;
+
+            _input.Enable();
         }
 
         public bool IsInvincible()
