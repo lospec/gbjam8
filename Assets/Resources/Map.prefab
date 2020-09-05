@@ -131,12 +131,24 @@ MonoBehaviour:
   loadDistance: 100
   unloadDistance: 100
   rooms:
-  - {fileID: -6330707306490166235, guid: 9a5a6f14215191b489d507d6d700a86d, type: 3}
-  - {fileID: -6330707306490166235, guid: 457e47d1e7a3e5a4baf6bb3bb759fed0, type: 3}
-  - {fileID: -6330707306490166235, guid: 61113ab08ae481548878b9faac93ebe8, type: 3}
-  - {fileID: -6330707306490166235, guid: be1ee4107ac3abd4392c7ed3fcc988ce, type: 3}
-  - {fileID: -6330707306490166235, guid: 02cac86b1c3e50b478c66e52285d1a8e, type: 3}
-  - {fileID: -6330707306490166235, guid: f6e7404f5d97e4e489940c94b0578970, type: 3}
+  - {fileID: -6330707306490166235, guid: 6889f158805a7ce43a7356eabf164004, type: 3}
+  - {fileID: -6330707306490166235, guid: 2d2dbc3f8fd6095409218e312c9e0b7e, type: 3}
+  - {fileID: -6330707306490166235, guid: aa04665f382120a47b4feaa61131900c, type: 3}
+  - {fileID: -6330707306490166235, guid: 1fa90ebe8f20b4d4a83b7edc69ba191e, type: 3}
+  - {fileID: -6330707306490166235, guid: 2359d5c08c941a742ac80d40448d85c6, type: 3}
+  - {fileID: -6330707306490166235, guid: 19be27c2173a4fd48925fc584d3b0aea, type: 3}
+  - {fileID: -6330707306490166235, guid: 2cf7ff37e53604949ad6ea7215143594, type: 3}
+  - {fileID: -6330707306490166235, guid: e6782bd6eb51dfb4e925f2e077aa314d, type: 3}
+  - {fileID: -6330707306490166235, guid: 8a09f7b4741076a40825594f5f665b4f, type: 3}
+  - {fileID: -6330707306490166235, guid: 1191126cea402834e9bd174def883b61, type: 3}
+  - {fileID: -6330707306490166235, guid: 370bfb7e5c3a535489319d4a895c46c0, type: 3}
+  - {fileID: -6330707306490166235, guid: e8e833c1092e67048bf4d04db05d9cc7, type: 3}
+  - {fileID: -6330707306490166235, guid: 202a8b9d68d8d0d4fbda3acac965b34e, type: 3}
+  - {fileID: -6330707306490166235, guid: 48be23ab67c8f5d4eb5cc8ee4dd148d6, type: 3}
+  - {fileID: -6330707306490166235, guid: 5111363bddd957b4ebea5f538d8bf4db, type: 3}
+  - {fileID: -6330707306490166235, guid: beabb958dd27d0e4086e0cb7ac01edf2, type: 3}
+  - {fileID: -6330707306490166235, guid: b39addd626f0bde4484e0d46725bab36, type: 3}
+  - {fileID: -6330707306490166235, guid: f095d51b72edc9b419948e8260523a25, type: 3}
   startRoom: {fileID: -6330707306490166235, guid: 6d2581a2aa5972c46be97c01dc055da6, type: 3}
   levelDifficulty: 0
   bottomDecoration: {fileID: 1696698734}

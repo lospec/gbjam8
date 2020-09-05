@@ -1,21 +1,44 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 class EntityHealth : MonoBehaviour
 {
     [SerializeField] private int health;
+    public bool canTakeDamage = true;
     public int Health
     {
-        set => health = value;
+        set
+		{
+			health = value;
+			OnHealthSet?.Invoke(value);
+		}
         get => health;
     }
 
-    public UnityEvent<int> OnTakeDamage;
+	public UnityEvent<int> OnHealthSet;
+	public UnityEvent<int> OnTakeDamage;
 
-    public virtual void Hurt(int damage)
+	private void Start()
+	{
+		OnHealthSet?.Invoke(Health);
+	}
+
+	public virtual void Hurt(int damage)
     {
-        Health -= damage;
-        OnTakeDamage?.Invoke(damage);
+        if (canTakeDamage)
+        {
+            Health -= damage;
+            OnTakeDamage?.Invoke(damage);
+        }
+    }
+
+    public IEnumerator MakeInvincible(float time)
+    {
+        canTakeDamage = false;
+
+        yield return new WaitForSeconds(time);
+
+        canTakeDamage = true;
     }
 }
