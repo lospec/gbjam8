@@ -837,6 +837,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: startingAudioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
       propertyPath: audioClips.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: ef96218e2594c994baa9f3bbc4698402, type: 2}
@@ -880,6 +884,26 @@ PrefabInstance:
       propertyPath: audioClips.Array.data[8]
       value: 
       objectReference: {fileID: 11400000, guid: 341a6b411fea679499cd8177ba7112f2, type: 2}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: startingAudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: ef96218e2594c994baa9f3bbc4698402, type: 2}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: startingAudioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c5d800558ded1745b08cf82d51123b9, type: 2}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: startingAudioClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c5d800558ded1745b08cf82d51123b9, type: 2}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioSourcePrefab
+      value: 
+      objectReference: {fileID: 7133465653868390175, guid: 1991fc47d03437e44ab41068aa879229, type: 3}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: startingPool
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8392549148684731853, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

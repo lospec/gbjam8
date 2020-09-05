@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8392549148684731853}
   - component: {fileID: 8392549148684731852}
+  - component: {fileID: 1263350339530163231}
   m_Layer: 0
   m_Name: AudioSystem
   m_TagString: Untagged
@@ -43,4 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e0418c1f6a48341aa9c20d2d7a3688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips: []
+  audioSourcePrefab: {fileID: 0}
+  startingAudioClips: []
+  startingPool: 4
+--- !u!81 &1263350339530163231
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8392549148684731855}
+  m_Enabled: 1
