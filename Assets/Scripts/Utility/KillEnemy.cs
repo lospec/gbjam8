@@ -16,15 +16,12 @@ namespace Utility
                 FlyingEnemyController.StartState.Flying);
         }
 
-        private void Update()
+        public void Explode()
         {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
-            {
-                var dissolve = enemyController.GetComponentInChildren<Dissolve>();
-                dissolve.enabled = true;
-                Instantiate(explosion, enemyController.transform.position,
-                    Quaternion.identity);
-            }
+            var dissolve = enemyController.GetComponentInChildren<Dissolve>();
+            dissolve.enabled = true;
+            Instantiate(explosion, enemyController.transform.position,
+                Quaternion.identity);
         }
     }
 }

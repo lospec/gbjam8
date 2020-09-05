@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1997692896}
   - component: {fileID: 1997692898}
   - component: {fileID: 1997692897}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AimBeam
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4543650564093325621}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: topLeft
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -196,7 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2438136982488890962}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bottomRight
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 3637448133786036102}
   - component: {fileID: 6509435940849865162}
   - component: {fileID: 2733972916197067242}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -408,10 +408,49 @@ MonoBehaviour:
   bottomRightBound: {fileID: 2438136982488890962}
   OnPlayerStartJump:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 06c05ea8822309348bbff2fe48c5ca67, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPlayerJumpHeld:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+        m_MethodName: IncreaseVolume
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 06c05ea8822309348bbff2fe48c5ca67, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPlayerLand:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: def64437af4ddb441b4038dc0b8e850a, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6509435940849865162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,9 +494,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7412625108201747400}
     m_Modifications:
+    - target: {fileID: 3395580938338161385, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7161776769959950318, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776769959950318, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_Name
@@ -466,6 +513,10 @@ PrefabInstance:
     - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817340, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: aimLineDistance
@@ -516,6 +567,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookFired.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookMapShot.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: pullSpeed
       value: 100
       objectReference: {fileID: 0}
@@ -534,6 +597,82 @@ PrefabInstance:
     - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: arrivedDistance
       value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookFired.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio.AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookFired.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookFired.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookFired.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c0a065919d8d424bbb3b91307150fd4, type: 2}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookFired.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Audio.AudioManagerAudioClip, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookFired.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookMapShot.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio.AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookMapShot.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookMapShot.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookMapShot.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 2535d5a722d2d894c92d9d48989954ff, type: 2}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookMapShot.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Audio.AudioManagerAudioClip, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookMapShot.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio.AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 41b501f267c26de4b96d026aeaa5a833, type: 2}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: Audio.AudioManagerAudioClip, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776771014116242, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}

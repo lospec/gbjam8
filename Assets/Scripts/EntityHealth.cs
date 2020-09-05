@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Utility;
 
 class EntityHealth : MonoBehaviour
 {
@@ -24,12 +25,22 @@ class EntityHealth : MonoBehaviour
 		OnHealthSet?.Invoke(Health);
 	}
 
-	public virtual void Hurt(int damage)
+    public virtual void Hurt(int damage)
     {
         if (canTakeDamage)
         {
             Health -= damage;
             OnTakeDamage?.Invoke(damage);
+
+            if (Health <= 0)
+            {
+                KillEnemy ke = GetComponent<KillEnemy>();
+
+                if (ke != null)
+                {
+                    ke.Explode();
+                }
+            }
         }
     }
 
