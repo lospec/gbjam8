@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: audioClips.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: eebc2b75e49c3264992eb2e9bffad912, type: 2}
+    - target: {fileID: 8392549148684731852, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
+      propertyPath: audioSourcePrefab
+      value: 
+      objectReference: {fileID: 7133465653868390175, guid: 1991fc47d03437e44ab41068aa879229, type: 3}
     - target: {fileID: 8392549148684731853, guid: bfc9ba380aad15b408547465b635a7f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -281,14 +285,6 @@ Behaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553456128700987083}
   m_Enabled: 1
---- !u!81 &553456128692947371
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 553456128700987083}
-  m_Enabled: 1
 --- !u!20 &553456128699311119
 Camera:
   m_ObjectHideFlags: 0
@@ -357,7 +353,6 @@ GameObject:
   - component: {fileID: 553456128700923363}
   - component: {fileID: 553456128699311119}
   - component: {fileID: 553456128688705857}
-  - component: {fileID: 553456128692947371}
   - component: {fileID: 5733657135334894603}
   - component: {fileID: 553456128701074392}
   m_Layer: 0
