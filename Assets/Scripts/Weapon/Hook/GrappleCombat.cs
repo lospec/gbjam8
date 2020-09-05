@@ -19,6 +19,8 @@ namespace Weapon.Hook
         [Tooltip("The Hit Jump height multiplier gained from each successful combo")]
         public float hitJumpMultiplier = 1.1f;
 
+        public GameObject slashVFX;
+
 
         public int Combo => 1; // TODO: implement Combo system
         private float CurrentHitJumpHeight
@@ -129,27 +131,9 @@ namespace Weapon.Hook
             {
                 // Maybe have an IDamageable interface so we can control what enemy should do
                 // when they take the players damage?
-                // The enemy can't hurt the player if it's being pulled
-                DamageGiver dg = enemy.GetComponent<DamageGiver>();
-                if (dg != null)
-                {
-                    // Destroy(dg);
-
-                    Debug.Log("Destroyed dg");
-                }
-                else
-                {
-                    dg = enemy.GetComponentInParent<DamageGiver>();
-
-                    if (dg != null)
-                    {
-                        // Destroy(dg);
-
-                        Debug.Log("Destroyed dg");
-                    }
-                }
 
                 enemy.Damage(1);
+                InstantiateVFX(enemy.gameObject);
                 StartCoroutine(motor.GetComponent<EntityHealth>().MakeInvincible(1f));
                 if (enemy.CurrentHealth <= 0)
                 {
@@ -177,6 +161,13 @@ namespace Weapon.Hook
             //}
             //
             // Or we could have one ICollideable interface to manage it all
+        }
+
+        private void InstantiateVFX(GameObject enemy)
+        {
+            float angle = Vector2.Angle(transform.position, enemy.transform.position);
+
+            Debug.Log(angle);
         }
 
 
