@@ -824,7 +824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1172,7 +1172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1499829436785034838, guid: 2c2d8a7e093c7e24c8ce2d4dd3f11a40, type: 3}
       propertyPath: orthographic size
-      value: 0.5243056
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c2d8a7e093c7e24c8ce2d4dd3f11a40, type: 3}
