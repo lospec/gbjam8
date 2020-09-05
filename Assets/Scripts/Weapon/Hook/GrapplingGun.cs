@@ -57,6 +57,19 @@ namespace Weapon.Hook
         private float _sameDirectionTimer = 0f;
         private float _stuckTime = 0f;
         private bool _grappleEnabled = true;
+        private int _ammo = 0;
+
+        public int Ammo
+        {
+            get => _ammo;
+            set
+            {
+                int prev = _ammo;
+                _ammo = value;
+
+                OnAmmoUpdate?.Invoke(prev);
+            }
+        }
 
         public bool Enabled
         {
@@ -69,11 +82,13 @@ namespace Weapon.Hook
                 _grappleEnabled = value;
             }
         }
+
         private Vector2 HookPosition
         {
             get => hook.position;
             set => hook.position = value;
         }
+        
         public Vector2 HookOrigin => transform.position;
         private Vector2 Target { get; set; }
         public Collider2D TargetObject { get; set; }
@@ -136,17 +151,22 @@ namespace Weapon.Hook
         public delegate void HookRetractedDelegate();
 
         public delegate void PullEndedDelegate(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject);
+        
+        public delegate void ShootEmptyDelegate();
+
+        public delegate void AmmoUpdateDelegate(int previousValue);
 
         public static event HookShotDelegate OnHookShot;
         public static event HookTargetHitDelegate OnHookTargetHit;
         public static event RetractHookDelegate OnRetractHook;
         public static event HookRetractedDelegate OnHookRetracted;
         public static event PullEndedDelegate OnPullEnded;
+        public static event ShootEmptyDelegate OnShootEmpty;
+        public static event AmmoUpdateDelegate OnAmmoUpdate;
 
         public UnityEvent OnHookFired;
         public UnityEvent OnHookMapShot;
         public UnityEvent OnHookEnemyShot;
-
 
         private void MoveTowardsTarget()
         {
@@ -223,8 +243,15 @@ namespace Weapon.Hook
                 return;
             }
 
+            if (Ammo <= 0)
+            {
+                OnShootEmpty?.Invoke();
+                return;
+            }
+
             _previousAim = _aim;
             _sameDirectionTimer = 0;
+            Ammo--;
 
             bool prevEnabled = enabled;
             enabled = false;
