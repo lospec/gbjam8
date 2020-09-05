@@ -129,7 +129,7 @@ namespace Weapon.Hook
                 DamageGiver dg = enemy.GetComponent<DamageGiver>();
                 if (dg != null)
                 {
-                    Destroy(dg);
+                    // Destroy(dg);
 
                     Debug.Log("Destroyed dg");
                 }
@@ -139,7 +139,7 @@ namespace Weapon.Hook
 
                     if (dg != null)
                     {
-                        Destroy(dg);
+                        // Destroy(dg);
 
                         Debug.Log("Destroyed dg");
                     }
@@ -150,7 +150,7 @@ namespace Weapon.Hook
 
                 if (enemy.CurrentHealth <= 0)
                 {
-                    Destroy(enemy.gameObject);
+                    // Destroy(enemy.gameObject);
                     PerformJumpHit();
                 }
             }
