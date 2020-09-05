@@ -8,12 +8,13 @@ namespace Utility
     public class KillEnemy : MonoBehaviour
     {
         [SerializeField] private EnemyController enemyController;
+        [SerializeField] private Dissolve enemyDissolve;
+        
         [SerializeField] private GameObject explosion;
         
         public void Explode()
         {
-            var dissolve = enemyController.GetComponentInChildren<Dissolve>();
-            dissolve.enabled = true;
+            enemyDissolve.enabled = true;
             Instantiate(explosion, enemyController.transform.position,
                 Quaternion.identity);
         }

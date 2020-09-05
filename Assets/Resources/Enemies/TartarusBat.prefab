@@ -359,4 +359,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyController: {fileID: 4338764739658670793}
+  enemyDissolve: {fileID: 1471363742}
   explosion: {fileID: 2659463550267547850, guid: 5d194f782feba8c4aa6dbca92430b6f9, type: 3}
