@@ -520,6 +520,14 @@ PrefabInstance:
       propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1167431108}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: retractSpeed
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: maxHookDistance
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

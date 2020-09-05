@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5264980574107726442}
   - component: {fileID: 297157817524894742}
   - component: {fileID: 1714762124343055539}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,13 +157,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7161776769959950319}
   - component: {fileID: 7161776769959950316}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AimLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7161776769959950319
 Transform:
   m_ObjectHideFlags: 0
@@ -287,9 +287,10 @@ GameObject:
   - component: {fileID: 7161776770310817342}
   - component: {fileID: 7161776770310817340}
   - component: {fileID: 7161776770310817343}
-  m_Layer: 0
+  - component: {fileID: 1028001889}
+  m_Layer: 10
   m_Name: GrappleGun
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -323,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bec65237596dd43b91e44c021b35cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimLineDistance: 1
+  aimLineDistance: 45.91
   grapplingGun: {fileID: 7161776770310817343}
   aimLine: {fileID: 7161776769959950316}
 --- !u!114 &7161776770310817343
@@ -338,11 +339,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7900b369a13ba043aa9830c79ddf1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hookableLayers:
+    serializedVersion: 2
+    m_Bits: 768
   shootSpeed: 60
-  returnSpeed: 60
-  pullSpeed: 10
+  retractSpeed: 1
+  pullSpeed: 100
+  pullAccelerationTime: 0.1
+  drag: 1
   maxHookDistance: 50
+  arrivedDistance: 1.2
+  stuckCheckThreshold: 0.01
+  stuckTimeThreshold: 0.01
   hook: {fileID: 7161776771014116243}
+  OnHookFired:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 6c0a065919d8d424bbb3b91307150fd4, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHookMapShot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 2535d5a722d2d894c92d9d48989954ff, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnHookEnemyShot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 41b501f267c26de4b96d026aeaa5a833, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  showGizmos: 1
+  gizmoOptions:
+    grappleRange: 0
+    arrivalDistance: 1
+--- !u!114 &1028001889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7161776770310817329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e2b36bb04940c40bc6c1b8e5daed03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motor: {fileID: 0}
+  baseHitJumpHeight: 2
+  hitJumpMultiplier: 1.1
 --- !u!1 &7161776771014116242
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7161776771014116243}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
