@@ -6,7 +6,7 @@ public class HUDCounterHandler : MonoBehaviour
     [SerializeField] private int _imagePadding;
     [SerializeField] private int _imageTopPadding;
 
-    public void SetHUDCounter(int value)
+    public void SetHUDCounter(float value)
     {
 		for (int i = 0; i < transform.childCount; i++)
 		{

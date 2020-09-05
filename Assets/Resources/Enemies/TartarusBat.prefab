@@ -358,6 +358,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a47fbdc0425d4a3e82bc9b104ca80ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyController: {fileID: 4338764739658670793}
   enemyDissolve: {fileID: 1471363742}
   explosion: {fileID: 2659463550267547850, guid: 5d194f782feba8c4aa6dbca92430b6f9, type: 3}

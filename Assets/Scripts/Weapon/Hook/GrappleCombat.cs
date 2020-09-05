@@ -9,6 +9,7 @@ namespace Weapon.Hook
     public class GrappleCombat : MonoBehaviour
     {
         [SerializeField] PlayerMotor motor = default;
+        [SerializeField] EntityHealth playerHp = default;
 
         /// <summary> The lowest Hit Jump height the player can achieve (which means Combo is 1 or 0) </summary>
         [Tooltip(
@@ -150,11 +151,12 @@ namespace Weapon.Hook
                 }
 
                 enemy.Damage(1);
-                StartCoroutine(motor.GetComponent<EntityHealth>().MakeInvincible(1f));
+                //StartCoroutine(motor.GetComponent<EntityHealth>().MakeInvincible(1f));
                 if (enemy.CurrentHealth <= 0)
                 {
                     // Destroy(enemy.gameObject);
                     PerformJumpHit();
+                    motor.GetComponent<PlayerHealth>().IncreaseHealth(1);
                 }
             }
 

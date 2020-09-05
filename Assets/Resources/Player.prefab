@@ -445,17 +445,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 7412625108201747397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b748bf69c2eaac041b646769b96c16eb, type: 3}
+  m_Script: {fileID: 11500000, guid: fb392ffb772f9224a880c7641fce771b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 1
   canTakeDamage: 1
   OnHealthSet:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDCounterHandler, Assembly-CSharp
+        m_MethodName: SetHUDCounter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDCounterHandler, Assembly-CSharp
+        m_MethodName: SetHUDCounter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
+  segmentCount: 7
+  segmentReduceRate: 0.5
 --- !u!114 &2733972916197067242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,7 +497,19 @@ MonoBehaviour:
   _score: 0
   OnScoreSet:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDScoreHandler, Assembly-CSharp
+        m_MethodName: SetHUDScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &5843827100157380859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -483,6 +521,10 @@ PrefabInstance:
       propertyPath: motor
       value: 
       objectReference: {fileID: 3637448133786036102}
+    - target: {fileID: 1028001889, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: playerHp
+      value: 
+      objectReference: {fileID: 6509435940849865162}
     - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_Name
       value: GrappleGun
