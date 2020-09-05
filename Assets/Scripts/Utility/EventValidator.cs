@@ -28,12 +28,8 @@ namespace Utility
                 return;
             }
 
-            ConnectEvent(player.GetComponent<EntityHealth>().OnHealthSet,
-                hud.HeartCounter.SetHUDCounter);
-            // TODO: AMMO COUNT!!!
-            ConnectEvent(
-                player.GetComponent<EntityHealth>().OnHealthSet,
-                hud.AmmoCounter.SetHUDCounter);
+            ConnectEvent(player.GetComponent<PlayerHealth>().OnHealthSet,
+                hud.HealthBar.SetHUDHealth);
             ConnectEvent(
                 player.GetComponent<EntityScore>().OnScoreSet,
                 hud.Score.SetHUDScore);

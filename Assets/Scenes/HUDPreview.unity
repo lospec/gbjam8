@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &55676343 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7041720693985217566, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-  m_PrefabInstance: {fileID: 2053035422}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65e32f66c365674ebc8cab679b0b714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &87145346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -255,7 +244,7 @@ PrefabInstance:
     - target: {fileID: 1426360327225431526, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2068244349}
+      objectReference: {fileID: 0}
     - target: {fileID: 1426360327225431526, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: HUDHealthHandler, Assembly-CSharp
@@ -379,7 +368,7 @@ PrefabInstance:
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2068244349}
+      objectReference: {fileID: 0}
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: HUDCounterHandler, Assembly-CSharp
@@ -411,7 +400,7 @@ PrefabInstance:
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnTakeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 55676343}
+      objectReference: {fileID: 0}
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnTakeDamage.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: HUDCounterHandler, Assembly-CSharp
@@ -439,7 +428,7 @@ PrefabInstance:
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnTakeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 55676343}
+      objectReference: {fileID: 0}
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnTakeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetHUDCounter
@@ -463,7 +452,7 @@ PrefabInstance:
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 55676343}
+      objectReference: {fileID: 0}
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetHUDCounter
@@ -813,6 +802,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4067354501658566327, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4067354501658566327, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5863881980072796116, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7821156551021953834, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -903,17 +904,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
---- !u!114 &2068244349 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3669553167332909829, guid: 14b0f791cc18cc643952390cd0332ee2, type: 3}
-  m_PrefabInstance: {fileID: 2053035422}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65e32f66c365674ebc8cab679b0b714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2145231193
 GameObject:
   m_ObjectHideFlags: 0
