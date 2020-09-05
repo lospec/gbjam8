@@ -65,7 +65,7 @@ Camera:
   far clip plane: 1000
   field of view: 35
   orthographic: 1
-  orthographic size: 12.102199
+  orthographic size: 9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 5358716840214067765}
-  parallaxStrength: 1
+  parallaxStrength: -3
   leftDeco: {fileID: 0}
   rightDeco: {fileID: 0}
 --- !u!114 &7563845085236508215
@@ -162,6 +162,7 @@ MonoBehaviour:
   maxPosY: Infinity
   targetOffsetY: 5
   xOffset: 3
+  pixelPerUnit: 8
 --- !u!114 &7563845085236508214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +179,7 @@ MonoBehaviour:
   m_RefResolutionX: 160
   m_RefResolutionY: 144
   m_UpscaleRT: 0
-  m_PixelSnapping: 0
+  m_PixelSnapping: 1
   m_CropFrameX: 1
   m_CropFrameY: 1
   m_StretchFill: 0

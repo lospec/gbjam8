@@ -6,6 +6,7 @@ using UnityEngine.InputSystem.LowLevel;
 #if UNITY_EDITOR
 using Handles = UnityEditor.Handles;
 #endif
+using UnityEngine.Events;
 
 namespace Weapon.Hook
 {
@@ -143,6 +144,10 @@ namespace Weapon.Hook
         public static event HookRetractedDelegate OnHookRetracted;
         public static event PullEndedDelegate OnPullEnded;
 
+		public UnityEvent OnHookFired;
+		public UnityEvent OnHookMapShot;
+		public UnityEvent OnHookEnemyShot;
+
 
         private void MoveTowardsTarget()
         {
@@ -233,8 +238,10 @@ namespace Weapon.Hook
                 TargetObject = hit.collider;
                 HookPosition = shootSpeed > 0f ? HookOrigin : Target;
 
-                // Start shooting the hook
-                OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+				OnHookFired?.Invoke();
+
+				// Start shooting the hook
+				OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
                 {
                     // When the shot is landed(animation finished, etc)
 
@@ -246,6 +253,15 @@ namespace Weapon.Hook
                         hook.SetParent(TargetObject.transform, true);
                     
                     OnHookTargetHit?.Invoke(HookPosition, TargetObject);
+
+					if (hit.transform.gameObject.tag == "Enemy")
+					{
+						OnHookEnemyShot?.Invoke();
+					}
+					else
+					{
+						OnHookMapShot?.Invoke();
+					}
                 });
             }
 
@@ -256,8 +272,8 @@ namespace Weapon.Hook
                 Target = HookOrigin + _aim.normalized * maxHookDistance;
                 HookPosition = HookOrigin;
 
-                // Start shooting the hook
-                OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+				// Start shooting the hook
+				OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
                 {
                     // When the shot is finished(animation finished, etc)
 

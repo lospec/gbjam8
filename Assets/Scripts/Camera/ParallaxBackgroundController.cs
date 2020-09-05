@@ -11,7 +11,7 @@ namespace Camera
             public static readonly int Offset = Shader.PropertyToID("_Offset");
         }
 
-        private const float ParallaxScale = 10000;
+        private const float ParallaxScale = 1440;
 
         [SerializeField] private MeshRenderer background;
         [SerializeField] private float parallaxStrength;

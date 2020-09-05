@@ -37,6 +37,7 @@ namespace Player
 
         public UnityEvent<float> OnPlayerStartJump;
         public UnityEvent<float> OnPlayerJumpHeld;
+		public UnityEvent<float> OnPlayerLand;
 
         private float _jumpTime;
         private float jumpFinishedTime;
@@ -64,6 +65,8 @@ namespace Player
             set => decelerationTime = moveSpeed > 0f ? value / moveSpeed : 0f;
         }
 
+		private Vector2 _lastVelocity;
+
         private void Awake()
         {
             Body = GetComponent<Rigidbody2D>();
@@ -77,6 +80,7 @@ namespace Player
 
         private void FixedUpdate()
         {
+			bool wasGrounded = _isGrounded;
             _isGrounded = GroundCheck();
 
             // Movement
@@ -120,7 +124,10 @@ namespace Player
 
             //Body.velocity = velocity;
             //Move = Vector2.zero;
-        }
+
+			_lastVelocity = Body.velocity;
+
+		}
 
         public void StartJump()
         {
@@ -141,7 +148,7 @@ namespace Player
 
         private void JumpUtility(float minAscension, float maxAscension, float power, bool jumping)
         {
-            // Se è il primo frame che sto saltando, imposto i tempi 
+            // Se ï¿½ il primo frame che sto saltando, imposto i tempi 
             if (!isJumping)
             {
                 jumpFinishedTime = Time.time + maxAscension;
