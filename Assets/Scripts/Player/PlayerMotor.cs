@@ -23,6 +23,7 @@ namespace Player
 
         public UnityEvent<float> OnPlayerStartJump;
         public UnityEvent<float> OnPlayerJumpHeld;
+		public UnityEvent<float> OnPlayerLand;
 
         private float _jumpTime;
         private bool _isGrounded;
@@ -34,6 +35,8 @@ namespace Player
 
         public bool IsAir => IsJumping || !_isGrounded;
         public Vector2 Move { get; set; }
+
+		private Vector2 _lastVelocity;
 
         private void Awake()
         {
@@ -48,7 +51,13 @@ namespace Player
 
         private void FixedUpdate()
         {
+			bool wasGrounded = _isGrounded;
             _isGrounded = GroundCheck();
+
+			if (!wasGrounded && _isGrounded)
+			{
+				OnPlayerLand?.Invoke(_lastVelocity.y);
+			}
 
             _gravity = _isGrounded
                 ? Vector2.zero
@@ -67,7 +76,10 @@ namespace Player
 
             Body.velocity = velocity;
             Move = Vector2.zero;
-        }
+
+			_lastVelocity = Body.velocity;
+
+		}
 
 
         public IEnumerator Jump(InputAction contextAction)
