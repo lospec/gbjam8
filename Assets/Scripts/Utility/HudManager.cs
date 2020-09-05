@@ -4,12 +4,10 @@ namespace Utility
 {
     public class HudManager : MonoBehaviour
     {
-        [SerializeField] private HUDCounterHandler hearts;
-        [SerializeField] private HUDCounterHandler ammo;
+        [SerializeField] private HUDHealthBar health;
         [SerializeField] private HUDScoreHandler score;
         
-        public HUDCounterHandler HeartCounter => hearts;
-        public HUDCounterHandler AmmoCounter => ammo;
+        public HUDHealthBar HealthBar => health;
         public HUDScoreHandler Score => score;
     }
 }
