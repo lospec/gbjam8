@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1997692896}
   - component: {fileID: 1997692898}
   - component: {fileID: 1997692897}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AimBeam
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -142,21 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 253397e06aca40cf80c27fd46154698a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1028001889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3637448132770123466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7e2b36bb04940c40bc6c1b8e5daed03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motor: {fileID: 3637448133786036102}
-  baseHitJumpHeight: 2
-  hitJumpMultiplier: 1.1
 --- !u!1 &3927918768347650595
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4543650564093325621}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: topLeft
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -196,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2438136982488890962}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: bottomRight
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -234,7 +219,7 @@ GameObject:
   - component: {fileID: 3637448133786036102}
   - component: {fileID: 6509435940849865162}
   - component: {fileID: 2733972916197067242}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -408,10 +393,49 @@ MonoBehaviour:
   bottomRightBound: {fileID: 2438136982488890962}
   OnPlayerStartJump:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 06c05ea8822309348bbff2fe48c5ca67, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnPlayerJumpHeld:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+        m_MethodName: IncreaseVolume
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 06c05ea8822309348bbff2fe48c5ca67, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnPlayerLand:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: def64437af4ddb441b4038dc0b8e850a, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6509435940849865162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,21 +479,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7412625108201747400}
     m_Modifications:
-    - target: {fileID: 7161776769959950318, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 1028001889, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: motor
+      value: 
+      objectReference: {fileID: 3637448133786036102}
     - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_Name
       value: GrappleGun
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817340, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: aimLineDistance
-      value: 45.91
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817342, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_LocalPosition.x
@@ -516,32 +532,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: pullSpeed
-      value: 100
+      propertyPath: retractSpeed
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: pullAccelerationTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: hookableLayers.m_Bits
-      value: 768
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: arrivedDistance
-      value: 1.2
+      propertyPath: maxHookDistance
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
---- !u!1 &3637448132770123466 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-  m_PrefabInstance: {fileID: 5843827100157380859}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3637448132770123461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7161776770310817342, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
@@ -552,7 +551,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
   m_PrefabInstance: {fileID: 5843827100157380859}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3637448132770123466}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7900b369a13ba043aa9830c79ddf1cf, type: 3}
