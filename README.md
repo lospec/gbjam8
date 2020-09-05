@@ -13,7 +13,7 @@
 - Unsettled - [Itch](https://unsettled.itch.io) [Twitter](https://twitter.com/_unsettled_) - Programming, Art
 - Sid - Programming
 - ShinyTseul - [Itch](https://shinytseul.itch.io) [Twitter](https://twitter.com/shinytseul) - Art
-- Zarki - Art
+- Zarki - [Itch](https://zarkidood.itch.io) - Art
 - Pit - [Itch](https://itch.io/profile/pixeltea-studio) - Art
 - Olivia - [Itch](https://treelia.itch.io/) [Twitter](https://twitter.com/honkerly) - Art
 - Skeddles - [Itch](https://skeddles.itch.io) [Twitter](https://twitter.com/skeddles) - Lospec Owner
