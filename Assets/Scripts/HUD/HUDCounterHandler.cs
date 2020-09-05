@@ -8,14 +8,12 @@ public class HUDCounterHandler : MonoBehaviour
 
     public void SetHUDCounter(int value)
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            Destroy(transform.GetChild(i).gameObject);
-        }
+		for (int i = 0; i < transform.childCount; i++)
+		{
+			Destroy(transform.GetChild(i).gameObject);
+		}
 
-        int numImages = value - transform.childCount;
-
-        for (int i = 0; i < numImages; i++)
+        for (int i = 0; i < value; i++)
         {
             var image = Instantiate(_imagePrefab, transform);
             var imageRectTransform = image.GetComponent<RectTransform>();
