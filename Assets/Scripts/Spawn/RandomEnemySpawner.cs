@@ -43,7 +43,7 @@ namespace Spawn
 
                 var roll = Random.Range(0f, ratioTotal);
                 var enemy = enemySpawnTable
-                    .Single(data => (roll -= data.weight) < 0)
+                    .First(data => (roll -= data.weight) < 0)
                     .enemy;
                 SpawnEnemy(enemy, out var result);
                 if (!result)

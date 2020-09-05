@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9077531343375216686, guid: ef3df0c297a5dbb4e82fef6b5617ff0d, type: 3}
+  m_Sprite: {fileID: 2000649802481348139, guid: 2a5bae70b3b527d43b3db5686c5af832, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +94,7 @@ Animator:
   m_GameObject: {fileID: 4338764739160754750}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 833aff26864aaf841b2db59863d442af, type: 2}
+  m_Controller: {fileID: 22100000, guid: ca5860c7066810e428c56f31749c0065, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -162,7 +162,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13198471, y: -0.22355282}
+  m_Offset: {x: 0.08458328, y: -0.71337616}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -173,7 +173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7281723, y: 0.7990401}
+  m_Size: {x: 1.8229752, y: 0.59889627}
   m_EdgeRadius: 0
 --- !u!1 &4338764739658670799
 GameObject:
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 7868094686041360326}
   - component: {fileID: 378247544}
   m_Layer: 9
-  m_Name: TartarusBat
+  m_Name: Harpy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,15 +249,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStat:
-    enemyName: 
+    enemyName: Harpy
     maxHealth: 0
     moveSpeed: 0
     damage: 0
   body: {fileID: 4338764739658670798}
   animator: {fileID: 4338764739160754747}
   spriteRenderer: {fileID: 4338764739160754746}
-  searchRange: 30
-  moveSpeed: 10
+  searchRange: 20
+  moveSpeed: 15
   takeOffHeight: 5
   groundLayer:
     serializedVersion: 2
