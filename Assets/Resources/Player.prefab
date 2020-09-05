@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1997692895
+--- !u!1 &488545052962572328
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1997692896}
-  - component: {fileID: 1997692898}
-  - component: {fileID: 1997692897}
+  - component: {fileID: 6826534983564240462}
+  - component: {fileID: 2137693733394369546}
+  - component: {fileID: 6539278147030273556}
   m_Layer: 0
   m_Name: AimBeam
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1997692896
+--- !u!4 &6826534983564240462
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997692895}
+  m_GameObject: {fileID: 488545052962572328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 7412625108201747400}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &1997692898
+--- !u!120 &2137693733394369546
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997692895}
+  m_GameObject: {fileID: 488545052962572328}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -130,33 +130,18 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &1997692897
+--- !u!114 &6539278147030273556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997692895}
+  m_GameObject: {fileID: 488545052962572328}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 253397e06aca40cf80c27fd46154698a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1028001889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3637448132770123466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7e2b36bb04940c40bc6c1b8e5daed03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motor: {fileID: 3637448133786036102}
-  baseHitJumpHeight: 2
-  hitJumpMultiplier: 1.1
 --- !u!1 &3927918768347650595
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +153,7 @@ GameObject:
   - component: {fileID: 4543650564093325621}
   m_Layer: 0
   m_Name: topLeft
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -198,7 +183,7 @@ GameObject:
   - component: {fileID: 2438136982488890962}
   m_Layer: 0
   m_Name: bottomRight
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,7 +221,7 @@ GameObject:
   - component: {fileID: 2733972916197067242}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -255,7 +240,7 @@ Transform:
   - {fileID: 4543650564093325621}
   - {fileID: 2438136982488890962}
   - {fileID: 3637448132770123461}
-  - {fileID: 1997692896}
+  - {fileID: 6826534983564240462}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -299,15 +284,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2720565861231176639, guid: 460e92447bb77c0439d5e71c101e12e3, type: 3}
+  m_Sprite: {fileID: 1768599190028779529, guid: 460e92447bb77c0439d5e71c101e12e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.5, y: 2.5}
+  m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7412625108201747398
@@ -323,7 +308,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapplingGun: {fileID: 3637448132770123460}
-  isKnockingBack: 0
 --- !u!50 &7412625108201747399
 Rigidbody2D:
   serializedVersion: 4
@@ -337,10 +321,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 10
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 6200000, guid: 5796d3685b791574e9123bcbd77522c1, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -396,14 +380,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   moveSpeed: 10
-  accelerationTime: 0.05
-  decelerationTime: 0.1
-  maxJumpHeight: 4
-  maxJumpTime: 0.4
-  minAscensionTime: 1.5
-  maxAscensionTime: 1.5
-  fallMultiplier: 1
-  terminalVelocity: 50
+  jumpPower: 10
+  jumpTimer: 0.4
+  customGravity: 9.88
+  terminalVelocity: 25
   topLeftBound: {fileID: 4543650564093325621}
   bottomRightBound: {fileID: 2438136982488890962}
   OnPlayerStartJump:
@@ -425,10 +405,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  canTakeDamage: 1
   OnHealthSet:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDCounterHandler, Assembly-CSharp
+        m_MethodName: SetHUDCounter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDCounterHandler, Assembly-CSharp
+        m_MethodName: SetHUDCounter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTakeDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -447,7 +450,19 @@ MonoBehaviour:
   _score: 0
   OnScoreSet:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDScoreHandler, Assembly-CSharp
+        m_MethodName: SetHUDScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &5843827100157380859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -455,21 +470,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7412625108201747400}
     m_Modifications:
-    - target: {fileID: 7161776769959950318, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_Name
       value: GrappleGun
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817340, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: aimLineDistance
-      value: 45.91
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817342, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_LocalPosition.x
@@ -515,33 +518,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: pullSpeed
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: pullAccelerationTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: hookableLayers.m_Bits
-      value: 768
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: arrivedDistance
-      value: 1.2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
---- !u!1 &3637448132770123466 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-  m_PrefabInstance: {fileID: 5843827100157380859}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3637448132770123461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7161776770310817342, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
@@ -552,7 +530,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
   m_PrefabInstance: {fileID: 5843827100157380859}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3637448132770123466}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7900b369a13ba043aa9830c79ddf1cf, type: 3}
