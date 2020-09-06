@@ -12,8 +12,7 @@ namespace Weapon.Hook
         [SerializeField] EntityHealth playerHp = default;
 
         /// <summary> The lowest Hit Jump height the player can achieve (which means Combo is 1 or 0) </summary>
-        [Tooltip(
-            "The lowest Hit Jump height the player can achieve (which means Combo is 0)")]
+        [Tooltip("The lowest Hit Jump height the player can achieve (which means Combo is 0)")]
         public float baseHitJumpHeight = 2f;
 
         /// <summary> The Hit Jump height multiplier gained from each successful combo </summary>

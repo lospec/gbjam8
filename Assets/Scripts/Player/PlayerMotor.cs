@@ -75,6 +75,7 @@ namespace Player
 
         private void OnDisable()
         {
+            EndJump();
             _gravity = Vector2.zero;
         }
 

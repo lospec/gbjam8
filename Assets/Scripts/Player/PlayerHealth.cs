@@ -13,12 +13,13 @@ public class PlayerHealth : EntityHealth
     private void Update()
     {
         Health -= segmentReduceRate / segmentCount * Time.deltaTime;
+        Health = Mathf.Clamp01(Health);
     }
 
     /// <summary> Increase the player health amount by a segment </summary>
     /// <param name="segmentCount">The amount of segment to be added to the player's health</param>
     public void IncreaseHealth(int segmentCount)
     {
-        Health += 1f / segmentCount;
+        Health = Mathf.Min(1f, 1f / segmentCount);
     }
 }

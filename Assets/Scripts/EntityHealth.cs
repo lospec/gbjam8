@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Utility;
@@ -34,6 +35,12 @@ public class EntityHealth : MonoBehaviour
 
             if (Health <= 0)
             {
+                // HACK: Please make a more centralized system to destroy the enemy, if you want to seperate the scripts, just make use of events and don't make dependencies EVERYWHERE
+                List<Collider2D> attachedColliders = new List<Collider2D>();
+                GetComponent<Rigidbody2D>().GetAttachedColliders(attachedColliders);
+                foreach (Collider2D c in attachedColliders)
+                    c.enabled = false;
+
                 KillEnemy ke = GetComponent<KillEnemy>();
 
                 if (ke != null)

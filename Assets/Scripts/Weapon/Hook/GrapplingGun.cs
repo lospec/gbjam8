@@ -93,8 +93,8 @@ namespace Weapon.Hook
         }
         public Vector2 HookOrigin => transform.position;
 
-        public float AutoAimAngleRad { get => autoAimAngle * Mathf.Deg2Rad; set => autoAimAngle = value * Mathf.Rad2Deg; }
-        public float AutoAimAngleDeg { get => autoAimAngle; set => autoAimAngle = value; }
+        public float AutoAimAngle_Rad { get => autoAimAngle * Mathf.Deg2Rad; set => autoAimAngle = value * Mathf.Rad2Deg; }
+        public float AutoAimAngle_Deg { get => autoAimAngle; set => autoAimAngle = value; }
 
         private Vector2 Target { get; set; }
         public Collider2D TargetObject { get; set; }
@@ -143,6 +143,28 @@ namespace Weapon.Hook
             }
         }
 
+        public delegate void HookShotDelegate(float speed, Vector2 target,
+            Transform hook, Action finishShooting);
+
+        public delegate void HookTargetHitDelegate(Vector2 hookPosition, Collider2D targetObject);
+
+        public delegate void RetractHookDelegate(float retractDuration, Transform
+            hook, Action finishRetracting);
+
+        public delegate void HookRetractedDelegate();
+
+        public delegate void PullEndedDelegate(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject);
+
+        public static event HookShotDelegate OnHookShot;
+        public static event HookTargetHitDelegate OnHookTargetHit;
+        public static event RetractHookDelegate OnRetractHook;
+        public static event HookRetractedDelegate OnHookRetracted;
+        public static event PullEndedDelegate OnPullEnded;
+
+        public UnityEvent OnHookFired;
+        public UnityEvent OnHookMapShot;
+        public UnityEvent OnHookEnemyShot;
+
         private void Start()
         {
             enabled = false;
@@ -169,28 +191,6 @@ namespace Weapon.Hook
 
             MoveTowardsTarget();
         }
-
-        public delegate void HookShotDelegate(float speed, Vector2 target,
-            Transform hook, Action finishShooting);
-
-        public delegate void HookTargetHitDelegate(Vector2 hookPosition, Collider2D targetObject);
-
-        public delegate void RetractHookDelegate(float retractDuration, Transform
-            hook, Action finishRetracting);
-
-        public delegate void HookRetractedDelegate();
-
-        public delegate void PullEndedDelegate(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject);
-
-        public static event HookShotDelegate OnHookShot;
-        public static event HookTargetHitDelegate OnHookTargetHit;
-        public static event RetractHookDelegate OnRetractHook;
-        public static event HookRetractedDelegate OnHookRetracted;
-        public static event PullEndedDelegate OnPullEnded;
-
-        public UnityEvent OnHookFired;
-        public UnityEvent OnHookMapShot;
-        public UnityEvent OnHookEnemyShot;
 
 
         private void MoveTowardsTarget()
@@ -256,6 +256,8 @@ namespace Weapon.Hook
         {
             enabled = false;
             EnableMovement();
+
+            HookPosition = HookOrigin;
             hook.SetParent(transform, true);
         }
 
@@ -311,7 +313,7 @@ namespace Weapon.Hook
                 Vector2 targetAim = (Vector2)target.position - HookOrigin;
 
                 if ((1 << target.gameObject.layer & autoAimMask) == 0) continue;
-                if (Vector2.Angle(AimInput, targetAim) > AutoAimAngleDeg / 2f) continue;
+                if (Vector2.Angle(AimInput, targetAim) > AutoAimAngle_Deg / 2f) continue;
 
                 RaycastHit2D hit = Physics2D.Raycast(HookOrigin, targetAim, autoAimRange, hookableMask);
                 if (hit.transform != target) continue;
@@ -364,63 +366,11 @@ namespace Weapon.Hook
                         OnHookRetracted?.Invoke();
 
                         // THEN, Start shooting the hook
-                        HookPosition = shootSpeed > 0f ? HookOrigin : Target;
-
-                        // Start shooting the hook
-                        OnHookFired?.Invoke();
-                        OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
-                        {
-                            // When the shot is landed(animation finished, etc)
-
-                            // enable grapple pull and invoke OnHookTargetHit
-                            enabled = true;
-
-                            // also make the hook stuck on target object(if any)
-                            if (TargetObject != null)
-                                hook.SetParent(TargetObject.transform, true);
-
-                            OnHookTargetHit?.Invoke(HookPosition, TargetObject);
-
-                            if (hit.transform.gameObject.tag == "Enemy")
-                            {
-                                OnHookEnemyShot?.Invoke();
-                            }
-                            else
-                            {
-                                OnHookMapShot?.Invoke();
-                            }
-                        });
+                        ShootHook();
                     });
                 }
-                else
-                {
-                    HookPosition = shootSpeed > 0f ? HookOrigin : Target;
-
-                    // Start shooting the hook
-                    OnHookFired?.Invoke();
-                    OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
-                    {
-                        // When the shot is landed(animation finished, etc)
-
-                        // enable grapple pull and invoke OnHookTargetHit
-                        enabled = true;
-
-                        // also make the hook stuck on target object(if any)
-                        if (TargetObject != null)
-                            hook.SetParent(TargetObject.transform, true);
-
-                        OnHookTargetHit?.Invoke(HookPosition, TargetObject);
-
-                        if (hit.transform.gameObject.tag == "Enemy")
-                        {
-                            OnHookEnemyShot?.Invoke();
-                        }
-                        else
-                        {
-                            OnHookMapShot?.Invoke();
-                        }
-                    });
-                }
+                
+                else ShootHook();
             }
 
             else if (shootSpeed > 0f && maxShootDistance > 0f &&
@@ -446,6 +396,35 @@ namespace Weapon.Hook
                     });
                 });
             }
+        }
+
+        // HACK: Need a better system to manage the grappling hook shoot,retract,etc
+        private void ShootHook()
+        {
+            HookPosition = shootSpeed > 0f ? HookOrigin : Target;
+
+            // Start shooting the hook
+            OnHookFired?.Invoke();
+            OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+            {
+                // When the shot is landed(animation finished, etc)
+
+                // enable grapple pull and invoke OnHookTargetHit
+                enabled = true;
+
+                // also make the hook stuck on target object(if any)
+                //if (TargetObject != null)
+                    //hook.SetParent(TargetObject.transform, true);
+
+                OnHookTargetHit?.Invoke(HookPosition, TargetObject);
+
+                // HACK
+                if (Target != null && TargetObject.tag == "Enemy")
+                    OnHookEnemyShot?.Invoke();
+
+                else
+                    OnHookMapShot?.Invoke();
+            });
         }
 
 

@@ -454,24 +454,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HUDCounterHandler, Assembly-CSharp
-        m_MethodName: SetHUDCounter
+        m_TargetAssemblyTypeName: HUDHealthBar, Assembly-CSharp
+        m_MethodName: SetHUDHealth
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HUDCounterHandler, Assembly-CSharp
-        m_MethodName: SetHUDCounter
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -481,7 +469,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   segmentCount: 7
-  segmentReduceRate: 0.5
+  segmentReduceRate: 0.1
 --- !u!114 &2733972916197067242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,19 +485,7 @@ MonoBehaviour:
   _score: 0
   OnScoreSet:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HUDScoreHandler, Assembly-CSharp
-        m_MethodName: SetHUDScore
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1001 &5843827100157380859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -528,6 +504,10 @@ PrefabInstance:
     - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_Name
       value: GrappleGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817340, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: aimLineDistance
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817342, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_LocalPosition.x
@@ -580,6 +560,18 @@ PrefabInstance:
     - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: maxHookDistance
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: hookableMask.m_Bits
+      value: 768
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: autoAimMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: autoAimRange
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
