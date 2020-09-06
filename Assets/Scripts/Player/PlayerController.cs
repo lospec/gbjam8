@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Weapon;
 using Weapon.Hook;
 
 namespace Player
@@ -20,6 +21,8 @@ namespace Player
         }
 
         [SerializeField] private GrapplingGun grapplingGun;
+        [SerializeField] private AimBeam beam;
+
 
         private Animator _animator;
         private PlayerControls _input = default;
@@ -29,6 +32,7 @@ namespace Player
         public bool isKnockingBack;
 
         private Vector2 _inputVector;
+        private bool _secondaryPressed;
 
         private void Awake()
         {
@@ -56,10 +60,16 @@ namespace Player
         {
             _motor.Move = new Vector2(_inputVector.x, _motor.Move.y);
             grapplingGun.AimInput = _inputVector;
+
+            beam.enabled = _secondaryPressed;
+            if (_secondaryPressed) //pressed
+            {
+                beam.Target = grapplingGun.FindTargetPosition(out _, out _);
+            }
+
             UpdateSpriteAndAnimations();
         }
 
-        
 
         private void OnEnable()
         {
@@ -76,7 +86,9 @@ namespace Player
             _inputVector = context.ReadValue<Vector2>();
         }
 
-        public void OnPrimary(InputAction.CallbackContext context) { }
+        public void OnPrimary(InputAction.CallbackContext context)
+        {
+        }
 
         public void OnJumpCanceled(InputAction.CallbackContext context) =>
             _motor.EndJump();
@@ -90,10 +102,19 @@ namespace Player
         }*/
 
 
-
         public void OnSecondary(InputAction.CallbackContext context)
         {
-            grapplingGun.PerformGrapple();
+            var value = context.ReadValueAsButton();
+
+
+            if (_secondaryPressed && !value) // release
+            {
+                beam.enabled = false;
+                grapplingGun.PerformGrapple();
+            }
+
+
+            _secondaryPressed = value;
         }
 
         private void UpdateSpriteAndAnimations()
@@ -106,7 +127,8 @@ namespace Player
             _animator.SetFloat(AnimParams.AbsDirX, Mathf.Abs(_inputVector.x));
         }
 
-        public IEnumerator Knockback(float duration, float strength, bool fromRight, float invincibility)
+        public IEnumerator Knockback(float duration, float strength, bool fromRight,
+            float invincibility)
         {
             Debug.Log("knockback per " + duration + " sec");
             _input.Disable();
@@ -114,7 +136,8 @@ namespace Player
 
             StartCoroutine(_healthManager.MakeInvincible(invincibility));
             _motor.Body.velocity = Vector3.zero;
-            _motor.Body.AddForce(new Vector3(!fromRight ? -1 : 1, 1, 0) * strength, ForceMode2D.Impulse);
+            _motor.Body.AddForce(new Vector3(!fromRight ? -1 : 1, 1, 0) * strength,
+                ForceMode2D.Impulse);
 
             yield return new WaitForSeconds(duration);
 
