@@ -2,6 +2,11 @@
 ## Made by Lospec
 ## [Website](https://lospec.com) - [Discord](https://lospec.com/discord)
 
+## Playable at [itch.io](https://lospec.itch.io/hooked-in-hell)!
+
+![](Assets/Sprites/MainMenu/Controls.png)<br>
+![](Assets/Sprites/MainMenu/Credits.png)
+
 ### Leads
 - Mariothedog - [Itch](https://mariothedog.itch.io) - Project Manager, Programming, Art
 - Pillsgood - [Itch](https://itch.io/profile/pillsgood) - Lead Programmer
