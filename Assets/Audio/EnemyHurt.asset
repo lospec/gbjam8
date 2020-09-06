@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyHurt
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: da8c13b0e733514499c5c6768e684287, type: 3}
-  volume: 0.1
+  volume: 0.02
   pitch: 1
   volumeIncrementAmount: 0.1
   loop: 0

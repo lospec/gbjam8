@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GrappleEnemyShot
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 848f9fa66e200eb4582d1ec92e0b5dab, type: 3}
-  volume: 0.01
+  volume: 0.005
   pitch: 1
   volumeIncrementAmount: 0.1
   loop: 0

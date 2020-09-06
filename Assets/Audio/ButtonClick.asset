@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ButtonClick
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 53561b333ca3a8045bb36a342b4cece8, type: 3}
-  volume: 0.2
-  pitch: 1
+  volume: 0.05
+  pitch: 1.4
   volumeIncrementAmount: 0.1
   loop: 0

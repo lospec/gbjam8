@@ -20,6 +20,6 @@
 - ShinyTseul - [Itch](https://shinytseul.itch.io) [Twitter](https://twitter.com/shinytseul) - Art
 - Zarki - [Itch](https://zarkidood.itch.io) - Art
 - Pit - [Itch](https://itch.io/profile/pixeltea-studio) - Art
-- Olivia - [Itch](https://treelia.itch.io/) [Twitter](https://twitter.com/honkerly) - Art
+- Olivia - [Itch](https://treelia.itch.io/) [Twitter](https://twitter.com/honkerly) - Art, SFX
 - Reverie - [Itch](https://reverevereverev.itch.io/) [Twitter](https://twitter.com/revereverevere1) - Art
 - Skeddles - [Itch](https://skeddles.itch.io) [Twitter](https://twitter.com/skeddles) - Lospec Owner
