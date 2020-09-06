@@ -41,12 +41,7 @@ public class EntityHealth : MonoBehaviour
                 foreach (Collider2D c in attachedColliders)
                     c.enabled = false;
 
-                KillEnemy ke = GetComponent<KillEnemy>();
-
-                if (ke != null)
-                {
-                    ke.Explode();
-                }
+				Die();
             }
         }
     }
@@ -59,4 +54,14 @@ public class EntityHealth : MonoBehaviour
 
         canTakeDamage = true;
     }
+
+	public virtual void Die()
+	{
+		KillEnemy ke = GetComponent<KillEnemy>();
+
+		if (ke != null)
+		{
+			ke.Explode();
+		}
+	}
 }
