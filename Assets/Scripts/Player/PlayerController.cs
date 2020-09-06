@@ -55,7 +55,7 @@ namespace Player
         private void Update()
         {
             _motor.Move = new Vector2(_inputVector.x, _motor.Move.y);
-            grapplingGun.Aim = _inputVector;
+            grapplingGun.AimInput = _inputVector;
             UpdateSpriteAndAnimations();
         }
 

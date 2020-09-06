@@ -217,15 +217,5 @@ namespace Player
 
             return _groundCollision.First();
         }
-
-        public void Knockback()
-        {
-
-        }
-
-        public void JumpHit(float height)
-        {
-
-        }
     }
 }
