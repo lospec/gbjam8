@@ -462,7 +462,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: dd2e55825303a49f69c683d64a5854ba, type: 2}
   - {fileID: 2100000, guid: bdc6e91fb757d409193a452dd0fa27d0, type: 2}
-  transitionSpeed: 0
+  transitionSpeed: 2
 --- !u!114 &553456128701074392
 MonoBehaviour:
   m_ObjectHideFlags: 0
