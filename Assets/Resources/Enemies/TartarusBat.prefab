@@ -162,7 +162,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0756166, y: -0.4598632}
+  m_Offset: {x: 0.13198471, y: -0.22355282}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -173,7 +173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7048812, y: 0.17899609}
+  m_Size: {x: 1.7281723, y: 0.7990401}
   m_EdgeRadius: 0
 --- !u!1 &4338764739658670799
 GameObject:
@@ -256,8 +256,8 @@ MonoBehaviour:
   body: {fileID: 4338764739658670798}
   animator: {fileID: 4338764739160754747}
   spriteRenderer: {fileID: 4338764739160754746}
-  searchRange: 10
-  moveSpeed: 5
+  searchRange: 30
+  moveSpeed: 10
   takeOffHeight: 5
   groundLayer:
     serializedVersion: 2
@@ -358,6 +358,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a47fbdc0425d4a3e82bc9b104ca80ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyController: {fileID: 4338764739658670793}
   enemyDissolve: {fileID: 1471363742}
   explosion: {fileID: 2659463550267547850, guid: 5d194f782feba8c4aa6dbca92430b6f9, type: 3}

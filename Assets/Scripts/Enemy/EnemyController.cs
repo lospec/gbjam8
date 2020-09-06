@@ -80,12 +80,12 @@ namespace Enemy
             action.Invoke();
         }
 
-        public virtual void Damage(int damage)
+        public virtual void Damage(float damage)
         {
             _entityHealth.Hurt(damage);
         }
 
 
-        public int CurrentHealth => _entityHealth.Health;
+        public float CurrentHealth => _entityHealth.Health;
     }
 }

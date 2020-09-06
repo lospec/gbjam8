@@ -78,11 +78,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
+  - {fileID: 4338764739658670793, guid: c3158606a9c281345b4a5b760225a2a0, type: 3}
+  - {fileID: 15050680584707100, guid: e19ae87a88ae8324c8a3d33e774fa890, type: 3}
   - {fileID: 4338764739658670793, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
+  - {fileID: 6398495632395392335, guid: 03c061a10fc648c439ddda007391925a, type: 3}
   enemySpawnTable:
-  - enemy: {fileID: 4338764739658670793, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
+  - enemy: {fileID: 4338764739658670793, guid: c3158606a9c281345b4a5b760225a2a0, type: 3}
+    weight: 3
+  - enemy: {fileID: 15050680584707100, guid: e19ae87a88ae8324c8a3d33e774fa890, type: 3}
     weight: 1
-  minSpawnCount: 2
+  - enemy: {fileID: 4338764739658670793, guid: 2d1d52db247440c439e3318d477f83e1, type: 3}
+    weight: 4
+  - enemy: {fileID: 6398495632395392335, guid: 03c061a10fc648c439ddda007391925a, type: 3}
+    weight: 2
+  minSpawnCount: 1
   maxSpawnCount: 4
 --- !u!1 &193748876849457773
 GameObject:

@@ -35,8 +35,7 @@ namespace Player
         [SerializeField] private Transform topLeftBound = default;
         [SerializeField] private Transform bottomRightBound = default;
 
-        public UnityEvent<float> OnPlayerStartJump;
-        public UnityEvent<float> OnPlayerJumpHeld;
+        public UnityEvent OnPlayerStartJump;
 		public UnityEvent<float> OnPlayerLand;
 
         private float _jumpTime;
@@ -75,6 +74,7 @@ namespace Player
 
         private void OnDisable()
         {
+            EndJump();
             _gravity = Vector2.zero;
         }
 
@@ -138,7 +138,9 @@ namespace Player
             Body.AddForce(new Vector2(0f, jumpForce) * Body.mass, ForceMode2D.Impulse);
 
             _jumpTime = maxJumpTime;
-        }
+
+			OnPlayerStartJump?.Invoke();
+		}
 
         public void EndJump()
         {
@@ -146,69 +148,7 @@ namespace Player
             _jumpTime = 0f;
         }
 
-        private void JumpUtility(float minAscension, float maxAscension, float power, bool jumping)
-        {
-            // Se � il primo frame che sto saltando, imposto i tempi 
-            if (!isJumping)
-            {
-                jumpFinishedTime = Time.time + maxAscension;
-                minJumpFinishedTime = Time.time + minAscension;
-                Body.AddForce(Vector2.up * power);
-
-                isJumping = true;
-            }
-
-            if ((jumping && Time.time < jumpFinishedTime) || Time.time < minJumpFinishedTime)
-            {
-                Body.velocity = new Vector2(Body.velocity.x, Vector2.up.y * maxJumpHeight);
-            }
-            else
-            {
-                isJumping = false;
-            }
-        }
-
-        public IEnumerator Jump(InputAction contextAction)
-        {
-            if (!_isGrounded || IsJumping) yield break;
-
-            IsJumping = true;
-            _jumpTime = maxJumpTime;
-            Body.AddForce(Vector2.up * maxJumpHeight, ForceMode2D.Impulse);
-
-            var netJumpMagnitude = maxJumpHeight;
-
-            OnPlayerStartJump?.Invoke(netJumpMagnitude);
-
-            var nextFixedUpdated = new WaitForFixedUpdate();
-
-            while (IsJumping)
-            {
-                if (contextAction.ReadValue<float>() > 0 && _jumpTime > 0)
-                {
-                    float jumpMagnitude = maxJumpHeight * (_jumpTime / maxJumpTime);
-                    Body.AddForce(
-                        Vector2.up * jumpMagnitude,
-                        ForceMode2D.Impulse);
-                    _jumpTime -= Time.fixedDeltaTime;
-
-                    netJumpMagnitude += jumpMagnitude;
-
-                    OnPlayerJumpHeld?.Invoke(netJumpMagnitude);
-                }
-
-                var prevGrounded = _isGrounded;
-                yield return nextFixedUpdated;
-                if (!prevGrounded && _isGrounded)
-                {
-                    break;
-                }
-            }
-
-            IsJumping = false;
-        }
-
-        private bool GroundCheck()
+		private bool GroundCheck()
         {
             _groundCollision[0] = null;
 
@@ -216,16 +156,6 @@ namespace Player
                 bottomRightBound.position, _groundCollision, floorLayer);
 
             return _groundCollision.First();
-        }
-
-        public void Knockback()
-        {
-
-        }
-
-        public void JumpHit(float height)
-        {
-
         }
     }
 }

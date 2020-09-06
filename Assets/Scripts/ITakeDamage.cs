@@ -1,5 +1,5 @@
 public interface ITakeDamage
 {
-    void Damage(int damage);
-    int CurrentHealth { get; }
+    void Damage(float damage);
+    float CurrentHealth { get; }
 }

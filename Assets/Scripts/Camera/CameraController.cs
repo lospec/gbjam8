@@ -27,15 +27,17 @@ public class CameraController : MonoBehaviour
         _previousPosition = transform.position;
     }
 
-    [InitializeOnLoadMethod]
-    private static void EnablePixelPerfectInEditor()
+#if UNITY_EDITOR
+	[InitializeOnLoadMethod]
+	private static void EnablePixelPerfectInEditor()
     {
         UnityEngine.Camera.allCameras.Select(c => c.GetComponent<PixelPerfectCamera>())
             .Where(controller => controller).ToList().ForEach(perfectCamera =>
                 perfectCamera.runInEditMode = true);
     }
+#endif
 
-    private void LateUpdate()
+	private void LateUpdate()
     {
         var position = transform.position;
         var targetPos = new Vector3(target.position.x,
