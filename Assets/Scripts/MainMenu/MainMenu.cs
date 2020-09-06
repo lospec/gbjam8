@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -96,16 +97,26 @@ public class MainMenu : MonoBehaviour
 
 	public void GoToMapScene()
 	{
-		SceneManager.LoadScene("MapScene");
+        TransitionManager.Instance.SingleTransition(false);
+        StartCoroutine(WaitAndLoadScene("MapScene"));
 	}
 
 	public void GoToControlsScene()
 	{
-		SceneManager.LoadScene("MainMenuControls");
+        TransitionManager.Instance.SingleTransition(false);
+        StartCoroutine(WaitAndLoadScene("MainMenuControls"));
 	}
 
 	public void GoToCreditsScene()
 	{
-		SceneManager.LoadScene("MainMenuCredits");
+        TransitionManager.Instance.SingleTransition(false);
+        StartCoroutine(WaitAndLoadScene("MainMenuCredits"));
 	}
+
+    private IEnumerator WaitAndLoadScene(string name)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        SceneManager.LoadScene(name);
+    }
 }
