@@ -1,13 +1,14 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Utility;
 
-class EntityHealth : MonoBehaviour
+public class EntityHealth : MonoBehaviour
 {
-    [SerializeField] private int health;
+    [SerializeField] private float health;
     public bool canTakeDamage = true;
-    public int Health
+    public float Health
     {
         set
 		{
@@ -17,15 +18,15 @@ class EntityHealth : MonoBehaviour
         get => health;
     }
 
-	public UnityEvent<int> OnHealthSet;
-	public UnityEvent<int> OnTakeDamage;
+	public UnityEvent<float> OnHealthSet;
+	public UnityEvent<float> OnTakeDamage;
 
 	private void Start()
 	{
 		Health = health;
 	}
 
-    public virtual void Hurt(int damage)
+    public virtual void Hurt(float damage)
     {
         if (canTakeDamage)
         {
@@ -34,6 +35,12 @@ class EntityHealth : MonoBehaviour
 
             if (Health <= 0)
             {
+                // HACK: Please make a more centralized system to destroy the enemy, if you want to seperate the scripts, just make use of events and don't make dependencies EVERYWHERE
+                List<Collider2D> attachedColliders = new List<Collider2D>();
+                GetComponent<Rigidbody2D>().GetAttachedColliders(attachedColliders);
+                foreach (Collider2D c in attachedColliders)
+                    c.enabled = false;
+
                 KillEnemy ke = GetComponent<KillEnemy>();
 
                 if (ke != null)

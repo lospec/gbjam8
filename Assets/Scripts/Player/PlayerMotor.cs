@@ -75,6 +75,7 @@ namespace Player
 
         private void OnDisable()
         {
+            EndJump();
             _gravity = Vector2.zero;
         }
 
@@ -216,16 +217,6 @@ namespace Player
                 bottomRightBound.position, _groundCollision, floorLayer);
 
             return _groundCollision.First();
-        }
-
-        public void Knockback()
-        {
-
-        }
-
-        public void JumpHit(float height)
-        {
-
         }
     }
 }

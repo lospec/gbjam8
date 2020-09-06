@@ -2,6 +2,7 @@
 using Player;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Weapon.Hook
 {
@@ -9,16 +10,17 @@ namespace Weapon.Hook
     public class GrappleCombat : MonoBehaviour
     {
         [SerializeField] PlayerMotor motor = default;
+        [SerializeField] EntityHealth playerHp = default;
 
         /// <summary> The lowest Hit Jump height the player can achieve (which means Combo is 1 or 0) </summary>
-        [Tooltip(
-            "The lowest Hit Jump height the player can achieve (which means Combo is 0)")]
+        [Tooltip("The lowest Hit Jump height the player can achieve (which means Combo is 0)")]
         public float baseHitJumpHeight = 2f;
 
         /// <summary> The Hit Jump height multiplier gained from each successful combo </summary>
         [Tooltip("The Hit Jump height multiplier gained from each successful combo")]
         public float hitJumpMultiplier = 1.1f;
 
+		public UnityEvent onEnemyKilled;
 
         public int Combo => 1; // TODO: implement Combo system
         private float CurrentHitJumpHeight
@@ -150,12 +152,15 @@ namespace Weapon.Hook
                 }
 
                 enemy.Damage(1);
-                StartCoroutine(motor.GetComponent<EntityHealth>().MakeInvincible(1f));
+                //StartCoroutine(motor.GetComponent<EntityHealth>().MakeInvincible(1f));
                 if (enemy.CurrentHealth <= 0)
                 {
                     // Destroy(enemy.gameObject);
                     PerformJumpHit();
-                }
+                    motor.GetComponent<PlayerHealth>().IncreaseHealth(1);
+
+					onEnemyKilled?.Invoke();
+				}
             }
 
             // The interfaces should be able to make us able to pass any Entity

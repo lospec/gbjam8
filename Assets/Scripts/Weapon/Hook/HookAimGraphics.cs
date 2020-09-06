@@ -19,17 +19,17 @@ namespace Weapon.Hook
 
         private void Update()
         {
-            var aim = grapplingGun.Aim.normalized;
+            var aim = grapplingGun.AimInput.normalized;
             var d = aimLineDistance;
 
             if (d <= 0f) d = Mathf.Infinity;
             var hit = Physics2D.Raycast(grapplingGun.HookOrigin,
-                grapplingGun.Aim, d);
+                grapplingGun.AimInput, d);
 
             if (hit) d = hit.distance;
             else
                 d = aimLineDistance <= 0f
-                    ? grapplingGun.maxHookDistance
+                    ? grapplingGun.maxShootDistance
                     : aimLineDistance;
 
             aimLine.SetPosition(0, grapplingGun.HookOrigin);
