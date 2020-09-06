@@ -77,7 +77,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bec65237596dd43b91e44c021b35cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aimLineDistance: 45.91
+  aimLineDistance: 40
   grapplingGun: {fileID: 7161776770310817343}
   aimLine: {fileID: 7161776769959950316}
 --- !u!114 &7161776770310817343
@@ -339,19 +339,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7900b369a13ba043aa9830c79ddf1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hookableLayers:
+  hookableMask:
     serializedVersion: 2
     m_Bits: 768
+  autoAimMask:
+    serializedVersion: 2
+    m_Bits: 512
+  hook: {fileID: 7161776771014116243}
   shootSpeed: 60
-  retractSpeed: 1
+  retractSpeed: 60
   pullSpeed: 100
   pullAccelerationTime: 0.1
   drag: 1
-  maxHookDistance: 50
+  maxShootDistance: 0
   arrivedDistance: 1.2
   stuckCheckThreshold: 0.01
   stuckTimeThreshold: 0.01
-  hook: {fileID: 7161776771014116243}
+  autoAimEnabled: 1
+  autoAimAngle: 45
+  autoAimRange: 20
   OnHookFired:
     m_PersistentCalls:
       m_Calls:
@@ -401,6 +407,10 @@ MonoBehaviour:
   gizmoOptions:
     grappleRange: 0
     arrivalDistance: 1
+    autoAimTarget: 1
+    autoAimRays: 0
+    limitRayCount: 1
+  rayCount: 2
 --- !u!114 &1028001889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,8 +424,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motor: {fileID: 0}
+  playerHp: {fileID: 0}
   baseHitJumpHeight: 2
   hitJumpMultiplier: 1.1
+  slashVFX: {fileID: 8399686956721165390, guid: b2d6ca602bff4274e8070b2b667c8da4, type: 3}
+  onEnemyKilled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EntityScore, Assembly-CSharp
+        m_MethodName: IncreaseScore
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 10
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7161776771014116242
 GameObject:
   m_ObjectHideFlags: 0

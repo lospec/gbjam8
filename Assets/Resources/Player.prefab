@@ -406,21 +406,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnPlayerJumpHeld:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Audio.AudioManager, Assembly-CSharp
-        m_MethodName: IncreaseVolume
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 06c05ea8822309348bbff2fe48c5ca67, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Audio.AudioManagerAudioClip, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   OnPlayerLand:
     m_PersistentCalls:
       m_Calls:
@@ -469,7 +454,23 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   segmentCount: 7
-  segmentReduceRate: 0.1
+  segmentReduceRate: 0.25
+  alive: 1
+  OnPlayerDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2733972916197067242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +486,19 @@ MonoBehaviour:
   _score: 0
   OnScoreSet:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDScoreHandler, Assembly-CSharp
+        m_MethodName: SetHUDScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &5843827100157380859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -501,13 +514,13 @@ PrefabInstance:
       propertyPath: playerHp
       value: 
       objectReference: {fileID: 6509435940849865162}
+    - target: {fileID: 1028001889, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
+      propertyPath: onEnemyKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2733972916197067242}
     - target: {fileID: 7161776770310817329, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_Name
       value: GrappleGun
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817340, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: aimLineDistance
-      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7161776770310817342, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_LocalPosition.x
@@ -552,26 +565,6 @@ PrefabInstance:
     - target: {fileID: 7161776770310817342, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: retractSpeed
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: maxHookDistance
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: hookableMask.m_Bits
-      value: 768
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: autoAimMask.m_Bits
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 7161776770310817343, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
-      propertyPath: autoAimRange
-      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 528790cb9ac8da0489d25d99560f4946, type: 3}
