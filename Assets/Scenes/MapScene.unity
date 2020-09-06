@@ -1175,6 +1175,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 1904205618317601467, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.17606264
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904205618317601467, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6478747
+      objectReference: {fileID: 0}
     - target: {fileID: 1904205618317601471, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: m_Name
       value: Lava
