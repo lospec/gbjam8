@@ -355,21 +355,9 @@ PrefabInstance:
       propertyPath: lava
       value: 
       objectReference: {fileID: 1909733341}
-    - target: {fileID: 4470147315589490617, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
-      propertyPath: unloadDistance
-      value: 200
-      objectReference: {fileID: 0}
     - target: {fileID: 4470147315589490619, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
       propertyPath: m_Name
       value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470147315589490619, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470147315589490619, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
