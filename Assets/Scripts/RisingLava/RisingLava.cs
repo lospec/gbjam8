@@ -4,9 +4,10 @@ using UnityEngine;
 public class RisingLava : MonoBehaviour
 {
 	[SerializeField] private float _risingSpeed;
+	[SerializeField] private GameObject explosion;
 	[SerializeField] private float _delayBeforeDeathSec;
 
-    private void Update()
+	private void Update()
     {
 		transform.position = new Vector3(
 			gameObject.transform.position.x,
@@ -19,6 +20,7 @@ public class RisingLava : MonoBehaviour
 		PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 		if (playerHealth != null)
 		{
+			Instantiate(explosion, collision.transform.position, Quaternion.identity);
 			StartCoroutine(WaitThenKillPlayer(playerHealth));
 		}
 	}

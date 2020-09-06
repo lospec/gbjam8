@@ -203,7 +203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8856653687292330576, guid: 08b051dfa6afa10418bac50fc60e933c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8856653687292330588, guid: 08b051dfa6afa10418bac50fc60e933c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1148,12 +1148,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1904205618317601464, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: _risingSpeed
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1904205618317601464, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: _delayBeforeDeathSec
-      value: 0.2
+      value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1904205618317601464, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
+      propertyPath: explosion
+      value: 
+      objectReference: {fileID: 2659463550267547850, guid: 5d194f782feba8c4aa6dbca92430b6f9, type: 3}
     - target: {fileID: 1904205618317601465, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
