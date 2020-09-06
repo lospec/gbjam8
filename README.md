@@ -16,4 +16,5 @@
 - Zarki - [Itch](https://zarkidood.itch.io) - Art
 - Pit - [Itch](https://itch.io/profile/pixeltea-studio) - Art
 - Olivia - [Itch](https://treelia.itch.io/) [Twitter](https://twitter.com/honkerly) - Art
+- Reverie - [Itch](https://reverevereverev.itch.io/) [Twitter](https://twitter.com/revereverevere1) - Art
 - Skeddles - [Itch](https://skeddles.itch.io) [Twitter](https://twitter.com/skeddles) - Lospec Owner
