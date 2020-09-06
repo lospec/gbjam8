@@ -165,9 +165,36 @@ namespace Weapon.Hook
 
         private void InstantiateVFX(GameObject enemy)
         {
-            float angle = Vector2.Angle(transform.position, enemy.transform.position);
+            Vector3 difference = transform.position - enemy.transform.position;
+            bool facesRight = motor.GetComponent<PlayerController>().FacesRight();
+            bool facesTop = difference.y <= 0;
+            SpriteRenderer slashRenderer = Instantiate(slashVFX, motor.transform.position, Quaternion.Euler(Vector3.zero)).GetComponent<SpriteRenderer>(); ;
 
-            Debug.Log(angle);
+            EZCameraShake.CameraShaker.Instance.ShakeOnce(2, 2, 0, 0.3f);
+
+            if (Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
+            {
+                if (facesRight)
+                {
+                    slashRenderer.flipX = false;
+                }
+                else
+                {
+                    slashRenderer.flipX = true;
+                }
+            }
+            else
+            {
+                if (facesTop)
+                {
+                    slashRenderer.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+                }
+                else
+                {
+                    slashRenderer.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -90));
+                }
+            }
+
         }
 
 

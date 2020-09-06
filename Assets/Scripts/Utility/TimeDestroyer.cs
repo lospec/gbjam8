@@ -8,7 +8,7 @@ public class TimeDestroyer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        WaitAndDestroy();
+        StartCoroutine(WaitAndDestroy());
     }
 
     private IEnumerator WaitAndDestroy()

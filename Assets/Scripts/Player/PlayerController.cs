@@ -128,5 +128,10 @@ namespace Player
         {
             return !_healthManager.canTakeDamage;
         }
+
+        public bool FacesRight()
+        {
+            return _inputVector.x >= 0;
+        }
     }
 }
