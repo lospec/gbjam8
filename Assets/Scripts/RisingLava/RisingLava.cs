@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class RisingLava : MonoBehaviour
 {
-	[SerializeField] private float _risingSpeed;
-	[SerializeField] private GameObject explosion;
+    [SerializeField] private float _risingSpeed;
+    [SerializeField] private GameObject explosion;
 	[SerializeField] private float _delayBeforeDeathSec;
 
-	private void Update()
+	private void Start()
+    {
+        GetComponent<MeshRenderer>().sortingOrder = 2;
+    }
+
+    private void Update()
     {
 		transform.position = new Vector3(
 			gameObject.transform.position.x,
