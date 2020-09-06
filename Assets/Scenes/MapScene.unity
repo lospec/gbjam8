@@ -351,6 +351,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4470147315589490617, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
+      propertyPath: lava
+      value: 
+      objectReference: {fileID: 1909733341}
+    - target: {fileID: 4470147315589490617, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
+      propertyPath: unloadDistance
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 4470147315589490619, guid: 8838884f9c0469c4891eba250f09cb69, type: 3}
       propertyPath: m_Name
       value: Map
@@ -1061,6 +1069,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e0418c1f6a48341aa9c20d2d7a3688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1909733341 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1904205618317601464, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
+  m_PrefabInstance: {fileID: 1904205617524931117}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a1ea15489f65d429192738f6bd3611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2005226507 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3779474207413180807, guid: 395914b1d4fb98948a6866cc3da53961, type: 3}
@@ -1146,18 +1165,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1904205618317601464, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
-      propertyPath: _risingSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1904205618317601464, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
-      propertyPath: _delayBeforeDeathSec
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1904205618317601464, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
-      propertyPath: explosion
-      value: 
-      objectReference: {fileID: 2659463550267547850, guid: 5d194f782feba8c4aa6dbca92430b6f9, type: 3}
     - target: {fileID: 1904205618317601465, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1202,33 +1209,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1904205618317601467, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1904205618317601467, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1904205618317601467, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.03138624
-      objectReference: {fileID: 0}
-    - target: {fileID: 1904205618317601467, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
-      propertyPath: m_Size.y
-      value: 0.9372275
-      objectReference: {fileID: 0}
-    - target: {fileID: 1904205618317601467, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
-      propertyPath: m_EdgeRadius
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1904205618317601471, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: m_Name
       value: Lava
-      objectReference: {fileID: 0}
-    - target: {fileID: 1904205618317601471, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
