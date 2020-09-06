@@ -16,10 +16,10 @@ public class PlayerHealth : EntityHealth
         Health = Mathf.Clamp01(Health);
     }
 
-    /// <summary> Increase the player health amount by a segment </summary>
-    /// <param name="segmentCount">The amount of segment to be added to the player's health</param>
-    public void IncreaseHealth(int segmentCount)
-    {
-        Health = Mathf.Min(1f, 1f / segmentCount);
-    }
+	/// <summary> Increase the player health amount by n segment </summary>
+	/// <param name="segment">The amount of segment to be added to the player's health</param>
+	public void IncreaseHealth(int segment)
+	{
+		Health = Mathf.Min(1f, 1f / segmentCount * segment);
+	}
 }

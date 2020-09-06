@@ -2,6 +2,7 @@
 using Player;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Weapon.Hook
 {
@@ -19,6 +20,7 @@ namespace Weapon.Hook
         [Tooltip("The Hit Jump height multiplier gained from each successful combo")]
         public float hitJumpMultiplier = 1.1f;
 
+		public UnityEvent onEnemyKilled;
 
         public int Combo => 1; // TODO: implement Combo system
         private float CurrentHitJumpHeight
@@ -156,7 +158,9 @@ namespace Weapon.Hook
                     // Destroy(enemy.gameObject);
                     PerformJumpHit();
                     motor.GetComponent<PlayerHealth>().IncreaseHealth(1);
-                }
+
+					onEnemyKilled?.Invoke();
+				}
             }
 
             // The interfaces should be able to make us able to pass any Entity

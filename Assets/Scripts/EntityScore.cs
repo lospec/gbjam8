@@ -23,4 +23,9 @@ class EntityScore : MonoBehaviour
 	{
 		OnScoreSet?.Invoke(Score);
 	}
+
+	public void IncreaseScore(int amount)
+	{
+		Score += amount;
+	}
 }

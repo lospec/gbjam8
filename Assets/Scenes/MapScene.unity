@@ -586,6 +586,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7412625108201747397, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
   m_PrefabInstance: {fileID: 1153030187}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1029235797 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2733972916197067242, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+  m_PrefabInstance: {fileID: 1153030187}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029235795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e67841030ddc9b14f84627e35a93d760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1029235804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7412625108201747400, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
@@ -604,6 +615,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHookFired.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1167431108}
@@ -615,6 +630,34 @@ PrefabInstance:
       propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1167431108}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: EntityScore, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1029235797}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: IncreaseScore
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3637448132770123460, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: OnHookEnemyShot.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3637448133786036102, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnPlayerStartJump.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -627,6 +670,38 @@ PrefabInstance:
       propertyPath: OnPlayerLand.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1167431108}
+    - target: {fileID: 5843827100077299866, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: onEnemyKilled.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843827100077299866, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: onEnemyKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843827100077299866, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: onEnemyKilled.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843827100077299866, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: onEnemyKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1029235797}
+    - target: {fileID: 5843827100077299866, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: onEnemyKilled.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: EntityScore, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843827100077299866, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: onEnemyKilled.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IncreaseScore
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843827100077299866, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: onEnemyKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843827100077299866, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
+      propertyPath: onEnemyKilled.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6509435940849865162, guid: 2c788fa0f41638a429c5e17901ae2bf2, type: 3}
       propertyPath: OnHealthSet.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
