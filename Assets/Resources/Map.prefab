@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadDistance: 100
-  unloadDistance: 100
+  unloadDistance: 200
   rooms:
   - {fileID: -6330707306490166235, guid: 6889f158805a7ce43a7356eabf164004, type: 3}
   - {fileID: -6330707306490166235, guid: 2d2dbc3f8fd6095409218e312c9e0b7e, type: 3}
@@ -152,6 +152,7 @@ MonoBehaviour:
   startRoom: {fileID: -6330707306490166235, guid: 6d2581a2aa5972c46be97c01dc055da6, type: 3}
   levelDifficulty: 0
   bottomDecoration: {fileID: 1696698734}
+  lava: {fileID: 0}
 --- !u!1001 &45074339
 PrefabInstance:
   m_ObjectHideFlags: 0
