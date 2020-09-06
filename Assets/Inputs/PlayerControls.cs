@@ -38,7 +38,7 @@ namespace Inputs
                 },
                 {
                     ""name"": ""Secondary"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""817b7f04-03c1-4771-960d-a34c1925e375"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
