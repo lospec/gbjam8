@@ -17,6 +17,7 @@ namespace Weapon.Hook
 
         private Coroutine _shootRoutine = default;
         private LineRenderer Line { get; set; }
+        private Transform _hook;
 
         private void Start()
         {
@@ -33,6 +34,7 @@ namespace Weapon.Hook
         private void Update()
         {
             Line.SetPosition(0, transform.position);
+            Line.SetPosition(1, _hook.position);
         }
 
         private void OnDestroy()
@@ -59,6 +61,7 @@ namespace Weapon.Hook
             }
 
             hook.SetParent(null, true);
+            _hook = hook;
             _shootRoutine =
                 StartCoroutine(ShootHook(speed, target, hook, finishShooting));
         }

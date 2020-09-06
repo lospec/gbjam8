@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class TransitionManager : MonoBehaviour
     public float darkValue;
     public Material[] materials;
     public float transitionSpeed;
+    private static readonly int Fade = Shader.PropertyToID("_Fade");
 
     // Start is called before the first frame update
     void Awake()
@@ -48,13 +50,10 @@ public class TransitionManager : MonoBehaviour
     {
         float t = 0;
 
-        while (materials[0].GetFloat("_Fade") != end)
+        while (Math.Abs(materials[0].GetFloat(Fade) - end) > 0.01f)
         {
             SetMaterialsValue(Mathf.Lerp(start, end, t));
             t += Time.deltaTime * transitionSpeed;
-
-            Debug.Log(Mathf.Lerp(start, end, t));
-
             yield return null;
         }
     }
