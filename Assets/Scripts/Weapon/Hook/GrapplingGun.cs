@@ -357,19 +357,20 @@ namespace Weapon.Hook
             hit = maxShootDistance > 0f
                 ? Physics2D.Raycast(HookOrigin, aim, maxShootDistance, hookableMask)
                 : Physics2D.Raycast(HookOrigin, aim, Mathf.Infinity, hookableMask);
+            Vector2 target = Vector2.zero;
             if (hit.collider)
             {
-                Target = hit.point;
+                target = hit.point;
                 targetHit = true;
             }
             else if (shootSpeed > 0f && maxShootDistance > 0f &&
                      !float.IsPositiveInfinity(maxShootDistance))
             {
-                Target = HookOrigin + Aim.normalized * maxShootDistance;
+                target = HookOrigin + Aim.normalized * maxShootDistance;
                 targetHit = false;
             }
 
-            return Target;
+            return target;
         }
 
         public void PerformGrapple()
