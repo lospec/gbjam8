@@ -7,10 +7,9 @@ public class TransitionManager : MonoBehaviour
     public static TransitionManager Instance;
     public float lightValue;
     public float darkValue;
-    public GameObject quad;
+    public Material[] materials;
     public float transitionSpeed;
 
-    private Material material;
     // Start is called before the first frame update
     void Awake()
     {
@@ -19,23 +18,21 @@ public class TransitionManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Chiamato");
+        SetMaterialsValue(darkValue);
 
-        material = quad.GetComponent<MeshRenderer>().sharedMaterial;
-        material.SetFloat("_Fade", darkValue);
-        StartCoroutine(SingleTransition(true));
+        SingleTransition(true);
     }
 
     public IEnumerator DoubleTransition()
     {
-        StartCoroutine(SingleTransition(false));
+        SingleTransition(false);
 
         yield return new WaitForSeconds(1.2f);
 
-        StartCoroutine(SingleTransition(true));
+        SingleTransition(true);
     }
 
-    public IEnumerator SingleTransition(bool toLight)
+    public void SingleTransition(bool toLight)
     {
         if (toLight)
         {
@@ -45,19 +42,28 @@ public class TransitionManager : MonoBehaviour
         {
             StartCoroutine(FadeValue(lightValue, darkValue));
         }
-
-        yield return new WaitForSeconds(0.2f);
     }
+
     private IEnumerator FadeValue(float start, float end)
     {
         float t = 0;
 
-        while (material.GetFloat("_Fade") != end)
+        while (materials[0].GetFloat("_Fade") != end)
         {
-            material.SetFloat("_Fade", Mathf.Lerp(start, end, t));
+            SetMaterialsValue(Mathf.Lerp(start, end, t));
             t += Time.deltaTime * transitionSpeed;
 
+            Debug.Log(Mathf.Lerp(start, end, t));
+
             yield return null;
+        }
+    }
+
+    private void SetMaterialsValue(float value)
+    {
+        for (int i = 0; i < materials.Length; i++)
+        {
+            materials[i].SetFloat("_Fade", value);
         }
     }
 }
