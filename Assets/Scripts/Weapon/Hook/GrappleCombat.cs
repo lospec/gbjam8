@@ -170,8 +170,6 @@ namespace Weapon.Hook
             bool facesTop = difference.y <= 0;
             SpriteRenderer slashRenderer = Instantiate(slashVFX, motor.transform.position, Quaternion.Euler(Vector3.zero)).GetComponent<SpriteRenderer>(); ;
 
-            EZCameraShake.CameraShaker.Instance.ShakeOnce(2, 2, 0, 0.3f);
-
             if (Mathf.Abs(difference.x) > Mathf.Abs(difference.y))
             {
                 if (facesRight)
