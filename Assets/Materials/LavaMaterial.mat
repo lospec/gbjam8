@@ -21,12 +21,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: LavaMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 08b62448a6381c548a4b1ea5df525c3f, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 13ec1e1b7557f1242acecf6c6d6501ae, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3500
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -41,7 +41,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_FF28031F:
-        m_Texture: {fileID: 2800000, guid: 169377c119aa3f14084d8a2cb06c4734, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0f82a16fa2463104bb7a3fcfb85323f5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -74,7 +74,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_2FB88E00: 19.26
+    - Vector1_5FA50351: 1
     - Vector1_7F9C6F59: 0.75
+    - Vector1_A5A00ACA: 0.25
+    - Vector1_CB1D0AA5: 0.05
     - Vector1_D72DE3A3: 0.1
     - _AlphaClip: 0
     - _Blend: 0
