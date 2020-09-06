@@ -20,6 +20,6 @@ public class PlayerHealth : EntityHealth
 	/// <param name="segment">The amount of segment to be added to the player's health</param>
 	public void IncreaseHealth(int segment)
 	{
-		Health = Mathf.Min(1f, 1f / segmentCount * segment);
+		Health = Mathf.Min(1f, Health + 1f / segmentCount * segment);
 	}
 }
