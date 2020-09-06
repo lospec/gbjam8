@@ -3,7 +3,6 @@ using Player;
 using UnityEngine;
 using UnityEngine.InputSystem.LowLevel;
 using System.Collections.Generic;
-
 #if UNITY_EDITOR
 using Handles = UnityEditor.Handles;
 #endif
@@ -27,7 +26,8 @@ namespace Weapon.Hook
         ///     The retraction speed of the hook in unit distance per seconds, this will only be used when
         ///     Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance)
         /// </summary>
-        [Tooltip("The retraction speed of the hook in unit distance per seconds, this will only be used when Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance)")]
+        [Tooltip(
+            "The retraction speed of the hook in unit distance per seconds, this will only be used when Shoot Speed and Max Hook Distance Speed is more than 0 (and not Infinity for the distance)")]
         public float retractSpeed = 1f;
 
         [Header("Grapple")]
@@ -49,7 +49,8 @@ namespace Weapon.Hook
         public float maxShootDistance = 0f;
 
         /// <summary> The minimum distance from the gunpoint(see: <see cref="HookOrigin"/>) to the target for it count the player has arrived at the target </summary>
-        [Tooltip("The minimum distance from the gunpoint to the target for it count that the player has arrived at the target")]
+        [Tooltip(
+            "The minimum distance from the gunpoint to the target for it count that the player has arrived at the target")]
         public float arrivedDistance = 5f;
 
         public float stuckCheckThreshold = .01f;
@@ -59,7 +60,8 @@ namespace Weapon.Hook
         public bool autoAimEnabled = true;
 
         /// <summary> Angle in which the auto-aim checks for target in degrees, kind of like Field of View angle </summary>
-        [Tooltip("Angle in which the auto-aim checks for target in degrees, kind of like Field of View angle")]
+        [Tooltip(
+            "Angle in which the auto-aim checks for target in degrees, kind of like Field of View angle")]
         [SerializeField] float autoAimAngle = 360f / 8f;
 
         /// <summary> Minimum distance the player will auto-aim to a target </summary>
@@ -93,8 +95,16 @@ namespace Weapon.Hook
         }
         public Vector2 HookOrigin => transform.position;
 
-        public float AutoAimAngle_Rad { get => autoAimAngle * Mathf.Deg2Rad; set => autoAimAngle = value * Mathf.Rad2Deg; }
-        public float AutoAimAngle_Deg { get => autoAimAngle; set => autoAimAngle = value; }
+        public float AutoAimAngle_Rad
+        {
+            get => autoAimAngle * Mathf.Deg2Rad;
+            set => autoAimAngle = value * Mathf.Rad2Deg;
+        }
+        public float AutoAimAngle_Deg
+        {
+            get => autoAimAngle;
+            set => autoAimAngle = value;
+        }
 
         private Vector2 Target { get; set; }
         public Collider2D TargetObject { get; set; }
@@ -136,7 +146,8 @@ namespace Weapon.Hook
                     Collider2D target = GetAutoAimTarget();
 
                     if (target != null)
-                        return ((Vector2)target.transform.position - HookOrigin).normalized;
+                        return ((Vector2) target.transform.position - HookOrigin)
+                            .normalized;
                 }
 
                 return AimInput;
@@ -146,14 +157,16 @@ namespace Weapon.Hook
         public delegate void HookShotDelegate(float speed, Vector2 target,
             Transform hook, Action finishShooting);
 
-        public delegate void HookTargetHitDelegate(Vector2 hookPosition, Collider2D targetObject);
+        public delegate void HookTargetHitDelegate(Vector2 hookPosition,
+            Collider2D targetObject);
 
         public delegate void RetractHookDelegate(float retractDuration, Transform
             hook, Action finishRetracting);
 
         public delegate void HookRetractedDelegate();
 
-        public delegate void PullEndedDelegate(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject);
+        public delegate void PullEndedDelegate(bool arrivedAtTarget,
+            Collider2D targetObject, Collider2D collidedObject);
 
         public static event HookShotDelegate OnHookShot;
         public static event HookTargetHitDelegate OnHookTargetHit;
@@ -214,26 +227,30 @@ namespace Weapon.Hook
             float maxPullForce = diff / Time.deltaTime;
             float tension = Mathf.Max(0f, -dot) / Time.deltaTime;
 
-            float pullForce = (pullAccelerationTime > 0f) ?
-                pullSpeed / pullAccelerationTime + tension :
-                maxPullForce;
+            float pullForce = (pullAccelerationTime > 0f)
+                ? pullSpeed / pullAccelerationTime + tension
+                : maxPullForce;
 
             pullForce = (pullForce < maxPullForce) ? pullForce : maxPullForce;
             Motor.Body.AddForce(dir * pullForce * Motor.Body.mass);
 
             // Player hits an obstacle
             var hits = new RaycastHit2D[1];
-            bool hitObject = Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f;
+            bool hitObject =
+                Motor.Body.Cast(dir, hits, pullSpeed * Time.fixedDeltaTime) > 0f;
 
             // Stuck Check
             bool approximatelyStuck = false;
-            if (hitObject) approximatelyStuck = Motor.Body.velocity.sqrMagnitude <= stuckCheckThreshold;
+            if (hitObject)
+                approximatelyStuck =
+                    Motor.Body.velocity.sqrMagnitude <= stuckCheckThreshold;
             if (approximatelyStuck) _stuckTime += Time.deltaTime;
             else _stuckTime = 0f;
             approximatelyStuck = _stuckTime >= stuckTimeThreshold;
 
             // Player reaches the target
-            bool arrived = (Target - HookOrigin).sqrMagnitude <= arrivedDistance * arrivedDistance;
+            bool arrived = (Target - HookOrigin).sqrMagnitude <=
+                           arrivedDistance * arrivedDistance;
             bool collideNearTarget = hitObject && arrived;
             bool reachesTarget = Motor.Body.OverlapPoint(Target);
 
@@ -279,7 +296,8 @@ namespace Weapon.Hook
             for (int i = 1; i <= rayCount; i++)
             {
                 float a = 0f;
-                if (rayCount > 1) a = a - autoAimAngle / 2f + autoAimAngle / rayCount * i;
+                if (rayCount > 1)
+                    a = a - autoAimAngle / 2f + autoAimAngle / rayCount * i;
                 a *= Mathf.Deg2Rad;
 
                 float sin = Mathf.Sin(a);
@@ -289,7 +307,8 @@ namespace Weapon.Hook
 
                 Vector2 aim = new Vector2(cos * tx - sin * ty, sin * tx + cos * ty);
 
-                RaycastHit2D hit = Physics2D.Raycast(HookOrigin, aim, autoAimRange, hookableMask);
+                RaycastHit2D hit =
+                    Physics2D.Raycast(HookOrigin, aim, autoAimRange, hookableMask);
                 if (hit && (1 << hit.collider.gameObject.layer & autoAimMask) != 0)
                 {
                     bool newNear = hit.distance < nearestDist;
@@ -303,19 +322,22 @@ namespace Weapon.Hook
 
         private Collider2D AutoAim_OverlapCircle()
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(HookOrigin, autoAimRange, hookableMask);
+            Collider2D[] colliders =
+                Physics2D.OverlapCircleAll(HookOrigin, autoAimRange, hookableMask);
             float nearestDist = Mathf.Infinity;
             Collider2D nearestTarget = null;
 
             for (int i = 0; i < colliders.Length; i++)
             {
                 Transform target = colliders[i].transform;
-                Vector2 targetAim = (Vector2)target.position - HookOrigin;
+                Vector2 targetAim = (Vector2) target.position - HookOrigin;
 
                 if ((1 << target.gameObject.layer & autoAimMask) == 0) continue;
-                if (Vector2.Angle(AimInput, targetAim) > AutoAimAngle_Deg / 2f) continue;
+                if (Vector2.Angle(AimInput, targetAim) > AutoAimAngle_Deg / 2f)
+                    continue;
 
-                RaycastHit2D hit = Physics2D.Raycast(HookOrigin, targetAim, autoAimRange, hookableMask);
+                RaycastHit2D hit = Physics2D.Raycast(HookOrigin, targetAim,
+                    autoAimRange, hookableMask);
                 if (hit.transform != target) continue;
                 if (hit.distance >= nearestDist) continue;
 
@@ -327,14 +349,37 @@ namespace Weapon.Hook
         }
 
         #endregion
-        
+
+        public Vector2 FindTargetPosition(out RaycastHit2D hit, out bool targetHit)
+        {
+            targetHit = false;
+            Vector2 aim = Aim;
+            hit = maxShootDistance > 0f
+                ? Physics2D.Raycast(HookOrigin, aim, maxShootDistance, hookableMask)
+                : Physics2D.Raycast(HookOrigin, aim, Mathf.Infinity, hookableMask);
+            if (hit.collider)
+            {
+                Target = hit.point;
+                targetHit = true;
+            }
+            else if (shootSpeed > 0f && maxShootDistance > 0f &&
+                     !float.IsPositiveInfinity(maxShootDistance))
+            {
+                Target = HookOrigin + Aim.normalized * maxShootDistance;
+                targetHit = false;
+            }
+
+            return Target;
+        }
+
         public void PerformGrapple()
         {
             Vector2 aim = Aim;
 
             // the player shot in the same direction and the player is using the grappling(plus some cooldown)
             // Don't do anything
-            if (aim == _previousAim && enabled && _sameDirectionTimer < _sameDirectionCooldown)
+            if (aim == _previousAim && enabled &&
+                _sameDirectionTimer < _sameDirectionCooldown)
             {
                 return;
             }
@@ -344,58 +389,62 @@ namespace Weapon.Hook
 
             bool prevEnabled = enabled;
             enabled = false;
-            var hit = maxShootDistance > 0f
-                ? Physics2D.Raycast(HookOrigin, aim, maxShootDistance, hookableMask)
-                : Physics2D.Raycast(HookOrigin, aim, Mathf.Infinity, hookableMask);
 
-            Target = hit.point;
-
+            Target = FindTargetPosition(out var hit, out var targetHit);
             // If hook hit something
-            if (hit.collider)
+            if (targetHit)
             {
-                TargetObject = hit.collider;
-                HookPosition = shootSpeed > 0f ? HookOrigin : Target;
-
-                // If the hook is enabled(the player is grappling)
-                if (prevEnabled)
-                {
-                    // Retract the hook first, then 
-                    OnRetractHook?.Invoke(retractSpeed, hook, () =>
-                    {
-                        // When the hook finished retracting
-                        OnHookRetracted?.Invoke();
-
-                        // THEN, Start shooting the hook
-                        ShootHook();
-                    });
-                }
-                
-                else ShootHook();
+                HookHit(hit, prevEnabled);
             }
-
-            else if (shootSpeed > 0f && maxShootDistance > 0f &&
-                     !float.IsPositiveInfinity(maxShootDistance))
+            else
             {
-                EnableMovement();
-                Target = HookOrigin + aim.normalized * maxShootDistance;
-                HookPosition = HookOrigin;
+                HookMiss(aim);
+            }
+        }
 
-                // Start shooting the hook
-                OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+        private void HookMiss(Vector2 aim)
+        {
+            EnableMovement();
+            Target = HookOrigin + aim.normalized * maxShootDistance;
+            HookPosition = HookOrigin;
+
+            // Start shooting the hook
+            OnHookShot?.Invoke(shootSpeed, Target, hook, () =>
+            {
+                // When the shot is finished(animation finished, etc)
+
+                // Start retracting the hook
+                OnRetractHook?.Invoke(retractSpeed, hook, () =>
                 {
-                    // When the shot is finished(animation finished, etc)
+                    // When the hook finished retracting
 
-                    // Start retracting the hook
-                    OnRetractHook?.Invoke(retractSpeed, hook, () =>
-                    {
-                        // When the hook finished retracting
+                    // Stop grappling(if it's enabled) and invoke OnHookRetracted
+                    StopGrappling();
+                    OnHookRetracted?.Invoke();
+                });
+            });
+        }
 
-                        // Stop grappling(if it's enabled) and invoke OnHookRetracted
-                        StopGrappling();
-                        OnHookRetracted?.Invoke();
-                    });
+        private void HookHit(RaycastHit2D hit, bool prevEnabled)
+        {
+            TargetObject = hit.collider;
+            HookPosition = shootSpeed > 0f ? HookOrigin : Target;
+
+            // If the hook is enabled(the player is grappling)
+            if (prevEnabled)
+            {
+                // Retract the hook first, then 
+                OnRetractHook?.Invoke(retractSpeed, hook, () =>
+                {
+                    // When the hook finished retracting
+                    OnHookRetracted?.Invoke();
+
+                    // THEN, Start shooting the hook
+                    ShootHook();
                 });
             }
+
+            else ShootHook();
         }
 
         // HACK: Need a better system to manage the grappling hook shoot,retract,etc
@@ -414,16 +463,18 @@ namespace Weapon.Hook
 
                 // also make the hook stuck on target object(if any)
                 //if (TargetObject != null)
-                    //hook.SetParent(TargetObject.transform, true);
 
                 OnHookTargetHit?.Invoke(HookPosition, TargetObject);
-
                 // HACK
-                if (Target != null && TargetObject.tag == "Enemy")
+                if (TargetObject.CompareTag("Enemy"))
+                {
                     OnHookEnemyShot?.Invoke();
-
+                    hook.SetParent(TargetObject.transform, true);
+                }
                 else
+                {
                     OnHookMapShot?.Invoke();
+                }
             });
         }
 
@@ -489,14 +540,15 @@ namespace Weapon.Hook
 
                 rayCount = rayCount <= 0 ? 1 : rayCount;
                 if (gizmoOptions.limitRayCount)
-                    rayCount = Mathf.Min(rayCount, (int)(autoAimAngle / .5f));
+                    rayCount = Mathf.Min(rayCount, (int) (autoAimAngle / .5f));
 
                 for (int i = 1; i <= rayCount; i++)
                 {
                     //Handles.color = Color.HSVToRGB((float)i / rayCount / 4f, 1f, 1f);
 
                     float a = 0f;
-                    if (rayCount > 1) a = a - autoAimAngle / 2f + autoAimAngle / rayCount * i;
+                    if (rayCount > 1)
+                        a = a - autoAimAngle / 2f + autoAimAngle / rayCount * i;
                     a *= Mathf.Deg2Rad;
 
                     float sin = Mathf.Sin(a);
@@ -507,7 +559,8 @@ namespace Weapon.Hook
                     Vector2 aim = new Vector2(cos * tx - sin * ty, sin * tx + cos * ty);
 
                     RaycastHit2D hit = Physics2D.Raycast(HookOrigin, aim, autoAimRange);
-                    Handles.DrawLine(HookOrigin, hit ? hit.point : HookOrigin + aim * autoAimRange);
+                    Handles.DrawLine(HookOrigin,
+                        hit ? hit.point : HookOrigin + aim * autoAimRange);
                 }
 
                 //Handles.DrawSolidArc(HookOrigin, Vector3.forward, gizAim, aimAngle, 1f);
@@ -518,9 +571,11 @@ namespace Weapon.Hook
                 Handles.color = new Color(0f, 1f, 0f, .25f);
 
                 Collider2D target = GetAutoAimTarget();
-                if (target != null) Handles.DrawLine(HookOrigin, target.transform.position);    
+                if (target != null)
+                    Handles.DrawLine(HookOrigin, target.transform.position);
             }
         }
+
         public int rayCount = 2;
 #endif
 

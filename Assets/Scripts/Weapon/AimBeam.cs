@@ -8,17 +8,13 @@ namespace Weapon
     {
         private LineRenderer _line;
         [SerializeField] private float offset = 2f;
-        
+
         public Vector2 Target { get; set; }
         public Vector2 InputDirection { get; set; }
 
         private void Start()
         {
             enabled = false;
-        }
-
-        private void SetOriginPosition()
-        {
         }
 
         private void Update()
