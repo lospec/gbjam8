@@ -37,7 +37,9 @@ public class RisingLava : MonoBehaviour
 
 	private IEnumerator WaitThenKillPlayer(PlayerHealth playerHealth)
 	{
-		yield return new WaitForSeconds(_delayBeforeDeathSec);
+        StartCoroutine(TransitionManager.Instance.DoubleTransition());
+
+        yield return new WaitForSeconds(_delayBeforeDeathSec);
 
 		playerHealth.Die();
 	}

@@ -1061,6 +1061,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25e0418c1f6a48341aa9c20d2d7a3688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1498978382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1499829436783176740, guid: 2c2d8a7e093c7e24c8ce2d4dd3f11a40, type: 3}
+  m_PrefabInstance: {fileID: 2131025634}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1909733341 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1904205618317601464, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
@@ -1089,6 +1094,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e479790d8e4cf4144b1732f3a85fe329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2005226511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005226507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21f6eb1c9f66de14e834bf164a635470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightValue: -3.72
+  darkValue: 0
+  quad: {fileID: 1498978382}
+  transitionSpeed: 2
 --- !u!1001 &2131025634
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1167,7 +1188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904205618317601464, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: _risingSpeed
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1904205618317601465, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1175,7 +1196,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904205618317601465, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.046
+      value: -15.91
       objectReference: {fileID: 0}
     - target: {fileID: 1904205618317601465, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1215,7 +1236,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1904205618317601465, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 20.091755
+      value: 29.822134
+      objectReference: {fileID: 0}
+    - target: {fileID: 1904205618317601465, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1904205618317601471, guid: f5afa5f09526ef34d8899aad6736a3a9, type: 3}
       propertyPath: m_Name

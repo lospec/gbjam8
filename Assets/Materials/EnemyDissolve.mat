@@ -71,7 +71,7 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _Dissolve: 0
-    - _DissolveScale: 30
+    - _DissolveScale: 80
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
