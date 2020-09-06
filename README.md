@@ -5,7 +5,7 @@
 ### Leads
 - Mariothedog - [Itch](https://mariothedog.itch.io) - Project Manager, Programming, Art
 - Pillsgood - [Itch](https://itch.io/profile/pillsgood) - Lead Programmer
-- RushJet1 - [Itch](https://itch.io/profile/rushjet1) - Lead Composer
+- RushJet1 - [Itch](https://itch.io/profile/rushjet1) [Twitter](https://twitter.com/RushJet1) - Lead Composer
 - Ophiuchus - [Itch](https://ophi-chus.itch.io) - Lead Artist, Level Design
 
 ### Contributors
