@@ -208,31 +208,7 @@ namespace Weapon.Hook
 
         private void MoveTowardsTarget()
         {
-            // Drag
-            float velMag = Motor.Body.velocity.magnitude;
-            float maxDrag = velMag / Time.deltaTime;
-
-            float dragMag = velMag * velMag * drag;
-            if (dragMag > maxDrag) dragMag = maxDrag;
-
-            Vector2 velNormalized = Motor.Body.velocity;
-            if (velMag > 0f) velNormalized /= velMag;
-            Vector2 dragForce = dragMag * -velNormalized;
-
-            Motor.Body.AddForce(dragForce);
-
             Vector2 dir = (Target - HookOrigin).normalized;
-            float dot = Vector2.Dot(Motor.Body.velocity, dir);
-            float diff = pullSpeed - dot;
-            float maxPullForce = diff / Time.deltaTime;
-            float tension = Mathf.Max(0f, -dot) / Time.deltaTime;
-
-            float pullForce = (pullAccelerationTime > 0f)
-                ? pullSpeed / pullAccelerationTime + tension
-                : maxPullForce;
-
-            pullForce = (pullForce < maxPullForce) ? pullForce : maxPullForce;
-            Motor.Body.AddForce(dir * pullForce * Motor.Body.mass);
 
             // Player hits an obstacle
             var hits = new RaycastHit2D[1];
@@ -266,7 +242,38 @@ namespace Weapon.Hook
 
                 // Resets Target just in case
                 TargetObject = null;
+                return;
             }
+
+
+            // Drag
+            float velMag = Motor.Body.velocity.magnitude;
+            float maxDrag = velMag / Time.deltaTime;
+
+            float dragMag = velMag * velMag * drag;
+            if (dragMag > maxDrag) dragMag = maxDrag;
+
+            Vector2 velNormalized = Motor.Body.velocity;
+            if (velMag > 0f) velNormalized /= velMag;
+            Vector2 dragForce = dragMag * -velNormalized;
+
+            Motor.Body.velocity += dragForce * Time.deltaTime;
+            //Motor.Body.AddForce(dragForce);
+
+            // Movement
+            float dot = Vector2.Dot(Motor.Body.velocity, dir);
+            float diff = pullSpeed - dot;
+            float maxPullForce = diff / Time.deltaTime;
+            float tension = Mathf.Max(0f, -dot) / Time.deltaTime;
+
+            float pullForce = (pullAccelerationTime > 0f)
+                ? pullSpeed / pullAccelerationTime + tension
+                : maxPullForce;
+
+            pullForce = (pullForce < maxPullForce) ? pullForce : maxPullForce;
+
+            Motor.Body.velocity += dir * pullForce * Motor.Body.mass * Time.deltaTime;
+            //Motor.Body.AddForce(dir * pullForce * Motor.Body.mass);
         }
 
         private void StopGrappling()
