@@ -17,6 +17,7 @@ namespace Weapon.Hook
 
         private Coroutine _shootRoutine = default;
         private LineRenderer Line { get; set; }
+        private Transform _hook;
 
         private void Start()
         {
@@ -24,42 +25,45 @@ namespace Weapon.Hook
             Line.useWorldSpace = true;
             Line.positionCount = 0;
             enabled = false;
-            GrapplingGun.HookShot += GrapplingGunOnHookShot;
-            GrapplingGun.HookRetract += GrapplingGunOnHookRetract;
-            GrapplingGun.EndPull += GrapplingGunOnEndPull;
-        }
 
+            GrapplingGun.OnHookShot += GrapplingGunOnHookShot;
+            GrapplingGun.OnRetractHook += GrapplingGunOnHookRetract;
+            GrapplingGun.OnPullEnded += GrapplingGunOnEndPull;
+        }
 
         private void Update()
         {
             Line.SetPosition(0, transform.position);
+            Line.SetPosition(1, _hook.position);
         }
 
         private void OnDestroy()
         {
-            GrapplingGun.HookShot -= GrapplingGunOnHookShot;
-            GrapplingGun.HookRetract -= GrapplingGunOnHookRetract;
-            GrapplingGun.EndPull -= GrapplingGunOnEndPull;
+            GrapplingGun.OnHookShot -= GrapplingGunOnHookShot;
+            GrapplingGun.OnRetractHook -= GrapplingGunOnHookRetract;
+            GrapplingGun.OnPullEnded -= GrapplingGunOnEndPull;
         }
 
-        private void GrapplingGunOnEndPull()
-        {
+        #region Callbacks
+
+        private void GrapplingGunOnEndPull(bool arrivedAtTarget, Collider2D targetObject, Collider2D collidedObject) =>
             Line.enabled = false;
-        }
-
 
         private void GrapplingGunOnHookShot(float speed, Vector2 target, Transform hook,
-            Action callBack)
+            Action finishShooting)
         {
             Line.enabled = true;
             if (_retractRoutine != null) return;
             if (_shootRoutine != null)
             {
-                return;
+                StopCoroutine(_shootRoutine);
+                _shootRoutine = null;
             }
 
             hook.SetParent(null, true);
-            _shootRoutine = StartCoroutine(ShootHook(speed, target, hook, callBack));
+            _hook = hook;
+            _shootRoutine =
+                StartCoroutine(ShootHook(speed, target, hook, finishShooting));
         }
 
 
@@ -69,24 +73,29 @@ namespace Weapon.Hook
             _retractRoutine = StartCoroutine(RetractHook(speed, hook, callBack));
         }
 
+        #endregion
+
+
         private IEnumerator ShootHook(float speed, Vector2 target, Transform hook,
             Action callBack)
         {
             enabled = false;
             Line.positionCount = ropeResolution;
             var d = Vector2.Distance(hook.position, target);
+            var abort = false;
             Vector2 hookPosition;
             var t = 0f;
-            while (t <= 1f)
+            while (t <= 1f && !abort)
             {
                 t += Time.deltaTime * speed / d;
 
-                SetRopePoints(transform.position, target, t, d, out hookPosition);
+                SetRopePoints(transform.position, target, t, d, out hookPosition, out
+                    abort);
                 hook.position = hookPosition;
                 yield return null;
             }
 
-            SetRopePoints(transform.position, target, 1f, d, out hookPosition);
+            SetRopePoints(transform.position, target, 1f, d, out hookPosition, out _);
 
             hook.position = hookPosition;
             Line.Simplify(1f);
@@ -100,11 +109,40 @@ namespace Weapon.Hook
         {
             var t = 0f;
             var startPosition = hook.position;
+            float dist = (startPosition - transform.position).magnitude;
             while (t <= 1f)
             {
-                t += Time.deltaTime * speed;
+                t += Time.deltaTime * speed / dist;
                 hook.position = Vector2.Lerp(startPosition, transform.position, t);
                 Line.SetPosition(1, hook.position);
+                yield return null;
+            }
+
+            hook.position = Vector2.Lerp(startPosition, transform.position, 1f);
+            Line.enabled = false;
+            enabled = false;
+            _retractRoutine = null;
+            callBack?.Invoke();
+        }
+
+        private IEnumerator RetractHookB(float speed, Transform hook, Action callBack)
+        {
+            // DISTANCE BASED RETRACTION
+            Vector3 startPosition = hook.position;
+            float d = 0f;
+            float retractAcceleration = 10f;
+
+            while (true)
+            {
+                d += Time.deltaTime * speed;
+                hook.position = Vector2.MoveTowards(startPosition, transform.position, d);
+                Line.SetPosition(1, hook.position);
+
+                Vector2 diff = (startPosition - transform.position);
+                if (diff.sqrMagnitude < d * d)
+                    break;
+
+                speed += retractAcceleration * Time.deltaTime;
                 yield return null;
             }
 
@@ -116,11 +154,17 @@ namespace Weapon.Hook
         }
 
         private void SetRopePoints(Vector2 startPoint, Vector2 targetPoint, float
-            t, float distance, out Vector2 ropeEnd)
+            t, float distance, out Vector2 ropeEnd, out bool abort)
         {
+            abort = false;
             var angle = GetAngle(targetPoint - startPoint);
             ropeEnd = Vector2.Lerp(startPoint, targetPoint, t);
             var length = Vector2.Distance(startPoint, ropeEnd);
+            if (length >= distance)
+            {
+                abort = true;
+            }
+
             for (var i = 0; i < ropeResolution; i++)
             {
                 var xPos = (float) i / ropeResolution * length;

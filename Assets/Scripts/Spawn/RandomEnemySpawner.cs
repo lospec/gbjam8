@@ -22,7 +22,9 @@ namespace Spawn
         [SerializeField] private EnemySpawnData[] enemySpawnTable;
 
         [Header("Parameters")]
-        [SerializeField] private int enemySpawnCount = 1;
+        [SerializeField] private int minSpawnCount = 0;
+        [SerializeField] private int maxSpawnCount = 4;
+
 
         public override void SpawnEnemies()
         {
@@ -30,7 +32,8 @@ namespace Spawn
                 enemySpawnTable.Aggregate(0f,
                     (i, data) => { return i += data.weight; });
             var failSafe = 0;
-            for (var i = 0; i < enemySpawnCount; i++)
+            var count = Random.Range(minSpawnCount, maxSpawnCount);
+            for (var i = 0; i < count; i++)
             {
                 if (failSafe >= 200)
                 {
@@ -40,7 +43,7 @@ namespace Spawn
 
                 var roll = Random.Range(0f, ratioTotal);
                 var enemy = enemySpawnTable
-                    .Single(data => (roll -= data.weight) < 0)
+                    .First(data => (roll -= data.weight) < 0)
                     .enemy;
                 SpawnEnemy(enemy, out var result);
                 if (!result)

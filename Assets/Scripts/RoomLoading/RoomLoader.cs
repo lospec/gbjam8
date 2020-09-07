@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Spawn;
 using UnityEngine;
+using Utility;
 
 namespace RoomLoading
 {
@@ -30,12 +31,24 @@ namespace RoomLoading
 
         private GameObject _topRoom;
 
+        [Header("Deco")]
+        [SerializeField] private Transform bottomDecoration;
+
+        [SerializeField] private RisingLava lava;
+
+
         // Start is called before the first frame update
         private void Start()
         {
             _loadedRooms = new List<GameObject>();
-            _player = FrequentlyAccessed.Instance.playerObject;
-            SpawnRoom(startRoom);
+            _player = GameManager.instance.playerObject;
+            var start = SpawnRoom(startRoom);
+            PlaceBottomDecoration(start);
+        }
+
+        private void PlaceBottomDecoration(GameObject start)
+        {
+            bottomDecoration.position = start.transform.position;
         }
 
         // Update is called once per frame
@@ -80,6 +93,17 @@ namespace RoomLoading
             }
         }
 
+        private void MoveLava(GameObject room)
+        {
+            var position = room.transform.position;
+            position.y += room.GetComponent<RoomData>().height +
+                          lava.transform.localScale.y / 2;
+            if (position.y > lava.transform.position.y)
+            {
+                lava.transform.position = position;
+            }
+        }
+
         // Unloads all the rooms that are far enough from the player
         // OPTIMIZABLE: just set a bottom room and destroy it, then set the room above it as the bottom room
         private void UnloadRooms()
@@ -94,6 +118,7 @@ namespace RoomLoading
                     _player.transform.position.y > roomCopy[i].transform.position.y)
                 {
                     // I remove it from the list of the loaded rooms
+                    MoveLava(roomCopy[i]);
                     _loadedRooms.Remove(roomCopy[i]);
                     // And I destroy it
                     Destroy(roomCopy[i]);

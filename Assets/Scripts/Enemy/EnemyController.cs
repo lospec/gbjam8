@@ -6,8 +6,11 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public abstract class EnemyController : MonoBehaviour
+    [RequireComponent(typeof(EntityHealth))]
+    public abstract class EnemyController : MonoBehaviour, ITakeDamage
     {
+        [SerializeField] private EnemyStat enemyStat;
+
         public Transform Player { get; set; }
 
         [SerializeField] protected Rigidbody2D body;
@@ -15,9 +18,11 @@ namespace Enemy
         [SerializeField] protected SpriteRenderer spriteRenderer;
 
         private List<MethodInfo> _trackedRoutines = new List<MethodInfo>();
+        private EntityHealth _entityHealth = default;
 
         protected Vector2 velocity;
 
+        public EnemyStat EnemyStat => enemyStat;
         protected Vector2 DirectionToPlayer =>
             (Player.position - transform.position).normalized;
         protected float DistanceToPlayer =>
@@ -26,6 +31,8 @@ namespace Enemy
 
         protected virtual void Start()
         {
+            _entityHealth = GetComponent<EntityHealth>();
+            _entityHealth.Health = enemyStat.maxHealth;
         }
 
         protected void Initialize(Transform player)
@@ -72,5 +79,13 @@ namespace Enemy
 
             action.Invoke();
         }
+
+        public virtual void Damage(float damage)
+        {
+            _entityHealth.Hurt(damage);
+        }
+
+
+        public float CurrentHealth => _entityHealth.Health;
     }
 }

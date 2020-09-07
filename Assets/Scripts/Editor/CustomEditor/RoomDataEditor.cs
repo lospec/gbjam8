@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RoomLoading;
 using UnityEditor;
 using UnityEditor.Tilemaps;
@@ -23,7 +24,7 @@ namespace Editor.CustomEditor
             base.OnInspectorGUI();
 
             foldout = EditorGUILayout.Foldout(foldout, "Generator", true);
-            
+
             if (!foldout)
             {
                 return;
@@ -44,6 +45,9 @@ namespace Editor.CustomEditor
                     .Warning, true);
                 if (GUILayout.Button("Load Room Resource"))
                 {
+                    var height = ((RoomData) target).GetRoomHeight();
+                    roomHeight = height;
+                    
                     if (!roomResource)
                     {
                         var asset =
@@ -80,7 +84,8 @@ namespace Editor.CustomEditor
 
             if (GUILayout.Button("Refresh Room Data"))
             {
-                ((RoomData) target).GetRoomHeight();
+                var height = ((RoomData) target).GetRoomHeight();
+                roomHeight = height;
             }
 
             if (GUILayout.Button("Generate"))
@@ -93,9 +98,39 @@ namespace Editor.CustomEditor
                 ClearWalls();
             }
 
+            if (GUILayout.Button("Clear Room"))
+            {
+                ClearRoom();
+            }
+
             if (GUILayout.Button("Clear All"))
             {
                 ClearAll();
+            }
+        }
+
+        private void ClearRoom()
+        {
+            var room = (RoomData) target;
+            var tilemap = room.tilemap;
+            var walls = new List<Vector3Int>();
+            for (var y = 0; y < roomHeight; y++)
+            {
+                for (var x = 0; x < wallWidth; x++)
+                {
+                    var xi = -x - 1 - spaceBetweenWall / 2;
+                    var xj = x + spaceBetweenWall / 2;
+                    walls.Add(new Vector3Int(xi, y, 0));
+                    walls.Add(new Vector3Int(xj, y, 0));
+                }
+            }
+
+            foreach (var position in tilemap.cellBounds.allPositionsWithin)
+            {
+                if (!walls.Contains(position))
+                {
+                    tilemap.SetTile(position, null);
+                }
             }
         }
 

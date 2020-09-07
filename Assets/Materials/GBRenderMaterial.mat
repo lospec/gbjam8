@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Palette:
-        m_Texture: {fileID: 2800000, guid: 82a09c61a9f624040bce02cef17ce7f9, type: 3}
+        m_Texture: {fileID: 2800000, guid: adecdc34e3e8add47b4ab90b41941bb6, type: 3}
         m_Scale: {x: -0.33, y: 0}
         m_Offset: {x: 0.1, y: 0}
     - _PaletteTexture:
@@ -74,7 +74,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EmissionScaleUI: 0
-    - _Fade: -3.11
+    - _Fade: 0
     - _Glossiness: 0.5
     - _Metallic: 0
     - _Mode: 0

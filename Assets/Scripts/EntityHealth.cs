@@ -1,33 +1,67 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.Events;
+using Utility;
 
-class EntityHealth : MonoBehaviour
+public class EntityHealth : MonoBehaviour
 {
-	[SerializeField] private int _health;
-	public int Health
-	{
-		protected set
+    [SerializeField] private float health;
+    public bool canTakeDamage = true;
+    public float Health
+    {
+        set
 		{
-			_health = value;
+			health = value;
 			OnHealthSet?.Invoke(value);
 		}
-		get
-		{
-			return _health;
-		}
-	}
+        get => health;
+    }
 
-	[SerializeField] public UnityEvent<int> OnHealthSet;
-	[SerializeField] public UnityEvent<int> OnTakeDamage;
+	public UnityEvent<float> OnHealthSet;
+	public UnityEvent<float> OnTakeDamage;
 
 	private void Start()
 	{
-		OnHealthSet?.Invoke(Health);
+		Health = health;
 	}
 
-	public virtual void Hurt(int damage)
+    public virtual void Hurt(float damage)
+    {
+        if (canTakeDamage)
+        {
+            Health -= damage;
+            OnTakeDamage?.Invoke(damage);
+
+            if (Health <= 0)
+            {
+                // HACK: Please make a more centralized system to destroy the enemy, if you want to seperate the scripts, just make use of events and don't make dependencies EVERYWHERE
+                List<Collider2D> attachedColliders = new List<Collider2D>();
+                GetComponent<Rigidbody2D>().GetAttachedColliders(attachedColliders);
+                foreach (Collider2D c in attachedColliders)
+                    c.enabled = false;
+
+				Die();
+            }
+        }
+    }
+
+    public IEnumerator MakeInvincible(float time)
+    {
+        canTakeDamage = false;
+
+        yield return new WaitForSeconds(time);
+
+        canTakeDamage = true;
+    }
+
+	public virtual void Die()
 	{
-		Health -= damage;
-		OnTakeDamage?.Invoke(damage);
+		KillEnemy ke = GetComponent<KillEnemy>();
+
+		if (ke != null)
+		{
+			ke.Explode();
+		}
 	}
 }

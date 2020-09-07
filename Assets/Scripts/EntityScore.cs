@@ -17,10 +17,15 @@ class EntityScore : MonoBehaviour
 		}
 	}
 
-	[SerializeField] public UnityEvent<int> OnScoreSet;
+	public UnityEvent<int> OnScoreSet;
 
 	private void Start()
 	{
 		OnScoreSet?.Invoke(Score);
+	}
+
+	public void IncreaseScore(int amount)
+	{
+		Score += amount;
 	}
 }
