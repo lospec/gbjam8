@@ -1,6 +1,10 @@
 # [GBJam8](https://itch.io/jam/gbjam-8)
+![Title screen](https://img.itch.zone/aW1hZ2UvNzQ3MjE2LzQyMDIxMTQucG5n/347x500/lPlBkN.png)
 ## Made by Lospec
 ## [Website](https://lospec.com) - [Discord](https://lospec.com/discord)
+![Gameplay screenshot](https://img.itch.zone/aW1hZ2UvNzQ3MjE2LzQyMDIxMDAucG5n/347x500/%2BdtWnu.png)
+![Gameplay screenshot](https://img.itch.zone/aW1hZ2UvNzQ3MjE2LzQyMDIxMDEucG5n/347x500/sJKrfq.png)
+![Gameplay screenshot](https://img.itch.zone/aW1hZ2UvNzQ3MjE2LzQyMDIxMDgucG5n/347x500/uF7N8y.png)
 
 ## Playable at [itch.io](https://lospec.itch.io/hooked-in-hell)!
 
